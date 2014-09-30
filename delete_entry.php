@@ -1,4 +1,4 @@
- <META http-equiv="refresh" content=".01;http://localhost:8888/checkout.php">
+ <META http-equiv="refresh" content=".01;http://localhost/checkout.php">
 
 <?php
 
