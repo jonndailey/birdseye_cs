@@ -94,7 +94,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
 	echo "<td>";
 	if ($row[selected_product]) {
-		echo "<-- " . $row["selected_product"];
+		echo "<--- " . $row["selected_product"];
 	}
 	echo "</td>";
 	echo "</div>";
