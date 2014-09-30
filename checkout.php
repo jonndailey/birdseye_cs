@@ -24,9 +24,9 @@ $minibase = mysqli_real_escape_string($connection, $_POST['minibase']);
 $dropdown = mysqli_real_escape_string($connection, $_POST['dropdown']);
 $selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
 
-$outTrack = str_replace("42006001029", "", $outTrack);
-$inTrack = str_replace("42006001029", "", $inTrack);
-
+//$outTrack = str_replace("42006001029", "", $outTrack);
+//$inTrack = str_replace("42006001029", "", $inTrack);
+//Need to figure out a way to make scanner not submit after scanning
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
