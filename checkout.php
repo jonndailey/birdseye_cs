@@ -66,7 +66,7 @@ echo "</select>";
 
 
 ?>
-	<input type="text" name="ticket" placeholder="Ticket #"><!--test-->
+	<input type="text" name="ticket" placeholder="Ticket #">
 	<input type="text" name="name" placeholder="First/Last Name">
 	<input type="text" name="outTrack" placeholder="Outgoing tracking">
 	<input type="text" name="inTrack" placeholder="Incoming tracking">
