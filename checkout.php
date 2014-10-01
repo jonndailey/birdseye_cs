@@ -62,15 +62,17 @@ while($list = mysqli_fetch_array($pl))
 	}
 
 //End the dropdown
+
 echo "</select>";
 
 
-?>
+?>	
+
 	<input type="text" name="ticket" placeholder="Ticket #">
 	<input type="text" name="name" placeholder="First/Last Name">
 	<input type="text" name="outTrack" placeholder="Outgoing tracking">
-	<input type="text" name="inTrack" placeholder="Incoming tracking">
-	<input type="submit">
+	<input type="text" name="inTrack" placeholder="Incoming tracking"><br />
+	
 </form>
 
 </div>
