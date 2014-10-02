@@ -51,7 +51,7 @@ echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";
 $pl = mysqli_query($connection, "SELECT id,name FROM products");
 
 //Begin dropdown list
-echo "<br><select name=\"dropdown\">";
+echo "<select name=\"dropdown\">";
 
 //Go through query and create dropdown option for each item
 //'name' is the description and 'id' is the value
@@ -67,7 +67,26 @@ echo "</select>";
 
 ?>	
 	<input type="text" name="ticket" placeholder="Ticket #">
-	<input type="text" name="name" placeholder="First/Last Name">
+	<input type="text" name="name" placeholder="First/Last Name"><br />
+	<?php
+
+		//start of location dropdown
+		$loc = mysqli_query($connection, "SELECT id,location FROM area");
+		echo "<select name=\"dropdown\">";
+		while ($origin = mysqli_fetch_array($loc)) {
+			echo "<option value\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
+		}
+		echo "</select>";
+
+
+		//Start of finance dropdown query
+		$funds = mysqli_query($connection, "SELECT id,cost FROM finance");
+		echo "<select name=\"dropdown\">";
+		while ($price = mysqli_fetch_array($funds)) {
+			echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
+		}
+		echo "</select>"
+	?>
 	<input type="text" name="outTrack" placeholder="Outgoing tracking">
 	<input type="text" name="inTrack" placeholder="Incoming tracking">
 

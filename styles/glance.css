@@ -1,14 +1,23 @@
 body {
 	font-family: Verdana;
 	font-size: 12px;
-	width:100%;
 }
 
 #checkin {
-	margin: 50 auto;
-	text-align: center;
+	width:500px;
+	margin:50 auto;
 
 }
+
+input[type=submit]{
+	width:120px;
+	margin-top: 20px;
+	background-color: steelblue;
+	color:white;
+	border: 1px solid black;
+}
+
+
 
 #glance-results {
 	color:red;
