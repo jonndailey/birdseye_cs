@@ -72,7 +72,7 @@ echo "</select>";
 
 		//start of location dropdown
 		$loc = mysqli_query($connection, "SELECT id,location FROM area");
-		echo "<select name=\"dropdown\">";
+		echo "<select name=\"dropdown2\">";
 		while ($origin = mysqli_fetch_array($loc)) {
 			echo "<option value\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
 		}
@@ -81,7 +81,7 @@ echo "</select>";
 
 		//Start of finance dropdown query
 		$funds = mysqli_query($connection, "SELECT id,cost FROM finance");
-		echo "<select name=\"dropdown\">";
+		echo "<select name=\"dropdown3\">";
 		while ($price = mysqli_fetch_array($funds)) {
 			echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
 		}
