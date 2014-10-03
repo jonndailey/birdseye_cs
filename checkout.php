@@ -101,7 +101,7 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable
 
-$result = mysqli_query($connection, "SELECT * FROM minis ORDER BY id ASC LIMIT 20");
+$result = mysqli_query($connection, "SELECT * FROM minis ORDER BY id ASC LIMIT 200");
 $chosen_product = mysqli_query($connection, "SELECT products.name FROM products INNER JOIN minis ON minis.selected_product=products.id");
 
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>";
