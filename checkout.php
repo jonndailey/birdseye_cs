@@ -1,7 +1,7 @@
 <html>
 <head>
 
-	<title>Check out</title>
+<title>Check out</title>
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
 
 </head>
@@ -12,7 +12,6 @@
 $dataset = "You are connected to the check-in system.";
 
 include('db.php');
-
 
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
@@ -28,10 +27,10 @@ $selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
 //$inTrack = str_replace("42006001029", "", $inTrack);
 //Need to figure out a way to make scanner not submit after scanning
 
-
+// Don't submit information unless it is POSTed.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$sql = "INSERT INTO minis (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product) 
+$sql = "INSERT INTO logged_info (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product) 
 VALUES ('$ticket','$name', '$currDate', '$inTrack','$outTrack', '$dropdown' '$selected')";
 
 } else "Error " . mysqli_error($connection);
@@ -54,46 +53,53 @@ $pl = mysqli_query($connection, "SELECT id,name FROM products");
 echo "<select name=\"dropdown\">";
 
 //Go through query and create dropdown option for each item
+	
 //'name' is the description and 'id' is the value
-while($list = mysqli_fetch_array($pl))
-	{
-		//Write the actual line of HTML for each item
-  		echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
-	}
+	
+while($list = mysqli_fetch_array($pl)){
+	//Write the actual line of HTML for each item
+  	echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
+}
 
 //End the dropdown
 echo "</select>";
 
-
 ?>	
-	<input type="text" name="ticket" placeholder="Ticket #">
-	<input type="text" name="name" placeholder="First/Last Name"><br />
-	<?php
 
-		//start of location dropdown
-		$loc = mysqli_query($connection, "SELECT id,location FROM area");
-		echo "<select name=\"dropdown2\">";
-		while ($origin = mysqli_fetch_array($loc)) {
-			echo "<option value\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
-		}
-		echo "</select>";
+<input type="text" name="ticket" placeholder="Ticket #">
+<input type="text" name="name" placeholder="First/Last Name"><br />
 
+<?php
 
-		//Start of finance dropdown query
-		$funds = mysqli_query($connection, "SELECT id,cost FROM finance");
-		echo "<select name=\"dropdown3\">";
-		while ($price = mysqli_fetch_array($funds)) {
-			echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
-		}
-		echo "</select>"
-	?>
-	<input type="text" name="outTrack" placeholder="Outgoing tracking">
-	<input type="text" name="inTrack" placeholder="Incoming tracking">
+//start of location dropdown
+$loc = mysqli_query($connection, "SELECT id,location FROM area");
+echo "<select name=\"dropdown2\">";
+while ($origin = mysqli_fetch_array($loc)) {
 
-	<input type="submit">
+	echo "<option value\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
+
+}
+echo "</select>";
+
+//Start of finance dropdown query
+
+$funds = mysqli_query($connection, "SELECT id,cost FROM finance");
+
+echo "<select name=\"dropdown3\">";
+
+while ($price = mysqli_fetch_array($funds)) {
+	echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
+}
+
+echo "</select>"
+?>
+
+<input type="text" name="outTrack" placeholder="Outgoing tracking">
+<input type="text" name="inTrack" placeholder="Incoming tracking">
+<input type="submit">
+
 </div>
 </form>
-
 </div>
 
 <?php
@@ -101,10 +107,10 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable
 
-$result = mysqli_query($connection, "SELECT * FROM minis ORDER BY id ASC LIMIT 200");
-$chosen_product = mysqli_query($connection, "SELECT products.name FROM products INNER JOIN minis ON minis.selected_product=products.id");
+$result = mysqli_query($connection, "SELECT * FROM logged_info ORDER BY id DESC LIMIT 20");
+$chosen_product = mysqli_query($connection, "SELECT products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
 
-echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>";
+echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th>";
 echo "<h2>Last 20 items checked out.</h2>";
 
 
@@ -116,22 +122,15 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
 	echo "<td>";
 
-	if ($row = mysqli_fetch_array($chosen_product)) {
-
-		echo "<--- " . $row['name']; 
-
-	}
-
-	echo "</td>";
+if ($row = mysqli_fetch_array($chosen_product)) {
+	echo "<div id='" . $row['color_code'] . "'> " . $row['name'] . "</div> ";
 	echo "</div>";
+}				
 
+echo "</td>";
+echo "</div>";
 
 };
-
-
-
-
-
 ?>
 </body>
 </html>

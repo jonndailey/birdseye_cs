@@ -17,7 +17,42 @@ input[type=submit]{
 	border: 1px solid black;
 }
 
+#one {
+	display: inline;
+	background-color: red;
+	color:white;
+	border:1px solid black;
+}
 
+#two {
+	display: inline;
+	background-color: steelblue;
+	color:white;
+}
+
+#ishower {
+	width:120px;
+	background-color: steelblue;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
+
+#igrill2 {
+	width:120px;
+	background-color: red;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
+
+#mini {
+	width:120px;
+	background-color:#9933ff;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
 
 #glance-results {
 	color:red;

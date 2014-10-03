@@ -8,7 +8,7 @@ $identification = $_REQUEST['id'];
 
 
 if (isset($_GET['id'])) {
-mysqli_query($connection, "DELETE FROM minis WHERE id = $identification");
+mysqli_query($connection, "DELETE FROM logged_info WHERE id = $identification");
 };
 
 
