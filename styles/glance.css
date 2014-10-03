@@ -17,7 +17,33 @@ input[type=submit]{
 	border: 1px solid black;
 }
 
+#one {
+	display: inline;
+	background-color: red;
+	color:white;
+	border:1px solid black;
+}
 
+#two {
+	display: inline;
+	background-color: steelblue;
+	color:white;
+	border:1px solid black;
+}
+
+#three {
+	display: inline;
+	background-color: grey;
+	color:white;
+	border:1px solid black;
+}
+
+#four {
+	display: inline;
+	background-color: green;
+	color:white;
+	border:1px solid black;
+}
 
 #glance-results {
 	color:red;
