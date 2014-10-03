@@ -101,7 +101,8 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable
 
-$result = mysqli_query($connection, "SELECT * FROM minis ORDER BY id DESC LIMIT 20");
+$result = mysqli_query($connection, "SELECT * FROM minis ORDER BY id ASC LIMIT 20");
+$chosen_product = mysqli_query($connection, "SELECT products.name FROM products INNER JOIN minis ON minis.selected_product=products.id");
 
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>";
 echo "<h2>Last 20 items checked out.</h2>";
@@ -115,10 +116,18 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
 	echo "<td>";
 
+<<<<<<< HEAD
 	
 	if ($row[selected_product]) {
 		echo "<--- " . $row["selected_product"];
+=======
+	if ($row = mysqli_fetch_array($chosen_product)) {
+
+		echo "<--- " . $row['name']; 
+
+>>>>>>> a1c697aa57f258ecaef2efcb18128dcb783ed12f
 	}
+
 	echo "</td>";
 	echo "</div>";
 
