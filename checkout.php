@@ -13,8 +13,6 @@ $dataset = "You are connected to the check-in system.";
 
 include('db.php');
 
-
-
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);
 $currDate = Date("m-d-Y");
