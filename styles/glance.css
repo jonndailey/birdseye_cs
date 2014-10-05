@@ -4,10 +4,15 @@ body {
 }
 
 #checkin {
-	width:500px;
+	width:650px;
 	margin:50 auto;
 
 }
+
+#buttons {
+	width:650px;
+	float:right;
+};
 
 input[type=submit]{
 	width:120px;

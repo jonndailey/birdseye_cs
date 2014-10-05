@@ -13,7 +13,6 @@ $dataset = "You are connected to the check-in system.";
 
 include('db.php');
 
-
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);
 $currDate = Date("m-d-Y");
@@ -45,7 +44,18 @@ if (mysqli_query($connection,$sql)) {
 
 <?php
 
-echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";
+echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";?>
+
+<input type="text" name="ticket" placeholder="Ticket #">
+<input type="text" name="name" placeholder="First/Last Name">
+<input type="text" name="outTrack" placeholder="Outgoing tracking">
+<input type="text" name="inTrack" placeholder="Incoming tracking"><br />
+
+<br />
+<div id="buttons">
+
+
+<?php
 //Queries Database for product names and ids
 $pl = mysqli_query($connection, "SELECT id,name FROM products");
 
@@ -66,13 +76,12 @@ echo "</select>";
 
 ?>	
 
-<input type="text" name="ticket" placeholder="Ticket #">
-<input type="text" name="name" placeholder="First/Last Name"><br />
 
 <?php
 
 //start of location dropdown
 $loc = mysqli_query($connection, "SELECT id,location FROM area");
+echo "Destination: ";
 echo "<select name=\"dropdown2\">";
 while ($origin = mysqli_fetch_array($loc)) {
 
@@ -84,21 +93,18 @@ echo "</select>";
 //Start of finance dropdown query
 
 $funds = mysqli_query($connection, "SELECT id,cost FROM finance");
-
+echo "&nbsp;Weight: ";
 echo "<select name=\"dropdown3\">";
 
 while ($price = mysqli_fetch_array($funds)) {
 	echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
 }
 
-echo "</select>"
+echo "</select>";
+echo "&nbsp;OZ.";
 ?>
-
-<input type="text" name="outTrack" placeholder="Outgoing tracking">
-<input type="text" name="inTrack" placeholder="Incoming tracking">
-<input type="submit">
-
 </div>
+<input type="submit">
 </form>
 </div>
 
