@@ -56,22 +56,21 @@ echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";?>
 
 
 <?php
-//Queries Database for product names and ids
+
 $pl = mysqli_query($connection, "SELECT id,name FROM products");
 
-//Begin dropdown list
+//Begin dropdown list for all of the products in the database.
+
 echo "<select name=\"dropdown\">";
 
 //Go through query and create dropdown option for each item
 	
-//'name' is the description and 'id' is the value
-	
 while($list = mysqli_fetch_array($pl)){
-	//Write the actual line of HTML for each item
-  	echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
+	//Write the line of HTML for each item
+	echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
 }
 
-//End the dropdown
+//End the dropdown for the products
 echo "</select>";
 
 ?>	
@@ -80,28 +79,39 @@ echo "</select>";
 <?php
 
 //start of location dropdown
+
+//queries database for international or domestic location
+
 $loc = mysqli_query($connection, "SELECT id,location FROM area");
+
 echo "Destination: ";
+
+//drop down written in HTML
+
 echo "<select name=\"dropdown2\">";
+
 while ($origin = mysqli_fetch_array($loc)) {
-
 	echo "<option value\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
-
 }
+
 echo "</select>";
 
-//Start of finance dropdown query
-
+//queries database for cost
 $funds = mysqli_query($connection, "SELECT id,cost FROM finance");
 echo "&nbsp;Weight: ";
+
 echo "<select name=\"dropdown3\">";
 
 while ($price = mysqli_fetch_array($funds)) {
 	echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
 }
 
+
+
 echo "</select>";
 echo "&nbsp;OZ.";
+echo "</select>"
+
 ?>
 </div>
 <input type="submit">
@@ -111,15 +121,16 @@ echo "&nbsp;OZ.";
 <?php
 
 
-//Adding the MYSQl query into the $result variable
-
+//Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
 $result = mysqli_query($connection, "SELECT * FROM logged_info ORDER BY id DESC LIMIT 20");
+
+//Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
 $chosen_product = mysqli_query($connection, "SELECT products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
 
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th>";
 echo "<h2>Last 20 items checked out.</h2>";
 
-
+//Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
 	echo "<div id=\"glance-results\"><tr><td><a href=\"delete_entry.php?id=" . $row['id'] . "\">[X]&nbsp;</a>" . $row['ticket_number'] . "</td>";
 	echo "<td>" . $row['customer_name'] . "</td>";
@@ -128,6 +139,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
 	echo "<td>";
 
+//Displays the type of product selected for the selected row
 if ($row = mysqli_fetch_array($chosen_product)) {
 	echo "<div id='" . $row['color_code'] . "'> " . $row['name'] . "</div> ";
 	echo "</div>";
@@ -138,5 +150,6 @@ echo "</div>";
 
 };
 ?>
+
 </body>
 </html>
