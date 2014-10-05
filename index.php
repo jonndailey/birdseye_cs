@@ -14,7 +14,7 @@ include('db.php');
 
 
 //Adding the MySql query into a variable
-$result = mysqli_query($connection, "SELECT * FROM minis" );
+$result = mysqli_query($connection, "SELECT * FROM logged_info" );
 
 
 //Break lines for readability

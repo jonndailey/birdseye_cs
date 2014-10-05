@@ -140,9 +140,8 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>";
 
 //Displays the type of product selected for the selected row
-if ($row = mysqli_fetch_array($chosen_product)) {
-	echo "<div id='" . $row['color_code'] . "'> " . $row['name'] . "</div> ";
-	echo "</div>";
+if ($row = mysqli_fetch_array($chosen_product)) {echo "<div id='" . $row['color_code'] . "'><a href=\"results.php?id=" . $row['name']  ."\">". $row['selected_product']   . "</div> ";
+	echo "<div id='" . $row['color_code'] . "'><a href=\"results.php?id=" . $row['name']  ."\">". $row['name']   . "</div> ";
 }				
 
 echo "</td>";
