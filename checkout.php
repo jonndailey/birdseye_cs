@@ -125,9 +125,15 @@ echo "</select>"
 $result = mysqli_query($connection, "SELECT * FROM logged_info ORDER BY id DESC LIMIT 20");
 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
-$chosen_product = mysqli_query($connection, "SELECT products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
+
+
+
+
+$chosen_product = mysqli_query($connection, "SELECT products.id, products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
+
 
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th>";
+
 echo "<h2>Last 20 items checked out.</h2>";
 
 //Display the info grabbed from the tables displayed in HTML
@@ -140,9 +146,15 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>";
 
 //Displays the type of product selected for the selected row
-if ($row = mysqli_fetch_array($chosen_product)) {echo "<div id='" . $row['color_code'] . "'><a href=\"results.php?id=" . $row['name']  ."\">". $row['selected_product']   . "</div> ";
-	echo "<div id='" . $row['color_code'] . "'><a href=\"results.php?id=" . $row['name']  ."\">". $row['name']   . "</div> ";
-}				
+if ($row = mysqli_fetch_array($chosen_product)) {
+	echo "<div id='" . $row['color_code'] . "'>";
+	$for_results_page = mysqli_query($connection, "SELECT id FROM products");
+	echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; 
+	echo "</div> ";
+};
+
+
+
 
 echo "</td>";
 echo "</div>";

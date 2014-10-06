@@ -14,6 +14,11 @@ body {
 	float:right;
 };
 
+#delete {
+	background-color:green;
+}
+
+
 input[type=submit]{
 	width:120px;
 	margin-top: 20px;

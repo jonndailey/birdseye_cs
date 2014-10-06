@@ -7,9 +7,8 @@
 
 $product = $_REQUEST['id'];
 
-$gotcha = mysqli_query("$connection, SELECT * FROM logged_info WHERE selected_product"); 
-
 $dataset = "You are connected to the results page.";
+
 include('db.php');
 
 echo "<h2>You are looking at " . $product;
@@ -18,7 +17,7 @@ echo "<h2>You are looking at " . $product;
 //Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
 
 
-$result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product");
+$result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =" . $product );
 //In the result variable I need to grab the selected_product number so it displays on the page
 $chosen_product = mysqli_query($connection, "SELECT products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
 
