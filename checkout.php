@@ -146,9 +146,11 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>";
 
 //Displays the type of product selected for the selected row
+
+
+
 if ($row = mysqli_fetch_array($chosen_product)) {
 	echo "<div id='" . $row['color_code'] . "'>";
-	$for_results_page = mysqli_query($connection, "SELECT id FROM products");
 	echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; 
 	echo "</div> ";
 };

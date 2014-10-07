@@ -27,14 +27,14 @@ input[type=submit]{
 	border: 1px solid black;
 }
 
-#one {
+#batt {
 	display: inline;
 	background-color: red;
 	color:white;
 	border:1px solid black;
 }
 
-#two {
+#pprobe {
 	display: inline;
 	background-color: steelblue;
 	color:white;
