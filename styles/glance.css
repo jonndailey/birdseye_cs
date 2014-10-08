@@ -1,6 +1,5 @@
 body {
-	font-family: Verdana;
-	font-size: 12px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 #checkin {
@@ -21,28 +20,30 @@ body {
 
 input[type=submit]{
 	width:120px;
-	margin-top: 20px;
 	background-color: steelblue;
 	color:white;
 	border: 1px solid black;
 }
 
 #batt {
-	display: inline;
-	background-color: red;
+	width:120px;
+	background-color: #1abc9c;
+	text-align: center;
 	color:white;
-	border:1px solid black;
+	padding:1px;
 }
 
 #pprobe {
-	display: inline;
-	background-color: steelblue;
+	width:120px;
+	background-color: #2ecc71;
+	text-align: center;
 	color:white;
+	padding:1px;
 }
 
 #ishower {
 	width:120px;
-	background-color: steelblue;
+	background-color: #3498db;
 	color:white;
 	text-align: center;
 	padding: 1px;
@@ -50,7 +51,7 @@ input[type=submit]{
 
 #igrill2 {
 	width:120px;
-	background-color: red;
+	background-color: #9b59b6;
 	color:white;
 	text-align: center;
 	padding: 1px;
@@ -58,40 +59,74 @@ input[type=submit]{
 
 #mini {
 	width:120px;
-	background-color:#9933ff;
+	background-color:#95a5a6;
+	color:white;
+	text-align: center;
+	padding: 1px;
+
+}
+
+#ccell {
+	width:120px;
+	background-color:#f39c12;
 	color:white;
 	text-align: center;
 	padding: 1px;
 }
 
+#magdisc {
+	width:120px;
+	background-color:#d35400;
+	color:white;
+	text-align: center;
+	padding: 1px;
+	
+}
+
+#base {
+	width:120px;
+	background-color:#d35400;
+	text-align: center;
+	padding: 1px;
+	margin-bottom: 1px;
+}
+
 #glance-results {
 	color:red;
+
 }
 
 table {
+	font-size: 15px;
 	padding-left:50px;
 	margin:0 auto;
+
 }
 
 th {
 	height: 20px;
-	font-size: 12px;
+	font-size: 15px;
 	margin:0 auto;
 	text-align: left;
 	margin-left: 50px;
+
 }
 
 
 td {
-	font-size: 13px;
-	width:160px;
-	font-size: 10px;
+	font-size: 13px;	
+	width:180px;
+}
+
+tr {
+	border:1px solid #000;
 }
 
 h2 {
 	text-align: center;
 	color:#aaa;
 }
+
 
 a:link{
 	color:black;
@@ -104,3 +139,48 @@ a:link{
 	color:#00cc00;
 }
 
+#head_name{
+	color:red;
+	font-size: 30px;
+}
+
+#pwrap {
+	width:120px;
+	background-color:#e74c3c;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
+
+#grate {
+	width:120px;
+	background-color:#c0392b;
+	color:white;
+	text-align: center;
+	padding: 1px;
+	margin-bottom: 1px;
+}
+
+#pindic {
+	width:120px;
+	background-color:#bdc3c7;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
+
+a {
+	color:white;
+}
+
+a:visited{
+	color:#000;
+}
+
+#glance-results{
+	font:12px;
+}
+
+textarea {
+	margin-top: 15px;
+}

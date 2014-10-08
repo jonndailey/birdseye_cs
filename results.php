@@ -1,5 +1,6 @@
 <title>Check out</title>
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <?php
 
@@ -12,8 +13,7 @@ include('db.php');
 $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
 
 include('switch.php');
-
-echo "<h2>You are looking at " . $product . "</h2>";
+echo "<h2>You are looking at <div id='head_name'>" . $product . "</div></h2>";
 
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th>";
 echo "<h2>Last 20 items checked out.</h2>";

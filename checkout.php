@@ -3,6 +3,7 @@
 
 <title>Check out</title>
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
@@ -21,6 +22,9 @@ $outTrack = mysqli_real_escape_string($connection, $_POST['outTrack']);
 $minibase = mysqli_real_escape_string($connection, $_POST['minibase']);
 $dropdown = mysqli_real_escape_string($connection, $_POST['dropdown']);
 $selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
+$note = mysqli_real_escape_string($connection, $_POST['note']); //create column in DB
+$destination = mysqli_real_escape_string($connection, $_POST['destination']); //create column in DB
+$weight = mysqli_real_escape_string($connection, $_POST['weight']); //create column in DB
 
 //$outTrack = str_replace("42006001029", "", $outTrack);
 //$inTrack = str_replace("42006001029", "", $inTrack);
@@ -50,7 +54,7 @@ echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";?>
 <input type="text" name="name" placeholder="First/Last Name">
 <input type="text" name="outTrack" placeholder="Outgoing tracking">
 <input type="text" name="inTrack" placeholder="Incoming tracking"><br />
-
+<textarea rows="4" cols="84" placeholder="Optional note"></textarea>
 <br />
 <div id="buttons">
 
@@ -138,7 +142,7 @@ echo "<h2>Last 20 items checked out.</h2>";
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<div id=\"glance-results\"><tr><td><a href=\"delete_entry.php?id=" . $row['id'] . "\">[X]&nbsp;</a>" . $row['ticket_number'] . "</td>";
+	echo "<div id=\"glance-results\"><tr id='rows'><td><a href=\"delete_entry.php?id=" . $row['id'] . "\">[X]&nbsp;</a>" . $row['ticket_number'] . "</td>";
 	echo "<td>" . $row['customer_name'] . "</td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
@@ -159,6 +163,7 @@ if ($row = mysqli_fetch_array($chosen_product)) {
 
 
 echo "</td>";
+echo "</tr>";
 echo "</div>";
 
 };
