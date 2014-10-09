@@ -55,8 +55,28 @@ echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";?>
 <input type="text" name="outTrack" placeholder="Outgoing tracking">
 <input type="text" name="inTrack" placeholder="Incoming tracking"><br />
 <textarea rows="4" cols="84" placeholder="Optional note"></textarea>
+
+
 <br />
+
+
 <div id="buttons">
+
+<?php
+
+echo "Quantity:&nbsp; ";
+$quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
+
+echo "<select name=\"dropdown4\">";
+
+while($productamount = mysqli_fetch_array($quantity)){
+	echo "<option value=\"".$productamount["id"] . "\">". $productamount["quantity"] . "</option>";
+
+}
+echo "</select>";
+
+?>
+
 
 
 <?php
@@ -64,7 +84,7 @@ echo "<div id=\"checkin\"><form action=\"checkout.php\" method=\"POST\">";?>
 $pl = mysqli_query($connection, "SELECT id,name FROM products");
 
 //Begin dropdown list for all of the products in the database.
-
+echo "Product: ";
 echo "<select name=\"dropdown\">";
 
 //Go through query and create dropdown option for each item
@@ -76,8 +96,8 @@ while($list = mysqli_fetch_array($pl)){
 
 //End the dropdown for the products
 echo "</select>";
-
 ?>	
+
 
 
 <?php
@@ -101,19 +121,18 @@ while ($origin = mysqli_fetch_array($loc)) {
 echo "</select>";
 
 //queries database for cost
-$funds = mysqli_query($connection, "SELECT id,cost FROM finance");
+$size = mysqli_query($connection, "SELECT id,package FROM p_size");
 echo "&nbsp;Weight: ";
 
 echo "<select name=\"dropdown3\">";
 
-while ($price = mysqli_fetch_array($funds)) {
-	echo "<option value\"" . $price["id"] . "\">" . $price["cost"] . "</option>";
+while ($weighted = mysqli_fetch_array($size)) {
+	echo "<option value\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
 }
 
 
 
-echo "</select>";
-echo "&nbsp;OZ.";
+echo "&nbsp;OZ";
 echo "</select>"
 
 ?>
