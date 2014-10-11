@@ -2,10 +2,10 @@
 
 
 switch ($product) {
-	case 3:
+	case 5:
 		$product = "iGrill mini";
 		break;
-	case 2:
+	case 4:
 		$product = "Standard Meat Probe";
 		break;
 	case 6:

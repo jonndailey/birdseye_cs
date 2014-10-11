@@ -10,10 +10,9 @@ body {
 
 }
 
-#results {
-	width:100%;
-	border:3px solid black;
-	text-align:center;
+#product_results {
+	margin-top: 35px;
+	float:right;
 };
 
 
@@ -154,7 +153,12 @@ a:link{
 
 #head_name{
 	color:red;
-	font-size: 30px;
+	font-size: 15px;
+}
+
+#human_syntax {
+	text-align: center;
+
 }
 
 #pwrap {
@@ -187,7 +191,7 @@ a {
 }
 
 a:visited{
-	color:#fff;
+	color:#ddd;
 }
 
 #glance-results{

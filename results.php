@@ -1,3 +1,4 @@
+<DOCTYPE html>
 <title>Check out</title>
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -6,12 +7,12 @@
 
 $product = $_GET['id'];
 
-$dataset = "You are connected to the results page.";
+$dataset = "*";
 
 include('db.php');
 
-//$number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product); 
-//$number_of_items_displayed = mysqli_fetch_array($number_of_items);
+$number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product); 
+$number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 
 $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
@@ -19,11 +20,12 @@ $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_pr
 include('switch.php');
 echo "<h2>You are looking at <div id='head_name'>" . $product . "</div></h2>";
 
-//echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "'s" ;
+echo "<div id='human_syntax'>";
+echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "" ;
+echo "</div>";
 
 
-
-echo "<div id=\"results\">";
+echo "<div id=\"product_results\">";
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>";
 
 //Display the info grabbed from the tables displayed in HTML
