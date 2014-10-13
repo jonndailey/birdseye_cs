@@ -1,25 +1,31 @@
 body {
+
 	font-family: 'Open Sans', sans-serif;
 }
 
+/* Block that covers all input field up "Las 20 items" */
 #checkin {
-	width:650px;
-	margin:50 auto;
+	margin: auto;
 	font-size: 11px;
 	text-align: center;
 
+
 }
+
+/*Start entries for the results page*/
 
 #product_results {
 	margin-top: 35px;
-	float:right;
+	margin-left:120;
 };
 
+/*End entries for the results page*/
 
 
-#buttons {
-	margin-top:1px;
-	padding-left: 5px;
+#button {
+	width:200px;
+	text-align: center;
+	margin:auto;
 };
 
 #delete {
@@ -28,8 +34,9 @@ body {
 
 
 input[type=submit]{
+	font-size:13px;
 	margin-top:10px;
-	width:80px;
+	width:120px;
 	background-color: steelblue;
 	color:white;
 	border: 1px solid black;
@@ -37,7 +44,9 @@ input[type=submit]{
 	
 }
 
-#batt {
+/* Start colors for all of the products */
+
+.batt {
 	width:120px;
 	background-color: #1abc9c;
 	text-align: center;
@@ -45,15 +54,15 @@ input[type=submit]{
 	padding:1px;
 }
 
-#pprobe {
+.pprobe {
 	width:120px;
-	background-color: #2ecc71;
+	background-color: #CCCC99;
 	text-align: center;
 	color:white;
 	padding:1px;
 }
 
-#ishower {
+.ishower {
 	width:120px;
 	background-color: #3498db;
 	color:white;
@@ -61,7 +70,7 @@ input[type=submit]{
 	padding: 1px;
 }
 
-#igrill2 {
+.igrill2 {
 	width:120px;
 	background-color: #9b59b6;
 	color:white;
@@ -69,7 +78,7 @@ input[type=submit]{
 	padding: 1px;
 }
 
-#mini {
+.mini {
 	width:120px;
 	background-color:#ff0000;
 	color:white;
@@ -78,7 +87,7 @@ input[type=submit]{
 
 }
 
-#ccell {
+.ccell {
 	width:120px;
 	background-color:#f39c12;
 	color:white;
@@ -86,27 +95,56 @@ input[type=submit]{
 	padding: 1px;
 }
 
-#magdisc {
+.magdisc {
 	width:120px;
-	background-color:#d35400;
+	background-color:#CCCFFF;
 	color:white;
 	text-align: center;
 	padding: 1px;
 	
 }
 
-#base {
+.base {
 	width:120px;
-	background-color:#d35400;
+	background-color:#000000;
 	text-align: center;
 	padding: 1px;
 	margin-bottom: 1px;
 }
 
-#glance-results {
-	color:red;
-
+.pwrap {
+	width:120px;
+	background-color:#9999cc;
+	color:white;
+	text-align: center;
+	padding: 1px;
 }
+
+.grate {
+	width:120px;
+	background-color:#CCCCCC;
+	color:white;
+	text-align: center;
+	padding: 1px;
+	margin-bottom: 1px;
+}
+
+.pindic {
+	width:120px;
+	background-color:#bdc3c7;
+	color:white;
+	text-align: center;
+	padding: 1px;
+}
+
+#non-pro{
+	width:10;
+	height:10;
+	color:#00cc00;
+}
+
+/* End colors for all of the products */
+
 
 table {
 	font-size: 15px;
@@ -134,9 +172,11 @@ tr {
 	border:1px solid #000;
 }
 
-h2 {
-	text-align: center;
-	color:#aaa;
+#lastItems {
+	font-size:20px;
+	text-align:center;
+	color:#bbb;
+	margin-top:50px;
 }
 
 
@@ -145,15 +185,11 @@ a:link{
 	text-decoration: none;
 }
 
-.non-pro{
-	width:10;
-	height:10;
-	color:#00cc00;
-}
 
 #head_name{
+	text-align: center;
 	color:red;
-	font-size: 15px;
+	font-size: 25px;
 }
 
 #human_syntax {
@@ -161,37 +197,14 @@ a:link{
 
 }
 
-#pwrap {
-	width:120px;
-	background-color:#e74c3c;
-	color:white;
-	text-align: center;
-	padding: 1px;
-}
 
-#grate {
-	width:120px;
-	background-color:#c0392b;
-	color:white;
-	text-align: center;
-	padding: 1px;
-	margin-bottom: 1px;
-}
-
-#pindic {
-	width:120px;
-	background-color:#bdc3c7;
-	color:white;
-	text-align: center;
-	padding: 1px;
-}
 
 a {
 	color:white;
 }
 
 a:visited{
-	color:#ddd;
+	color:#FFF;
 }
 
 #glance-results{
