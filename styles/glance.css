@@ -5,7 +5,7 @@ body {
 
 /* Block that covers all input field up "Las 20 items" */
 #checkin {
-	margin: auto;
+	margin: 0 auto;
 	font-size: 11px;
 	text-align: center;
 
@@ -145,15 +145,25 @@ input[type=submit]{
 
 /* End colors for all of the products */
 
+.thenotes {
+	font: 20px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	width:700px;
+	color:black;
+	border-bottom:3px solid #ddd;
+	border-top:3px solid #ddd;
+}
+
 
 table {
-	font-size: 15px;
-	padding-left:50px;
-	margin:0 auto;
-
+	table-layout: fixed;
+	width:500px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 th {
+	width:200px;
 	height: 20px;
 	font-size: 15px;
 	margin:0 auto;
@@ -164,12 +174,15 @@ th {
 
 
 td {
-	font-size: 13px;	
-	width:180px;
+	font-size: 13px;
+	width:30px;	
+	margin-top: 35px;
+	margin-left:120;
 }
 
 tr {
-	border:1px solid #000;
+	width:100px;
+
 }
 
 #lastItems {
@@ -196,7 +209,6 @@ a:link{
 	text-align: center;
 
 }
-
 
 
 a {
