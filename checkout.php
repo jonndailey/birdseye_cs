@@ -212,6 +212,3 @@ echo "</tr>";
 echo "</table>";
 echo "</div>";
 ?>
-
-</body>
-</html>

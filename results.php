@@ -29,6 +29,7 @@ echo "<br />";
 echo "<h2>In the last week:<br /></h2>";
 echo "</div>";
 
+$chosen_location = mysqli_query($connection, "SELECT area.mypath,logged_info.location FROM area INNER JOIN logged_info ON area.id=logged_info.location ORDER BY logged_info.id DESC");
 
 echo "<div id=\"product_results\">";
 echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Details</th>" ;
@@ -41,37 +42,32 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td> ";
-
 	echo "<td>";
+
+
+	
+if ($row = mysqli_fetch_array($chosen_location)) {
+	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
+};
+
 /*
-	$totalquantity = mysqli_query($connection, "SELECT quantity FROM amount");
-	
-	
-	if ($row = mysqli_fetch_array($totalquantity)) {
-		echo $row['quantity'];
-	};
-*/	
-	$location = mysqli_query($connection, "SELECT id,location,mypath FROM area");
-
-	if ($row = mysqli_fetch_array($location)) {
-		echo "<img id=\"". $row['id'] . " \" src=\"images/flags/" . $row['mypath'] . "\">";
-	};
-
-
-
-if ($row["note"]){
+while ($row["note"]){
 	echo "<tr><td>";
 	echo "<div class=\"thenotes\">";
 	echo "<strong>Note:&nbsp;</strong>" . $row['note'];
 	echo "</td></tr>";
 	echo "</div>";
-	}
+}
+*/
+
+
 }
 
 
 echo "</table>";
 
 echo "</div>";
+
 ?>
 <img src="">
 </body>
