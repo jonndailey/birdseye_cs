@@ -31,16 +31,32 @@ echo "</div>";
 
 
 echo "<div id=\"product_results\">";
-echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>"  ;
+echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Details</th>" ;
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-echo "<div class=\"container\">";
-echo "<div id=\"glance-results\"><tr><td>" . $row['ticket_number'] . "</td>";
-echo "<td>" . $row['customer_name'] . "</td>";
-echo "<td>" . $row['date_sent'] . "</td>";
-echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
-echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td> ";
+	echo "<div class=\"container\">";
+	echo "<div id=\"glance-results\"><tr><td>" . $row['ticket_number'] . "</td>";
+	echo "<td>" . $row['customer_name'] . "</td>";
+	echo "<td>" . $row['date_sent'] . "</td>";
+	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
+	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td> ";
+
+	echo "<td>";
+/*
+	$totalquantity = mysqli_query($connection, "SELECT quantity FROM amount");
+	
+	
+	if ($row = mysqli_fetch_array($totalquantity)) {
+		echo $row['quantity'];
+	};
+*/	
+	$location = mysqli_query($connection, "SELECT id,location,mypath FROM area");
+
+	if ($row = mysqli_fetch_array($location)) {
+		echo "<img id=\"". $row['id'] . " \" src=\"images/flags/" . $row['mypath'] . "\">";
+	};
+
 
 
 if ($row["note"]){
@@ -51,9 +67,12 @@ if ($row["note"]){
 	echo "</div>";
 	}
 }
+
+
 echo "</table>";
 
 echo "</div>";
 ?>
+<img src="">
 </body>
 </html>

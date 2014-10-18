@@ -5,6 +5,9 @@
 	<title>Check out</title>
 	<link rel="stylesheet" type="text/css" href="styles/glance.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<script type="text/javascript">
+		var apples = document.getElementById("myText").select();
+	</script>
 </head>
 <body>
 
@@ -26,19 +29,22 @@ $dropdown2 = mysqli_real_escape_string($connection, $_POST['dropdown2']);
 $dropdown3 = mysqli_real_escape_string($connection, $_POST['dropdown3']);
 $dropdown4 = mysqli_real_escape_string($connection, $_POST['dropdown4']);
 $selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
+$destination = mysqli_real_escape_string($connection, $_POST['destination']); 
+$weight = mysqli_real_escape_string($connection, $_POST['weight']); 
 $note = mysqli_real_escape_string($connection, $_POST['note']); 
-$destination = mysqli_real_escape_string($connection, $_POST['destination']); //create column in DB
-$weight = mysqli_real_escape_string($connection, $_POST['weight']); //create column in DB
 
-//$outTrack = str_replace("42006001029", "", $outTrack);
-//$inTrack = str_replace("42006001029", "", $inTrack);
+
+$outTrack = str_replace("42076182029", "", $outTrack);
+$inTrack = str_replace("42076182029", "", $inTrack);
+
+
 //Need to figure out a way to make scanner not submit after scanning
 
 // Don't submit information unless it is POSTed.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$sql = "INSERT INTO logged_info (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product, note) 
-VALUES ('$ticket','$name', '$currDate', '$inTrack','$outTrack', '$dropdown1' '$selected', '$note')";
+$sql = "INSERT INTO logged_info (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product, note, location, weight, warranty, quantity) 
+VALUES ('$ticket','$name', '$currDate', '$inTrack','$outTrack', '$dropdown1' '$selected', '$note', '$dropdown2', '$dropdown3', '$dropdown4', '$dropdown0')";
 
 } else "Error " . mysqli_error($connection);
    
@@ -50,7 +56,6 @@ if (mysqli_query($connection,$sql)) {
 
 ?>
 
-
 <?php
 
 echo "<div id=\"checkin\">";
@@ -60,10 +65,10 @@ echo "<form action=\"checkout.php\" method=\"POST\">";
 ?>
 
 <input type="text" name="ticket" placeholder="Ticket #">
-<input type="text" name="name" placeholder="First/Last Name">
-<input type="text" name="outTrack" placeholder="Outgoing tracking">
-<input type="text" name="inTrack" placeholder="Incoming tracking"><br />
-<textarea rows="4" cols="84" placeholder="Optional note" name="note"></textarea>
+<input type="text" name="name" placeholder="First/Last Name"><br />
+<textarea id="styled" rows="2" cols="20" type="text" name="outTrack" placeholder="Outgoing tracking"></textarea>
+<textarea id="styled" rows="2" cols="20" type="textarea" name="inTrack" placeholder="Incoming tracking"></textarea><br />
+<textarea rows="4" cols="108" placeholder="Optional note" name="note"></textarea>
 
 <br />
 
@@ -146,10 +151,21 @@ echo "</select>";
 echo "&nbsp;OZ&nbsp;|";
 ?>
 
-<select>
-	<option value='#'>Free</option>
-	<option>Pay</option>
-</select>
+<?php
+
+$warranty = mysqli_query($connection, "SELECT id,status FROM warranty");
+echo "&nbsp;Warranty: ";
+
+echo "<select name=\"dropdown4\">";
+
+while ($warrantyStatus = mysqli_fetch_array($warranty)) {
+	echo "<option value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
+
+}
+echo "</select>";
+
+?>
+
 
 <div id="button">
 	<input type="submit">
