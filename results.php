@@ -42,23 +42,26 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td> ";
-	echo "<td>";
 
-
-	
-if ($row = mysqli_fetch_array($chosen_location)) {
-	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
-};
-
-/*
-while ($row["note"]){
+if ($row["note"]){
 	echo "<tr><td>";
 	echo "<div class=\"thenotes\">";
 	echo "<strong>Note:&nbsp;</strong>" . $row['note'];
 	echo "</td></tr>";
 	echo "</div>";
 }
-*/
+
+if ($row = mysqli_fetch_array($chosen_location)) {
+	echo "<td class='flags'>";
+	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
+	echo "</td>";
+}
+
+
+
+
+
+
 
 
 }
