@@ -32,64 +32,35 @@ echo "</div>";
 $chosen_location = mysqli_query($connection, "SELECT area.mypath,logged_info.location FROM area INNER JOIN logged_info ON area.id=logged_info.location ORDER BY logged_info.id DESC");
 
 
-echo "<table>" . "<th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>";
-echo "<div id=\"product_results\">";
+echo "<table>" ;
 //Display the info grabbed from the tables displayed in HTML
-echo "<div class=\"container\">";
 
 while($row = mysqli_fetch_array($result)) {
-	
-	echo "<tr><td>" . $row['ticket_number'] . "</td>";
+	echo "<table>";
+	echo "<tr>";
+	echo "<td>" . $row['ticket_number'] . "</td>";
 	echo "<td>" . $row['customer_name'] . "</td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
-	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
-	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td> ";
-
-
-if ($row["note"]){
-	echo "<tr><td>";
-	echo "<div class=\"thenotes\">";
-	echo "<strong>Note:&nbsp;</strong>" . $row['note'];
-	echo "</td></tr>";
-
-	echo "</div>";
-
-}
-echo "<td>";
-
-
-
-echo "Sent 5";
-echo "</td>";
-echo "<td>";
-
-echo "In Warranty";
-
-echo "</td>";
-
-echo "<td>";
-
-echo "$0";
-
-echo "</td>";
+	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
+	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
 
 if ($row = mysqli_fetch_array($chosen_location)) {
-	echo "<td class='flags'>";
+	echo "<td class='outerinfo'>";
 	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
+	echo "<br />$$$$$<br />In Warranty</td>";
+	}
 
-	echo "</td>";
+if ($row = mysqli_fetch_array($result)){
+	echo "<table><tr><td>";
+	echo "<strong>Note:&nbsp;</strong>" . $row['note'] . "";
+	echo "</td></tr></table><br /><br /><br /><br /><br /><br />";
+	}else "";
 }
-
-}
-echo "<hr>";
-echo "</div>";
-
 
 echo "</table>";
 
-echo "</div>";
 
 ?>
-<img src="">
+
 </body>
 </html>
