@@ -7,22 +7,12 @@
 <?php
 
 
-$product = $_GET['id'];
-
-if ($product == 14) {
-	echo "<META http-equiv='refresh' content='.01;http://localhost/qa.php'>";
-}else "Nope";
-
-
-//$product = mysqli_query($connection, "SELECT logged_info.selected_product,products.id FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product ORDER BY logged_info.id DESC");
-
+$product = 14;
 
 $dataset = "*";
 
 include('db.php');
 
-$currDate = Date("m-d-Y");
-$seven_days_ago = Date($currDate-7);
 
 
 //Grabbing the amount of products sent in the table. 
@@ -35,6 +25,8 @@ $last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE
 $last_7_days_displayed = mysqli_fetch_array($last_7_days);
 
 
+
+
 $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
 
 //Same query as result to display notes
@@ -42,9 +34,10 @@ $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_pro
 
 
 
+include('switch.php');
 echo "<h2><div id='head_name'>You are looking at " . $product . "</div></h2>";
 echo "<div id='human_syntax'>";
-echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "" ;
+echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "'s through the QA program." ;
 echo "<br />";
 echo "<h2>In the last week:<br /></h2>";
 echo "</div>";
@@ -58,11 +51,9 @@ $chosen_quantity = mysqli_query($connection, "SELECT logged_info.customer_name,a
 //Warranty status
 $chosen_warranty = mysqli_query($connection, "SELECT logged_info.customer_name,warranty.id,logged_info.warranty FROM warranty INNER JOIN logged_info ON warranty.status=logged_info.warranty ORDER BY logged_info.id DESC");
 
-//Package weight
-$chosen_size = mysqli_query($connection, "SELECT logged_info.customer_name,p_size.package,logged_info.weight FROM p_size INNER JOIN logged_info ON p_size.id=logged_info.weight ORDER BY logged_info.id DESC");
 
 
-echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>" . "<th class='infoHeader'></th></tr>";
+echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>";
 //Display the info grabbed from the tables displayed in HTML
 
 while($row = mysqli_fetch_array($result)) {
@@ -74,12 +65,13 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
 
-
+/*
 if ($row = mysqli_fetch_array($chosen_location)) {
 	echo "<td class='outerinfo'>";
 	echo "<img src=\"images/flags/" . $row['mypath'] . "\"><br />";
 
 	}
+}
 
 
 if ($row = mysqli_fetch_array($chosen_quantity)) {
@@ -89,27 +81,12 @@ if ($row = mysqli_fetch_array($chosen_quantity)) {
 
 	}
 
-
-if ($row = mysqli_fetch_array($chosen_size)) {
-	echo $row['package'] . " oz";
-	echo "<br />";
-
-	}	
-
-
 if ($row = mysqli_fetch_array($chosen_warranty)) {
-	echo $row['id'];
+	echo "Status: " . $row['id'];
 	echo "<br /><br /></td></table>";
 
-	}	
-
-
-if ($row = mysqli_fetch_array($notes)){
-	echo "<table><td class='mynote'>";
-	echo "<strong>Note:&nbsp;</strong>" . $row['note'];
-	echo "</td></table>";
-	}else echo "Nothing noted";
-	echo "</tr><br /><br />";
+	}
+*/	
 }
 
 echo "</table>";

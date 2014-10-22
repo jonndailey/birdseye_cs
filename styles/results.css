@@ -1,0 +1,96 @@
+body {
+
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+table{
+	table-layout: fixed;
+	width:1200px;
+	margin: 0 auto;
+	border-spacing: 0;
+
+}
+
+td {
+	font-size: 15px;
+	height:50px;
+	border-left:0;
+	border-right:0;
+	border-top: 3px solid black;
+	border-bottom: 3px solid #ddd;
+	padding:0;
+	margin:0;
+}
+
+th {
+	color:#bbb;
+	text-align: left;
+	text-decoration: overline;
+	background-color: white;
+
+}
+
+table:nth-child(odd) {
+    background-color: #eee;
+}
+
+
+
+.outerinfo{
+	text-align: right;
+}
+
+/* Block that covers all input field up "Las 20 items" */
+#checkin {
+	margin: 0 auto;
+	font-size: 11px;
+	text-align: center;
+
+
+}
+
+#product_results {
+	margin-top: 35px;
+	margin-left:120;
+};
+
+.resultdata {
+	margin-top: 20px;
+}
+
+.mynote {
+	border-bottom: 1px #ddd dashed;
+	border-top: 1px #ddd dashed;
+	
+}
+
+
+
+a:link{
+	color:black;
+	text-decoration: none;
+}
+
+
+#head_name{
+	text-align: center;
+	color:red;
+	font-size: 25px;
+}
+
+#human_syntax {
+	text-align: center;
+
+}
+
+
+a {
+	color:white;
+}
+
+a:visited{
+	color:#fff;
+}
+
+

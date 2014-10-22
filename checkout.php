@@ -34,8 +34,8 @@ $weight = mysqli_real_escape_string($connection, $_POST['weight']);
 $note = mysqli_real_escape_string($connection, $_POST['note']); 
 
 
-$outTrack = str_replace("42076182029", "", $outTrack);
-$inTrack = str_replace("42076182029", "", $inTrack);
+$outTrack = substr($outTrack, 12);
+$inTrack = substr($inTrack, 12);
 
 
 //Need to figure out a way to make scanner not submit after scanning
@@ -82,7 +82,7 @@ $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
 echo "<select name=\"dropdown0\">";
 
 while($productamount = mysqli_fetch_array($quantity)){
-	echo "<option value=\"".$productamount["id"] . "\">". $productamount["quantity"] . "</option>";
+	echo "<option value=\"". $productamount["id"] . "\">". $productamount["quantity"] . "</option>";
 
 }
 	echo "</select>";
@@ -183,7 +183,6 @@ $result = mysqli_query($connection, "SELECT * FROM logged_info ORDER BY id DESC 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
 
 $chosen_product = mysqli_query($connection, "SELECT products.id, products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
-echo "<div id=\"glance-results\">";
 
 echo "<div id='lastItems'>Last 20 items checked out.</div>";
 echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th></tr> ";
@@ -196,7 +195,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
-	echo "<td>";
+	echo "<td class='product_sent'>";
 
 //Displays the type of product selected for the selected row
 if ($row = mysqli_fetch_array($chosen_product)) {
