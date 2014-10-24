@@ -35,6 +35,7 @@ $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_pro
 
 
 include('switch.php');
+
 echo "<h2><div id='head_name'>You are looking at " . $product . "</div></h2>";
 echo "<div id='human_syntax'>";
 echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "'s through the QA program." ;
@@ -64,29 +65,6 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
-
-/*
-if ($row = mysqli_fetch_array($chosen_location)) {
-	echo "<td class='outerinfo'>";
-	echo "<img src=\"images/flags/" . $row['mypath'] . "\"><br />";
-
-	}
-}
-
-
-if ($row = mysqli_fetch_array($chosen_quantity)) {
-	
-	echo "Qty: " . $row['quantity'];
-	echo "<br />";
-
-	}
-
-if ($row = mysqli_fetch_array($chosen_warranty)) {
-	echo "Status: " . $row['id'];
-	echo "<br /><br /></td></table>";
-
-	}
-*/	
 }
 
 echo "</table>";

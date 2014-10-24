@@ -14,12 +14,11 @@ if ($product == 14) {
 }else "Nope";
 
 
-//$product = mysqli_query($connection, "SELECT logged_info.selected_product,products.id FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product ORDER BY logged_info.id DESC");
-
-
 $dataset = "*";
 
+
 include('db.php');
+
 
 $currDate = Date("m-d-Y");
 $seven_days_ago = Date($currDate-7);
@@ -40,13 +39,17 @@ $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_pr
 //Same query as result to display notes
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
 
+//Pulling the current product we're viewing from the database.
+//$productSwitch = mysqli_query($connection, "SELECT logged_info.selected_product,products.name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
+//$productSwitchResults = mysqli_fetch_array($productSwitch);
 
+include('switch.php');
 
-echo "<h2><div id='head_name'>You are looking at " . $product . "</div></h2>";
+echo "<h2><div id='head_name'>" . $product . "</div></h2>";
 echo "<div id='human_syntax'>";
-echo "You have sent a total of " . $number_of_items_displayed[0] . " " . $product . "" ;
+echo "A total of " . $number_of_items_displayed[0] . " have been sent." ;
 echo "<br />";
-echo "<h2>In the last week:<br /></h2>";
+echo "<h2><br /></h2>";
 echo "</div>";
 
 //For the display of the flag
