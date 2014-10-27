@@ -57,7 +57,7 @@ tr:nth-child(even) {
 }
 
 .product_sent {
-	background-color: #3498db;
+	background-color: #2980b9;
 	padding:none;
 	width:100px;
 }
@@ -87,13 +87,13 @@ input[type=submit]{
 .pprobe {
 	width:100%;
 	text-align: center;
-	color:white;
+	color:red;
 }
 
 .ishower {
 	width:100%;
 	text-align: center;
-	color:white;
+	color:red;
 }
 
 .igrill2 {

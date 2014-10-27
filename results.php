@@ -65,7 +65,7 @@ $chosen_warranty = mysqli_query($connection, "SELECT logged_info.customer_name,w
 $chosen_size = mysqli_query($connection, "SELECT logged_info.customer_name,p_size.package,logged_info.weight FROM p_size INNER JOIN logged_info ON p_size.id=logged_info.weight ORDER BY logged_info.id DESC");
 
 
-echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>" . "<th class='infoHeader'></th></tr>";
+echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>" . "</tr>";
 //Display the info grabbed from the tables displayed in HTML
 
 while($row = mysqli_fetch_array($result)) {
@@ -77,44 +77,45 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
 
-
+echo "<tr>";
 if ($row = mysqli_fetch_array($chosen_location)) {
 	echo "<td class='outerinfo'>";
-	echo "<img src=\"images/flags/" . $row['mypath'] . "\"><br />";
+	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
 
 	}
 
 
 if ($row = mysqli_fetch_array($chosen_quantity)) {
+	echo "<div class='detailedinfo'>";
+	echo "Qty: " . $row['quantity'] . " &#183; ";
 	
-	echo "Qty: " . $row['quantity'];
-	echo "<br />";
 
 	}
 
 
 if ($row = mysqli_fetch_array($chosen_size)) {
-	echo $row['package'] . " oz";
-	echo "<br />";
+	echo $row['package'] . " oz &#183; ";
+	
 
 	}	
 
 
 if ($row = mysqli_fetch_array($chosen_warranty)) {
 	echo $row['id'];
-	echo "<br /><br /></td></table>";
+	echo "</div>";
+	echo "</td></table>";
 
 	}	
 
 
 if ($row = mysqli_fetch_array($notes)){
 	echo "<table><td class='mynote'>";
-	echo "<strong>Note:&nbsp;</strong>" . $row['note'];
+	echo $row['note'];
 	echo "</td></table>";
 	}else echo "Nothing noted";
 	echo "</tr><br /><br />";
 }
-
+echo "</tr>";
 echo "</table>";
 
 
