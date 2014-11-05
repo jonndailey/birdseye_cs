@@ -3,6 +3,8 @@
 <?php
 
 include('db.php');
+
+
 echo "<p>Good to go</p>";
 $identification = $_REQUEST['id'];
 

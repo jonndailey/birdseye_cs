@@ -1,0 +1,49 @@
+* {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+
+}
+
+.product{
+			background-color: steelblue;
+			text-align: center;
+			cursor: crosshair;
+			height:60px;
+		}
+
+table {
+			padding:0;
+			font-size: 15px;
+			width:900px;
+			box-shadow: 1px 1px 1px black;
+
+		}
+
+		td{
+			height:100%;
+			font-size: 15px;
+		}
+#checkin{
+		background-color:#039BE5;
+		padding:0;
+		text-align: center;
+		cursor: crosshair;
+			
+
+		}
+.optionalNote {
+	width:100%;
+}
+
+a:link {
+	color:#000;
+}
+
+a:visited{
+	color:#000;
+}
+
+a:active {
+	color:#000;
+
+};

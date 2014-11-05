@@ -17,9 +17,16 @@ $dataset = "*";
 
 include('db.php');
 
+echo "<br /><br />";
+echo "<a href=\"checkout.php\">Checkout Page</a><br />";
+echo "<a href=\"checkin.php\">Checkin Page</a><br />";
+
+
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);
-$currDate = Date("m-d-Y");
+
+
+//Using MySql currdate rather than: $currDate = Date("m-d-Y");
 $inTrack = mysqli_real_escape_string($connection, $_POST['inTrack']);
 $outTrack = mysqli_real_escape_string($connection, $_POST['outTrack']);
 $minibase = mysqli_real_escape_string($connection, $_POST['minibase']);
@@ -44,7 +51,7 @@ $inTrack = substr($inTrack, 12);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $sql = "INSERT INTO logged_info (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product, note, location, weight, warranty, quantity) 
-VALUES ('$ticket','$name', '$currDate', '$inTrack','$outTrack', '$dropdown1' '$selected', '$note', '$dropdown2', '$dropdown3', '$dropdown4', '$dropdown0')";
+VALUES ('$ticket','$name', 'CURDATE()', '$inTrack','$outTrack', '$dropdown1' '$selected', '$note', '$dropdown2', '$dropdown3', '$dropdown4', '$dropdown0')";
 
 } else "Error " . mysqli_error($connection);
    
