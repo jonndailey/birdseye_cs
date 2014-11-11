@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="styles/results.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <body>
+	
 <?php
 
 
@@ -39,12 +40,15 @@ $last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE
 $last_7_days_displayed = mysqli_fetch_array($last_7_days);
 
 
-$result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
+//Grabbing every item in the database that has the correct ID
+$result = mysqli_query($connection, "SELECT ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product =  $product ORDER BY tid DESC");
+
+
 
 //Same query as result to display notes
-$notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
+$notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =  $product ORDER BY tid DESC");
 
-$notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
+$notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY tid DESC ");
 
 
 //Pulling the current product we're viewing from the database.
@@ -80,7 +84,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<table class='resultdata'>";
 	echo "<tr class='rows'>";
 	echo "<td>" . $row['ticket_number'] . "</td>";
-	echo "<td>" . $row['customer_name'] . "</td>";
+	echo "<td>" . $row['name'] . "</td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td>" . $row['date_returned'] ;
 
@@ -124,17 +128,18 @@ if ($row = mysqli_fetch_array($chosen_warranty)) {
 
 if ($row = mysqli_fetch_array($notes)){
 	echo "<table><td class='mynote'>";
-	echo "&nbsp; " . $row['note'];
+	echo $row['note'];
 	echo "</td>";
 	}else echo "No note checked in:";
 	echo "</tr><br />";
 
 if ($row = mysqli_fetch_array($notes2)){
 	echo "<td class='mynote'>";
-	echo "&nbsp; " . $row['note2'];
+	echo $row['note2'];
 	echo "</td></table>";
-	}else echo "No note";
+	}else echo "";
 	echo "</tr><br /><br />";
+
 }
 echo "</tr>";
 echo "</table>";

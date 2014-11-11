@@ -12,6 +12,8 @@ table{
 	border-spacing: 0;
 	font-size: 18px;
 	 background-color: #eee;
+	 -webkit-border-radius: 5px 5px 0px 0px;
+
 
 }
 
@@ -20,9 +22,10 @@ td {
 	height:50px;
 	border-left:0;
 	border-right:0;
-	border-bottom: 3px solid #ddd;
-	padding:0;
+	border-bottom: 3px solid steelblue;
+	padding:5px;
 	margin:0;
+
 }
 
 th {
@@ -62,19 +65,16 @@ table:nth-child() {
 #product_results {
 	margin-top: 35px;
 	margin-left:120;
-};
+}
 
 .resultdata {
 	margin-top: 20px;
 }
 
 .mynote {
-	border-bottom: 1px #ddd dashed;
-	border-top: 1px #ddd dashed;
+	border-bottom: 1px #ddd solid;
+	border-top: 1px #ddd solid;
 	height:100%;
-/*	padding-top:10px;
-	padding-bottom:10px;
-*/
 	background-color:#eee;
 }
 

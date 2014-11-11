@@ -26,40 +26,59 @@ $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);
 
 
-//Using MySql currdate rather than: $currDate = Date("m-d-Y");
+$currDate = Date("m-d-Y");
 $inTrack = mysqli_real_escape_string($connection, $_POST['inTrack']);
 $outTrack = mysqli_real_escape_string($connection, $_POST['outTrack']);
 $minibase = mysqli_real_escape_string($connection, $_POST['minibase']);
-$dropdown0 = mysqli_real_escape_string($connection, $_POST['dropdown0']);
-$dropdown1 = mysqli_real_escape_string($connection, $_POST['dropdown1']);
-$dropdown2 = mysqli_real_escape_string($connection, $_POST['dropdown2']);
-$dropdown3 = mysqli_real_escape_string($connection, $_POST['dropdown3']);
-$dropdown4 = mysqli_real_escape_string($connection, $_POST['dropdown4']);
-$selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
-$destination = mysqli_real_escape_string($connection, $_POST['destination']); 
+$myquantity = mysqli_real_escape_string($connection, $_POST['myquantity']);
+$myproducts = mysqli_real_escape_string($connection, $_POST['myproducts']);
+$mydestination = mysqli_real_escape_string($connection, $_POST['mydestination']);
+$myweight = mysqli_real_escape_string($connection, $_POST['myweight']);
+$mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']);
+//$selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
+//$destination = mysqli_real_escape_string($connection, $_POST['destination']); 
 $weight = mysqli_real_escape_string($connection, $_POST['weight']); 
 $note = mysqli_real_escape_string($connection, $_POST['note']); 
 
 
-$outTrack = substr($outTrack, 12);
-$inTrack = substr($inTrack, 12);
+//INSERT INTO customers (name,email) VALUES ('Marlon Brando', 'marlon@brando.com');# 1 row affected.
+//INSERT INTO logged_info (cid,ticket_number,location) VALUES (LAST_INSERT_ID(),'123456','1')# 1 row affected.
 
+if (strlen($outTrack) >= 18) {
+	$outTrack = substr($outTrack, 11);
+}
 
-//Need to figure out a way to make scanner not submit after scanning
+if (strlen($inTrack) >= 18) {
+	$inTrack = substr($inTrack, 11);
+
+}
+
 
 // Don't submit information unless it is POSTed.
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$sql = "INSERT INTO logged_info (ticket_number, customer_name, date_sent, incoming_barcode, outgoing_barcode, selected_product, note, location, weight, warranty, quantity) 
-VALUES ('$ticket','$name', 'CURDATE()', '$inTrack','$outTrack', '$dropdown1' '$selected', '$note', '$dropdown2', '$dropdown3', '$dropdown4', '$dropdown0')";
-
-} else "Error " . mysqli_error($connection);
-   
-
+$sql = "INSERT INTO customers (name) VALUES ('$name');";
 
 if (mysqli_query($connection,$sql)) {
-  	echo ('1 Record has been added');
+  	echo ('The name record has been added <br />');
 }else echo '** ' . mysqli_error($connection);
+
+$lastID = mysqli_insert_id($connection) or die(mysqli_error($connection));
+
+
+
+$sqlH = "INSERT INTO logged_info (cid, ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
+VALUES ('$lastID', '$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');";
+
+if (mysqli_query($connection,$sqlH)) {
+  	echo ('The logged into data has been added ');
+}else echo '** ' . mysqli_error($connection);
+
+}
+
+echo $lastID;
+
 
 ?>
 
@@ -86,7 +105,7 @@ echo "<form action=\"checkout.php\" method=\"POST\">";
 echo "Quantity: &nbsp; ";
 $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
 
-echo "<select name=\"dropdown0\">";
+echo "<select name=\"myquantity\">";
 
 while($productamount = mysqli_fetch_array($quantity)){
 	echo "<option value=\"". $productamount["id"] . "\">". $productamount["quantity"] . "</option>";
@@ -105,7 +124,7 @@ $pl = mysqli_query($connection, "SELECT id,name FROM products");
 //Begin dropdown list for all of the products in the database.
 
 echo "Product: ";
-echo "<select name=\"dropdown1\">";
+echo "<select name=\"myproducts\">";
 
 //Go through query and create dropdown option for each item
 	
@@ -135,7 +154,7 @@ echo "Destination: ";
 
 //drop down written in HTML
 
-echo "<select name=\"dropdown2\">";
+echo "<select name=\"mydestination\">";
 
 while ($origin = mysqli_fetch_array($loc)) {
 	echo "<option value=\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
@@ -147,7 +166,7 @@ echo "|";
 $size = mysqli_query($connection, "SELECT id,package FROM p_size");
 echo "&nbsp;Weight: ";
 
-echo "<select name=\"dropdown3\">";
+echo "<select name=\"myweight\">";
 
 while ($weighted = mysqli_fetch_array($size)) {
 	echo "<option value=\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
@@ -163,7 +182,7 @@ echo "&nbsp;OZ&nbsp;|";
 $warranty = mysqli_query($connection, "SELECT id,status FROM warranty");
 echo "&nbsp;Warranty: ";
 
-echo "<select name=\"dropdown4\">";
+echo "<select name=\"mywarranty\">";
 
 while ($warrantyStatus = mysqli_fetch_array($warranty)) {
 	echo "<option value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
@@ -185,11 +204,11 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
 
-$result = mysqli_query($connection, "SELECT * FROM logged_info ORDER BY id DESC LIMIT 20");
+$result = mysqli_query($connection, "SELECT customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid ORDER BY logged_info.tid DESC");
 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
 
-$chosen_product = mysqli_query($connection, "SELECT products.id, products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
+$chosen_product = mysqli_query($connection, "SELECT products.id, products.name,products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
 
 echo "<div id='lastItems'>Last 20 items checked out.</div>";
 echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th></tr> ";
@@ -197,8 +216,8 @@ echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['id'] . "\">[X]&nbsp;</a>" . $row['ticket_number'] . "</td>";
-	echo "<td>" . $row['customer_name'] . "</td>";
+	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['cid'] . "\">[X]&nbsp;</a>" . $row['ticket_number'] . "</td>";
+	echo "<td>" . $row['name'] . "</td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
 	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";

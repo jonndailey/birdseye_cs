@@ -4,13 +4,15 @@
 
 include('db.php');
 
+$lastID = mysqli_insert_id($connection);
+
 
 echo "<p>Good to go</p>";
 $identification = $_REQUEST['id'];
 
 
 if (isset($_GET['id'])) {
-mysqli_query($connection, "DELETE FROM logged_info WHERE id = $identification");
+mysqli_query($connection, "DELETE FROM customers WHERE cid = $identification");
 };
 
 

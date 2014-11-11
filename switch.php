@@ -6,6 +6,9 @@ switch ($product) {
 	case 2:
 		$product = "Standard Meat Probe";
 		break;
+	case 3:
+		$product = "iGrill Mini";
+		break;
 	case 5:
 		$product = "iGrill mini";
 		break;
@@ -59,6 +62,9 @@ switch ($product) {
 		break;
 	case 21:
 		$product = "Kitchen Thermometer Mini Base";
+		break;
+	case 22:
+		$product = "iShower Mount";
 		break;
 	default:
 		echo "Nothing selected";
