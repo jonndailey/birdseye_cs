@@ -1,5 +1,5 @@
 body {
-
+	margin-top: 0px;
 	font-family: 'Open Sans', sans-serif;
 
 
@@ -22,7 +22,7 @@ td {
 	height:50px;
 	border-left:0;
 	border-right:0;
-	border-bottom: 3px solid steelblue;
+	border-bottom: 1px solid steelblue;
 	padding:5px;
 	margin:0;
 
@@ -43,12 +43,15 @@ table:nth-child() {
 
 .detailedinfo{
 	color:black;
+	width:500px;
+
 }
 
 
 
 .outerinfo{
 	font-size: 15px;
+	border-bottom:0px;
 
 
 }
@@ -88,13 +91,15 @@ a:link{
 
 #head_name{
 	text-align: center;
-	color:red;
+	color:steelblue;
 	font-size: 25px;
 }
 
-#human_syntax {
+#human_syntax{
 	text-align: center;
-
+	text-align: center;
+	margin-bottom: 50px;
+	border-bottom: 4px;
 }
 
 
@@ -106,4 +111,38 @@ a:visited{
 	color:#fff;
 }
 
+.notifySize {
+	font-size: 16px;
+}
 
+.h_syntax{
+	font-weight: bold;
+	border-bottom: none;
+	color:steelblue;
+	border:1px solid black;
+	box-shadow: -1px 0px 8px 1px #27ae60;
+}
+
+.title {
+		font-size: 10px;
+		width:100px;
+		}
+
+.titleName {
+		border-right:1px solid black;
+		width:100px;
+}
+
+.number {
+		font-size: 40px;
+}
+
+.navstation {
+	width:800px;
+	background-color: steelblue;
+	color:white;
+	margin: 0 auto;
+	border-radius:3px;
+	margin-bottom: 100px;
+
+}

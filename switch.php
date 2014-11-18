@@ -66,6 +66,9 @@ switch ($product) {
 	case 22:
 		$product = "iShower Mount";
 		break;
+	case 24:
+		$product = "Ambient Temperature Probe";
+		break;
 	default:
 		echo "Nothing selected";
 		break;

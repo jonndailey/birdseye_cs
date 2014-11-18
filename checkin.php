@@ -24,7 +24,7 @@ echo "<table>";
 $chosen_product = mysqli_query($connection, "SELECT products.id, products.name, products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.id DESC");
 
 //Show me everything in the databse that does not have a return stamp
-$checkin = mysqli_query($connection,"SELECT * FROM logged_info WHERE date_returned = '' ORDER BY logged_info.id DESC");
+$checkin = mysqli_query($connection,"SELECT * FROM logged_info WHERE date_returned = '' ORDER BY logged_info.cid DESC");
 
 //Show me the notes associated with returned row
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");

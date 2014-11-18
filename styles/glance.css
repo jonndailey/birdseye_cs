@@ -160,6 +160,12 @@ input[type=submit]{
 	color:white;
 }
 
+ .ambtemp{
+	width:100%;
+	text-align: center;
+	color:white;	
+ }
+
 /* End colors for all of the products */
 /*
 .thenotes {

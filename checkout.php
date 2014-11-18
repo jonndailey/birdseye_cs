@@ -64,20 +64,29 @@ if (mysqli_query($connection,$sql)) {
   	echo ('The name record has been added <br />');
 }else echo '** ' . mysqli_error($connection);
 
-$lastID = mysqli_insert_id($connection) or die(mysqli_error($connection));
+$lastID = mysqli_insert_id($connection);
 
 
+$sqlH = "INSERT INTO logged_info (cid,ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
+VALUES ('$lastID','$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');";
 
-$sqlH = "INSERT INTO logged_info (cid, ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
-VALUES ('$lastID', '$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');";
+
 
 if (mysqli_query($connection,$sqlH)) {
   	echo ('The logged into data has been added ');
 }else echo '** ' . mysqli_error($connection);
 
+
+
+
+
+
+
+
 }
 
-echo $lastID;
+
+
 
 
 ?>
