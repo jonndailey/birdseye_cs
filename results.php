@@ -35,13 +35,15 @@ Start of human syntax .
 //Grabbing the date from 7 days ago, always dynamic 
 $seven_days_ago = date('m-d-Y', strtotime("-7 day"));
 
+echo $seven_days_ago;
+
 //Grabbing and counting the amount of products sent in the table that match this product 
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product); 
 $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 
 //How many items have been sent in the last 7 days
-$last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product AND date_returned >= " . $seven_days_ago ); 
+$last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product AND date_sent >= (DATE_SUB(CURDATE(), INTERVAL -7 DAY))" ); 
 $last_7_days_displayed = mysqli_fetch_array($last_7_days);
 
 //How many items sent that were in warranty
@@ -51,6 +53,18 @@ $how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty);
 //How many items sent that were out of warranty
 $how_many_out_warranty = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE warranty = 2 AND selected_product=". $product);
 $how_many_out_warranty_displayed = mysqli_fetch_array($how_many_out_warranty);
+
+//How many items are sent domestically
+$how_many_domestic = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 1 AND selected_product=". $product);
+$how_many_domestic_displayed = mysqli_fetch_array($how_many_domestic);
+
+//How many items are sent to Europe
+$how_many_europe = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 2 AND selected_product=". $product);
+$how_many_europe_displayed = mysqli_fetch_array($how_many_europe);
+
+//How many items are sent to Canada
+$how_many_canada = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 3 AND selected_product=". $product);
+$how_many_canada_displayed = mysqli_fetch_array($how_many_canada);
 
 /*
 ***************
@@ -80,11 +94,12 @@ include('switch.php');
 			<tr>
 				<td align="center" class="titleName"><?php echo $product ?></td>
 				<td align="center" class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
-				<td align="center" class="title"><span class="number"><?php echo $last_7_days_displayed[0] ?></span><br/>In the past seven days</td>
+				<!--<td align="center" class="title"><span class="number"><?php echo $last_7_days_displayed[0] ?></span><br/>In the past seven days</td>-->
 				<td align="center" class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
 				<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Domestic</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>International</td>
+				<td align="center" class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
+				<td align="center" class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
+				<td align="center" class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
 			</tr>
 		</table>
 	</div>

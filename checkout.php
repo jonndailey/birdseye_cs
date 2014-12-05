@@ -5,13 +5,12 @@
 	<title>Check out</title>
 	<link rel="stylesheet" type="text/css" href="styles/glance.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<script type="text/javascript">
-		var apples = document.getElementById("myText").select();
-	</script>
+
 </head>
 <body>
 
 <?php
+
 
 $dataset = "*";
 
@@ -24,9 +23,7 @@ echo "<a href=\"checkin.php\">Checkin Page</a><br />";
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);
-
-
-$currDate = Date("m-d-Y");
+$currDate = Date("Y-m-d");
 $inTrack = mysqli_real_escape_string($connection, $_POST['inTrack']);
 $outTrack = mysqli_real_escape_string($connection, $_POST['outTrack']);
 $minibase = mysqli_real_escape_string($connection, $_POST['minibase']);
@@ -35,6 +32,7 @@ $myproducts = mysqli_real_escape_string($connection, $_POST['myproducts']);
 $mydestination = mysqli_real_escape_string($connection, $_POST['mydestination']);
 $myweight = mysqli_real_escape_string($connection, $_POST['myweight']);
 $mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']);
+$myemail = mysqli_real_escape_string($connection, strtolower($_POST['myemail']));
 //$selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
 //$destination = mysqli_real_escape_string($connection, $_POST['destination']); 
 $weight = mysqli_real_escape_string($connection, $_POST['weight']); 
@@ -54,39 +52,58 @@ if (strlen($inTrack) >= 18) {
 }
 
 
+
+
+
 // Don't submit information unless it is POSTed.
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-$sql = "INSERT INTO customers (name) VALUES ('$name');";
+//Search the database for the email that was just typed in
+$sql1 = mysqli_query($connection, "SELECT * FROM customers WHERE email = '$_POST[myemail]' ");
 
-if (mysqli_query($connection,$sql)) {
-  	echo ('The name record has been added <br />');
-}else echo '** ' . mysqli_error($connection);
+//Store the result as an array. This allows me to pull data from the returned value.
+$sql1Result = mysqli_fetch_array($sql1);
 
-$lastID = mysqli_insert_id($connection);
+//Assigning the CID from the customers table to a variable.
+$existingCID = $sql1Result['cid'];
 
+//If the result does exist in the database, take the cid from the customers table and insert the form data into the logged_info DB.
+if ($sql1Result[0] > 1) {
+	$justlogged = mysqli_query($connection, "INSERT INTO logged_info (cid,ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
+	VALUES ('$existingCID','$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');");
+} else {
+	
+	//Insert customer data into customers table
+	$customer_insert = "INSERT INTO customers (name,email) VALUES ('$name','$myemail');";
 
-$sqlH = "INSERT INTO logged_info (cid,ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
-VALUES ('$lastID','$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');";
+	//Verifying that the query went through
+	if (mysqli_query($connection,$customer_insert)) {
+  		echo ('The name record has been added <br />');
 
+	}else echo '** ' . mysqli_error($connection);
 
+	//Grab the ID from the last customer table insert
+	$lastID = mysqli_insert_id($connection);
 
-if (mysqli_query($connection,$sqlH)) {
-  	echo ('The logged into data has been added ');
-}else echo '** ' . mysqli_error($connection);
+	//Insert the form data into the logged_info table with the 'cid' from the customer table insert
+	$logged_insert = "INSERT INTO logged_info (cid,ticket_number, date_sent, incoming_barcode, outgoing_barcode, selected_product, location, weight, warranty, quantity, note) 
+	VALUES ('$lastID','$ticket','$currDate','$inTrack','$outTrack','$myproducts','$mydestination','$myweight','$mywarranty','$myquantity','$note');";
 
+	//Verifying that the query went through
+	if (mysqli_query($connection,$logged_insert)) {
+  		echo ('The logged into data has been added ');
+	}else echo '** ' . mysqli_error($connection);
 
+}
 
-
-
+echo "This is the CID in the customers table matching the email -> " . $sql1Result['cid'] . " ////////***///////<br />";
+//echo "////////***/////// " . var_dump($sql1Result) . " ////////***///////<br /><br />";
+echo "This is the email address  -> " . $sql1Result[2] . " ////////***///////<br /><br />";
 
 
 
 }
-
-
-
 
 
 ?>
@@ -100,7 +117,8 @@ echo "<form action=\"checkout.php\" method=\"POST\">";
 ?>
 
 <input type="text" name="ticket" placeholder="Ticket #">
-<input type="text" name="name" placeholder="First/Last Name"><br />
+<input type="text" name="name" placeholder="First/Last Name">
+<input type="text" name="myemail" placeholder="Email Address"><br />
 <textarea id="styled" rows="2" cols="20" type="text" name="outTrack" placeholder="Outgoing tracking"></textarea>
 <textarea id="styled" rows="2" cols="20" type="textarea" name="inTrack" placeholder="Incoming tracking"></textarea><br />
 <textarea rows="4" cols="108" placeholder="Optional note" name="note"></textarea>
@@ -213,7 +231,7 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
 
-$result = mysqli_query($connection, "SELECT customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid ORDER BY logged_info.tid DESC");
+$result = mysqli_query($connection, "SELECT customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid  ORDER BY logged_info.tid DESC LIMIT 20");
 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
 
