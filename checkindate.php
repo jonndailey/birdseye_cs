@@ -1,4 +1,4 @@
-<META http-equiv="refresh" content="3;http://localhost/checkin.php">
+<META http-equiv="refresh" content="0.1;http://localhost/checkin.php">
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
 
 <style type="text/css">
@@ -9,6 +9,7 @@
 <?php
 
 include('db.php');
+$dataset = "<img src=\"images/logo/coffee.png\">";
 
 
 

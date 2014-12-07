@@ -15,7 +15,7 @@ if ($product == 14) {
 }else "Nope";
 
 
-$dataset = "*";
+$dataset = "<img src=\"images/logo/coffee.png\">";
 
 
 include('db.php');
@@ -35,7 +35,7 @@ Start of human syntax .
 //Grabbing the date from 7 days ago, always dynamic 
 $seven_days_ago = date('m-d-Y', strtotime("-7 day"));
 
-echo $seven_days_ago;
+//echo $seven_days_ago;
 
 //Grabbing and counting the amount of products sent in the table that match this product 
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product); 
@@ -133,7 +133,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_returned'] ;
 
 	if ($row['date_returned'] == '') {
-		echo "Not checked in </td>";
+		echo "<a href=\"checkin.php\">Not checked in</a></td>";
 	};
 
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";

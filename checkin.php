@@ -13,7 +13,7 @@
 
 
 //Lets me know the connection to the server was successful
-$dataset = "*";
+$dataset = "<img src=\"images/logo/coffee.png\">";
 
 //Including the DB connection
 include('db.php');
@@ -32,10 +32,10 @@ $theNewNote =  mysqli_real_escape_string($connection, $_POST['secondNote']);
 echo "<table>";
 
 //Show me what product is selected in the database for the row
-$chosen_product = mysqli_query($connection, "SELECT products.id, products.name,products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
+$chosen_product = mysqli_query($connection, "SELECT logged_info.selected_product,logged_info.tid,products.id, products.name,products.color_code FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
 
 //Show me everything in the databse that does not have a return stamp
-$checkin = mysqli_query($connection,"SELECT customers.name, customers.cid, logged_info.ticket_number, logged_info.date_sent,logged_info.tid from logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' ORDER BY logged_info.tid DESC ");
+$checkin = mysqli_query($connection,"SELECT customers.name, customers.cid, logged_info.ticket_number, logged_info.date_sent,logged_info.tid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' ORDER BY logged_info.tid DESC");
 
 //Show me the notes associated with returned row
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC");
