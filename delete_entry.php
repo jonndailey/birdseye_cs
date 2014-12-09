@@ -12,7 +12,7 @@ $identification = $_REQUEST['id'];
 
 
 if (isset($_GET['id'])) {
-mysqli_query($connection, "DELETE FROM customers WHERE cid = $identification");
+mysqli_query($connection, "DELETE FROM logged_info WHERE tid = $identification");
 };
 
 

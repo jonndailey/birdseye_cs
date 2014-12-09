@@ -231,7 +231,7 @@ echo "</select>";
 
 //Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
 
-$result = mysqli_query($connection, "SELECT customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid  ORDER BY logged_info.tid DESC LIMIT 20");
+$result = mysqli_query($connection, "SELECT logged_info.tid, customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid  ORDER BY logged_info.tid DESC LIMIT 20");
 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
 
@@ -243,7 +243,7 @@ echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['cid'] . "\"><img src=\"images/buttons/close.png\">&nbsp;</a>" . $row['ticket_number'] . "</td>";
+	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['tid'] . "\"><img src=\"images/buttons/close.png\">&nbsp;</a>" . $row['ticket_number'] . "</td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";

@@ -34,8 +34,8 @@ echo "<table>";
 //Show me what product is selected in the database for the row
 $chosen_product = mysqli_query($connection, "SELECT logged_info.selected_product,logged_info.tid,products.id, products.name,products.color_code FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
 
-//Show me everything in the databse that does not have a return stamp
-$checkin = mysqli_query($connection,"SELECT customers.name, customers.cid, logged_info.ticket_number, logged_info.date_sent,logged_info.tid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' ORDER BY logged_info.tid DESC");
+//Show me everything in the database that does not have a return stamp
+$checkin = mysqli_query($connection,"SELECT customers.name, customers.cid, logged_info.ticket_number, logged_info.date_sent,logged_info.tid,logged_info.selected_product FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' ORDER BY logged_info.tid DESC");
 
 //Show me the notes associated with returned row
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC");
@@ -57,8 +57,7 @@ echo "<th>Checkout Date</th>" ;
 		  <tr>
 			<td><?php echo $row['date_sent']; ?></td>
 			<td><?php echo $row['name']; ?></td>	
-			<?php /* echo "<td id ='checkin'><a id=\"message\" href=\"checkin.php?id=" . $row['tid'] . "\ */">Check me in</a></td>"; ?>
-			<td class="product"><?php if ($row = mysqli_fetch_array($chosen_product)) { echo "<div class='" . $row['color_code'] . "'><a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a></div> "; }; ?></td>
+			<td class="product"><?php  if ($row = mysqli_fetch_array($chosen_product)) { echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; }; ?></td>
 	  	  </tr><br />
 		</table>
 
@@ -77,11 +76,12 @@ echo "<th>Checkout Date</th>" ;
 			 	}else {echo $row['note2'];}
 
 			 ?></td>
+			 <?php }; ?>
 		  </tr>
 		</table>
 </form>
 	<?php echo "<br />" ?>
-  <?php }; ?>
+  
 <?php }; ?>
 </table>
 </body>
