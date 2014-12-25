@@ -9,6 +9,7 @@
 
 
 $product = $_GET['id'];
+
 if ($product == 14) {
 	echo "<META http-equiv='refresh' content='.01;http://localhost/qa.php'>";
 }else "Nope";
@@ -78,10 +79,10 @@ End of information banner
 $result = mysqli_query($connection, "SELECT ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
 //Pull the first note from the DB
-$notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =  $product ORDER BY tid DESC");
+$notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =  $product ORDER BY logged_info.tid DESC");
 
 //Pull the second note from the DB
-$notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY tid DESC ");
+$notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
 //Warranty status
 $chosen_warranty = mysqli_query($connection, "SELECT logged_info.warranty,warranty.status,logged_info.selected_product FROM logged_info INNER JOIN warranty ON logged_info.warranty=warranty.id WHERE logged_info.selected_product = $product ORDER BY logged_info.tid DESC");

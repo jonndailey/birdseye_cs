@@ -5,16 +5,58 @@
 	<title>Check out</title>
 	<link rel="stylesheet" type="text/css" href="styles/glance.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<script src="scripts/jquery-1.10.2.min.js"></script>
+	<script src="scripts/main-script.js"></script>
+	<script type="text/javascript">
 
+
+		function popup() {
+			var element = document.getElementById("collectedLinks").style.display = "block";
+		}
+
+		function popdown() {
+			var element = document.getElementById("collectedLinks").style.display = "none";
+			var element = document.getElementById("collectedLinks").style.height = "100%";
+
+		}
+	</script>
 </head>
 <body>
+
+<div id="nav" onmouseover="popup();" onmouseout="popdown();" align="center">
+<p>Products</p>
+
+<div id="collectedLinks" align="center">
+
+<?php
+include('db.php');
+$pl = mysqli_query($connection, "SELECT id,name FROM products");
+
+
+
+while($list = mysqli_fetch_array($pl)){
+	//Write the line of HTML for each item
+	echo "&#183; <a href=\"results.php?id=" . $list['id']  ."\">". $list['name'] . "</a> ";
+
+}
+echo "&#183;";
+
+
+
+
+?>
+
+</div>
+
+</div>
 
 <?php
 
 
+
 $dataset = "<img src=\"images/logo/coffee.png\">";
 
-include('db.php');
+
 
 echo "<br /><br />";
 echo "<a href=\"checkout.php\">Checkout Page</a><br />";
@@ -33,14 +75,9 @@ $mydestination = mysqli_real_escape_string($connection, $_POST['mydestination'])
 $myweight = mysqli_real_escape_string($connection, $_POST['myweight']);
 $mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']);
 $myemail = mysqli_real_escape_string($connection, strtolower($_POST['myemail']));
-//$selected = mysqli_real_escape_string($connection, $_POST['selected_product']);
-//$destination = mysqli_real_escape_string($connection, $_POST['destination']); 
 $weight = mysqli_real_escape_string($connection, $_POST['weight']); 
 $note = mysqli_real_escape_string($connection, $_POST['note']); 
 
-
-//INSERT INTO customers (name,email) VALUES ('Marlon Brando', 'marlon@brando.com');# 1 row affected.
-//INSERT INTO logged_info (cid,ticket_number,location) VALUES (LAST_INSERT_ID(),'123456','1')# 1 row affected.
 
 if (strlen($outTrack) >= 18) {
 	$outTrack = substr($outTrack, 11);
@@ -50,9 +87,6 @@ if (strlen($inTrack) >= 18) {
 	$inTrack = substr($inTrack, 11);
 
 }
-
-
-
 
 
 // Don't submit information unless it is POSTed.
@@ -96,10 +130,10 @@ if ($sql1Result[0] > 1) {
 	}else echo '** ' . mysqli_error($connection);
 
 }
-
+/*
 echo "This is the CID in the customers table matching the email -> " . $sql1Result['cid'] . " ////////***///////<br />";
 //echo "////////***/////// " . var_dump($sql1Result) . " ////////***///////<br /><br />";
-echo "This is the email address  -> " . $sql1Result[2] . " ////////***///////<br /><br />";
+//echo "This is the email address  -> " . $sql1Result[2] . " ////////***///////<br /><br />";
 
 
 

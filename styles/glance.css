@@ -1,6 +1,8 @@
 body {
 
 	font-family: 'Open Sans', sans-serif;
+	margin:0;
+	padding:0;
 
 }
 
@@ -291,4 +293,37 @@ textarea {
 	font-size:15px;
 	font-family: 'Open Sans', sans-serif;
 }
+
+#nav {
+	left: 50%;
+	width:800px;
+	background-color:steelblue;
+	position: fixed;
+	margin-left: -400px;
+	z-index: 1;
+	border-radius: 0 0 10px 10px;
+	/*opacity: 0.9;*/
+	color:white;
+
+
+
+}
+
+#collectedLinks {
+	width:800px;
+	color:white;
+	margin: auto;
+	display: none;
+}
+
+#collectedLinks > a {
+
+	font-size: 18px;
+	color:white;
+}
+
+#collectedLinks > a:hover {
+	text-decoration: underline;
+}
+
 
