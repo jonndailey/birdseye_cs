@@ -1,12 +1,14 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="styles/checkin.css">
+	<link rel="stylesheet" type="text/css" href="styles/customer.css">
+	<?php include('header.php');?>
 </head>
 <?php
 
 $dataset = "<img src=\"images/logo/coffee.png\">";
 
 include('db.php');
+
 
 $customerID = $_REQUEST['cid'];
 
@@ -70,20 +72,20 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	<?php }; ?>	
 	
 	<?php if ($row = mysqli_fetch_array($notes)) { ?>
-		<?php echo "<tr>" ?>
+		<?php echo "<table class='lastnote'><tr>" ?>
 		<td><?php echo $row['note'];?></td>
-		<?php echo "</tr>" ?>
+		<?php echo "</tr><table>" ?>
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($notes2)) { ?>
-		<?php echo "<tr>" ?>
+		<?php echo "<tr class=\"sep\">" ?>
 		<td><?php echo $row['note2'];?></td>
-		<?php echo "</tr>" ?>
+		<?php echo "</tr><table><br /><br />" ?>
 	<?php }; ?>	
 
 	</tr>
-
 <?php }; ?>
+</table>
 
 
 

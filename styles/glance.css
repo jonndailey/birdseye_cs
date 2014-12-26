@@ -64,7 +64,7 @@ tr:nth-child(even) {
 }
 
 .product_sent {
-	background-color: #2980b9;
+	background-color: #926239;
 	padding:none;
 	width:100px;
 }
@@ -177,17 +177,6 @@ input[type=submit]{
 	color:white;	
  }
 
-/* End colors for all of the products */
-/*
-.thenotes {
-	display: block;
-	font: 20px;
-	margin-bottom: 20px;
-	margin-top: 50px;
-	width:400px;
-
-}
-*/
 input:not([type=submit]):not([type=file]) {
    height:40px;
    width:250px;
@@ -205,21 +194,6 @@ textarea#styled {
 }
 
 
-
-/*
-table {
-	margin: 0 auto;
-	table-layout: fixed;
-	width:500px;
-	font-family: 'Open Sans', sans-serif;
-}
-
-
-.flags {
-	border:1px solid red;
-	width:900px;
-}
-*/
 td {
 	font-size: 11px;
 	height:50px;
@@ -293,37 +267,4 @@ textarea {
 	font-size:15px;
 	font-family: 'Open Sans', sans-serif;
 }
-
-#nav {
-	left: 50%;
-	width:800px;
-	background-color:steelblue;
-	position: fixed;
-	margin-left: -400px;
-	z-index: 1;
-	border-radius: 0 0 10px 10px;
-	/*opacity: 0.9;*/
-	color:white;
-
-
-
-}
-
-#collectedLinks {
-	width:800px;
-	color:white;
-	margin: auto;
-	display: none;
-}
-
-#collectedLinks > a {
-
-	font-size: 18px;
-	color:white;
-}
-
-#collectedLinks > a:hover {
-	text-decoration: underline;
-}
-
 

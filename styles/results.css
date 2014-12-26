@@ -139,7 +139,7 @@ a:visited{
 
 .navstation {
 	width:1000px;
-	background-color: steelblue;
+	background-color: #A2B19C;
 	color:white;
 	margin: 0 auto;
 	border-radius:3px;
@@ -159,6 +159,22 @@ input[type=submit]{
 	
 }
 
+a:visited {
+	color:black;
+}
+
 a{
 	color:black;
+}
+
+.checkinBox {
+	width:800px;
+}
+
+.exclude {
+	width:800px;
+}
+
+#secondNote {
+	width:790px;
 }

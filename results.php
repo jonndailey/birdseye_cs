@@ -3,6 +3,7 @@
 <title>Check out</title>
 <link rel="stylesheet" type="text/css" href="styles/results.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<?php include('header.php'); ?>
 <body>
 	
 <?php
@@ -76,7 +77,7 @@ End of information banner
 
 
 //Grabbing every item in the database that has the correct ID
-$result = mysqli_query($connection, "SELECT ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product = $product ORDER BY logged_info.tid DESC");
+$result = mysqli_query($connection, "SELECT customers.cid,ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
 //Pull the first note from the DB
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =  $product ORDER BY logged_info.tid DESC");
@@ -100,7 +101,7 @@ $chosen_size = mysqli_query($connection, "SELECT p_size.package,logged_info.weig
 include('switch.php');
 
 ?>
-
+<br /><br />
 <div id="navcontainer">
 		<table align="center" class="navstation">	
 			<tr>
@@ -129,9 +130,10 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<table class='resultdata'>";
 	echo "<tr class='rows'>";
 	echo "<td>" . $row['ticket_number'] . "</td>";
-	echo "<td>" . $row['name'] . "</td>";
+	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td>" . $row['date_returned'] ;
+	
 
 	if ($row['date_returned'] == '') {
 		echo "<a href=\"checkin.php\">Not checked in</a></td>";

@@ -3,12 +3,8 @@
 <head>
 <title>Check in</title>
 <link rel="stylesheet" type="text/css" href="styles/results.css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="styles/checkin.css">
-<script src="scripts/jquery-1.10.2.min.js"></script>
-<script src="scripts/main-script.js"></script>
-</head>
-<body>
+<?php include('header.php');?>
 <?php
 
 
@@ -53,10 +49,10 @@ echo "<th>Checkout Date</th>" ;
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>
 
-		<table align="center">
+		<table align="center" class="checkinBox">
 		  <tr>
 			<td><?php echo $row['date_sent']; ?></td>
-			<td><?php echo $row['name']; ?></td>	
+			<?php echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>"; ?>
 			<td class="product"><?php  if ($row = mysqli_fetch_array($chosen_product)) { echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; }; ?></td>
 	  	  </tr><br />
 		</table>
