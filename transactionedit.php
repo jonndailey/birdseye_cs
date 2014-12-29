@@ -34,17 +34,20 @@ if (strlen($inTrack) >= 18) {
 $edit = mysqli_query($connection, "SELECT * FROM logged_info WHERE tid = $identification ORDER BY tid DESC");
 
 //Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product. 
-//$chosen_product = mysqli_query($connection, "SELECT products.id,products.name FROM products WHERE tid = $identification");
-$chosen_product = mysqli_query($connection, "SELECT products.id,products.name,logged_info.selected_product FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id");
+$chosen_product = mysqli_query($connection, "SELECT name,id from products INNER JOIN logged_info ON products.id=logged_info.selected_product WHERE tid = $identification UNION SELECT products.id,products.name FROM products ORDER BY name DESC");
+//$chosen_product = mysqli_query($connection, "SELECT name,id from products UNION SELECT tid,selected_product FROM logged_info WHERE tid = $identification ");
+
 
 
 //Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product. 
-$remind_product = mysqli_query($connection, "SELECT id,name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id WHERE tid = $identification ORDER BY logged_info.tid DESC");
+$remind_product = mysqli_query($connection, "SELECT id,name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ");
 
 
 
 //waranty
-$mywarranty = mysqli_query($connection, "SELECT warranty.id,warranty.status FROM warranty");
+$mywarranty = mysqli_query($connection, "SELECT warranty.id FROM warranty UNION SELECT logged_info.warranty FROM logged_info INNER JOIN warranty ON warranty.id=logged_info.warranty WHERE tid = $identification ORDER BY id DESC");
+
+//SELECT name,id from products UNION SELECT products.id,products.name FROM products INNER JOIN logged_info ON products.id=logged_info.selected_product WHERE tid = $identification ORDER BY id DESC
 
 //first note
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE tid =  $identification ");
@@ -64,6 +67,7 @@ $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
 <?php 
 //Grab the customers location
 $chosen_location = mysqli_query($connection, "SELECT area.id,area.location,area.secondary_name FROM area INNER JOIN logged_info ON area.id=logged_info.location WHERE tid = $identification");
+
 
 
 
@@ -121,7 +125,7 @@ while ($row = mysqli_fetch_array($chosen_quantity)) {
 $warranty = mysqli_query($connection, "SELECT warranty.id,warranty.status FROM warranty INNER JOIN logged_info ON warranty.id=logged_info.warranty WHERE tid = $identification ORDER BY logged_info.tid DESC");
 
 while ($row = mysqli_fetch_array($warranty)) {
-	echo "<div style='display:inline-block;color:steelblue'>" . $row['status'] . ".</div><br /><br />";
+	echo "<div style='display:inline-block;color:steelblue'>" . $row['id'] . ".</div><br /><br />";
 }
 
 ?>
@@ -133,7 +137,6 @@ echo "<select name=\"myproduct\">";
 while ($product = mysqli_fetch_array($chosen_product)) {
 
 	echo "<option value=\"" . $product["id"] . "\">" . $product["name"] . "</option>";
-
 }
 echo "</select>";
 
