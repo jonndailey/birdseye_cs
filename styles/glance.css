@@ -64,7 +64,7 @@ tr:nth-child(even) {
 }
 
 .product_sent {
-	background-color: #926239;
+	background-color: steelblue;
 	padding:none;
 	width:100px;
 }

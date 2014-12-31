@@ -18,8 +18,7 @@
 </head>
 <body>
 
-<div id="nav" onmouseover="popup();" onmouseout="popdown();" align="center">
-<p>Products</p>
+<div id="nav" align="center">
 
 <div id="collectedLinks" align="center">
 
