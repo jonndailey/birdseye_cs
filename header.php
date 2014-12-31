@@ -35,7 +35,6 @@ while($list = mysqli_fetch_array($pl)){
 	echo "&#183; <a href=\"results.php?id=" . $list['id']  ."\">". $list['name'] . "</a> ";
 
 }
-echo "&#183;";
 
 ?>
 

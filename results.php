@@ -34,9 +34,7 @@ Information banner
 */
 
 //Grabbing the date from 7 days ago, always dynamic 
-$seven_days_ago = date('m-d-Y', strtotime("-7 day"));
-
-//echo $seven_days_ago;
+//$seven_days_ago = date('m-d-Y', strtotime("-7 day"));
 
 //Grabbing and counting the amount of products sent in the table that match this product 
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC"); 

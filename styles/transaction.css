@@ -103,3 +103,11 @@ h3 {
 }
 
 
+select {
+	width:130px;
+	float:right;
+}
+
+form {
+	width:365px;
+}

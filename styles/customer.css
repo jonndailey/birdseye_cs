@@ -19,6 +19,7 @@ table{
 
 
 td {
+	height:50px;
 	font-size: 12px;
 
 }
@@ -27,8 +28,8 @@ th {
 	color:#34495e;
 	text-align: left;
 	background-color: white;
-
-
+	height: 100px;
+	font-size: 20px;
 }
 
 table:nth-child() {
