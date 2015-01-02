@@ -16,7 +16,6 @@ if ($product == 14) {
 }else "Nope";
 
 
-$dataset = "<img src=\"images/logo/coffee.png\">";
 
 
 include('db.php');

@@ -38,11 +38,29 @@ $checkinNotes = mysqli_query($connection,"SELECT logged_info.note,logged_info.no
 
 //Count how many items are not checked in.
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned='' AND products.protected = 'yes' "); 
+
 $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
-echo "<div align='center'>There are "  . $number_of_items_displayed[0] . " items to be checked in.</div>";
+$last3 = mysqli_query($connection, "SELECT logged_info.date_returned,customers.name,logged_info.cid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
 
-echo "<th>Checkout Date</th>" ;
+$chosen_product_for_3 = mysqli_query($connection, "SELECT logged_info.selected_product,products.name FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
+
+echo "<div align='center'>Last 3 items checked in</div>";
+while ($row = mysqli_fetch_array($last3)) { ?>
+	<table align="center" class="checkinBox">
+		  <tr>
+			<td><?php echo $row['date_returned']; ?></td>
+			<?php echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>"; ?>
+			<td class="product"><?php  if ($row = mysqli_fetch_array($chosen_product_for_3)) { echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; }; ?></td>
+	  	  </tr><br />
+		</table>
+<?php }; ?>
+
+
+
+<?php
+echo "<br /><br /><br /><br /><br /><div align='center'>There are "  . $number_of_items_displayed[0] . " items to be checked in.</div>";
+
 ?>
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>

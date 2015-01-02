@@ -16,7 +16,7 @@ switch ($product) {
 		$product = "Pro Meat Probe";
 		break;
 	case 7:
-		$product = "iGrill2";
+		$product = "iGrill<sup>2</sup>";
 		break;
 	case 8:
 		$product = "iGrill<sup>2</sup> Base";
@@ -62,8 +62,9 @@ switch ($product) {
 		break;
 	case 22:
 		$product = "iShower Mount";
+		break;
 	case 23:
-		$product = "Ambient Temperature Probe";
+		$product = "KT mini";
 		break;		
 	case 24:
 		$product = "Ambient Temperature Probe";

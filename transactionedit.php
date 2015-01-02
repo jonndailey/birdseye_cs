@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="styles/transaction.css">
+	<?php include('header.php');?>
+
 <?php
 $dataset = "<img src=\"images/logo/coffee.png\">";
 
@@ -65,25 +67,28 @@ $chosen_location = mysqli_query($connection, "SELECT area.id,area.location,area.
 
 while ($row = mysqli_fetch_array($edit)) { ?>
 
+
 <?php 
 
 $checkdate = mysqli_query($connection, "SELECT date_returned FROM logged_info WHERE tid = $identification");
 $checkdatearray = mysqli_fetch_array($checkdate);
+
 if ($checkdatearray[0] > 1) {
-	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a>";
-}else echo "This has not been checked in.";
+	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br />";
+}else echo "This has not been checked in.<br /><br />";
 
 
 
 
 ?>
-<br /><br />
+
 <form action="editinsert.php?">
 	Ticket number:<br /><input type="text" name="ticket" placeholder="Ticket Number" value="<?php echo $row['ticket_number'];?>"></input><br /><br />
 	Outgoing Tracking: <br /><input type="text" name="incoming" placeholder="Incoming Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
 	Incoming Tracking:<br /><input type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
 
 <?php
+
 echo "Notes:<br />";
 while ($customernote1 = mysqli_fetch_array($notes)) { ?>
 

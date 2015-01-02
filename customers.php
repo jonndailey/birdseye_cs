@@ -1,11 +1,11 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/customer.css">
-	<?php include('header.php');?>
 </head>
+	<?php include('header.php');?>
+
 <?php
 
-$dataset = "<img src=\"images/logo/coffee.png\">";
 
 include('db.php');
 
@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
 	<tr>
-		<?php echo "<td><a href=\"transactionedit.php?tid=" . $row['tid'] . "\">Edit</a></td>";?>
+		<?php echo "<td><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
 		<td><?php echo $row['ticket_number'];?></td>
 		<td><?php echo $row['date_sent'];?></td>
 		<td><?php echo $row['date_returned'];?></td>

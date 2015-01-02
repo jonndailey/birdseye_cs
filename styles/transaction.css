@@ -1,16 +1,22 @@
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
+	padding:0px;
+	margin:0px;
 
 }
 
 .groupedData {
-	width:500px;
-	margin:0 auto;
-	display: block;
+	background-color: #F5F5DC;
+	width:365px;
+	margin:70px auto;
+	border:5px solid #ECF0F1;
+	padding:15px;
+	border-radius:5px;
 }
 
 table{
+	border:3px solid black;
 	table-layout: fixed;
 	width:1000px;
 	margin: 0 auto;
@@ -104,6 +110,7 @@ h3 {
 
 
 select {
+	height:20px;
 	width:130px;
 	float:right;
 }
@@ -111,3 +118,4 @@ select {
 form {
 	width:365px;
 }
+

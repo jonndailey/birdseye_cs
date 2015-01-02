@@ -10,8 +10,4 @@ if (mysqli_connect_errno()) {
 	echo "";
 };
 
-if ($dataset) {
-	echo $dataset;
-}
-
 ?>
