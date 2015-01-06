@@ -1,15 +1,11 @@
-<DOCTYPE html>
-<html>
-<head>
-<title>Check in</title>
-<link rel="stylesheet" type="text/css" href="styles/global.css">
-
 <?php include('header.php');?>
+<body class="checkinpage">
+<?php include('nav.php');?>
 
 <?php
 
 //Including the DB connection
-include('db.php');
+
 
 
 //My Dev navigation. Not final.
@@ -62,7 +58,7 @@ echo "<br /><br /><br /><br /><br /><div align='center'>There are "  . $number_o
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>
 
-		<table align="center" class="checkinBox">
+		<table>
 		  <tr>
 			<td><?php echo $row['date_sent']; ?></td>
 			<?php echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>"; ?>

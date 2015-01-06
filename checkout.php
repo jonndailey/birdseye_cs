@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Check out</title>
-<head>
-<!--<link rel="stylesheet" type="text/css" href="styles/glance.css">-->
-</head>
 <?php include('header.php');?>
-
-
-
+<body class="checkoutpage">
+<?php include('nav.php');?>
 <?php
-
-
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $name = mysqli_real_escape_string($connection, $_POST['name']);

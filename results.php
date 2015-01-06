@@ -1,10 +1,7 @@
-<DOCTYPE html>
+<?php include('header.php');?>
+<body class="resultspage">
+<?php include('nav.php');?>
 
-<title>Check out</title>
-<link rel="stylesheet" type="text/css" href="styles/results.css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<?php include('header.php'); ?>
-<body>
 	
 <?php
 
@@ -120,12 +117,12 @@ include('switch.php');
 
 echo "<br>";
 
-echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Date Received</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>" . "</tr>";
+echo "<table id=\"resultsData\">" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Date Received</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>" . "</tr>";
 //Display the info grabbed from the tables displayed in HTML
 
 while($row = mysqli_fetch_array($result)) {
-	echo "<table class='resultdata'>";
-	echo "<tr class='rows'>";
+	echo "<table>";
+	echo "<tr>";
 	echo "<td>" . $row['ticket_number'] . "</td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
@@ -139,7 +136,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
 
-echo "<tr>";
+echo "<tr  class='resultdata'>";
 if ($row = mysqli_fetch_array($chosen_location)) {
 	echo "<td class='outerinfo'>";
 	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";

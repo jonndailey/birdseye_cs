@@ -1,13 +1,9 @@
-<html>
-<head>
-</head>
-	<?php include('header.php');?>
+<?php include('header.php');?>
+<body class="customerspage">
+<?php include('nav.php');?>
+
 
 <?php
-
-
-include('db.php');
-
 
 $customerID = $_REQUEST['cid'];
 
