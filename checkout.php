@@ -3,23 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Check out</title>
-<link rel="stylesheet" type="text/css" href="styles/glance.css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<script src="scripts/jquery-1.10.2.min.js"></script>
-<script src="scripts/main-script.js"></script>
+<head>
+<!--<link rel="stylesheet" type="text/css" href="styles/glance.css">-->
+</head>
 <?php include('header.php');?>
+
+
 
 <?php
 
-
-
-$dataset = "<img src=\"images/logo/coffee.png\">";
-
-
-
-echo "<br /><br />";
-echo "<a href=\"checkout.php\">Checkout Page</a><br />";
-echo "<a href=\"checkin.php\">Checkin Page</a><br />";
 
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
@@ -89,10 +81,7 @@ if ($sql1Result[0] > 1) {
 	}else echo '** ' . mysqli_error($connection);
 
 }
-/*
-echo "This is the CID in the customers table matching the email -> " . $sql1Result['cid'] . " ////////***///////<br />";
-//echo "////////***/////// " . var_dump($sql1Result) . " ////////***///////<br /><br />";
-//echo "This is the email address  -> " . $sql1Result[2] . " ////////***///////<br /><br />";
+
 
 
 
@@ -115,10 +104,6 @@ echo "<form action=\"checkout.php\" method=\"POST\">";
 <textarea id="styled" rows="2" cols="20" type="text" name="outTrack" placeholder="Outgoing tracking"></textarea>
 <textarea id="styled" rows="2" cols="20" type="textarea" name="inTrack" placeholder="Incoming tracking"></textarea><br />
 <textarea rows="4" cols="108" placeholder="Optional note" name="note"></textarea>
-
-<br />
-
-
 
 <?php
 
@@ -231,7 +216,7 @@ $result = mysqli_query($connection, "SELECT logged_info.tid, customers.cid, tick
 $chosen_product = mysqli_query($connection, "SELECT products.id, products.name,products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
 
 echo "<div id='lastItems'>Last 20 items checked out.</div>";
-echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th></tr> ";
+echo "<table id=\"viewtable\">" . "<tr><th>Ticket Number</th>" . "<th>Customer Name</th>" . "<th>Date Sent</th>" . "<th>Outgoing Barcode</th>" . "<th>Incoming Barcode</th>" . "<th>Product Sent</th></tr> ";
 
 
 //Display the info grabbed from the tables displayed in HTML
@@ -245,7 +230,7 @@ while($row = mysqli_fetch_array($result)) {
 
 //Displays the type of product selected for the selected row
 if ($row = mysqli_fetch_array($chosen_product)) {
-	echo "<div class='" . $row['color_code'] . "'>";
+	echo "<div class=\"product\">";
 	echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>"; 
 	echo "</div> ";
 		};

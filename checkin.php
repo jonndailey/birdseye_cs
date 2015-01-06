@@ -2,14 +2,11 @@
 <html>
 <head>
 <title>Check in</title>
-<link rel="stylesheet" type="text/css" href="styles/results.css">
-<link rel="stylesheet" type="text/css" href="styles/checkin.css">
+<link rel="stylesheet" type="text/css" href="styles/global.css">
+
 <?php include('header.php');?>
+
 <?php
-
-
-//Lets me know the connection to the server was successful
-$dataset = "<img src=\"images/logo/coffee.png\">";
 
 //Including the DB connection
 include('db.php');
@@ -25,7 +22,7 @@ $theNewNote =  mysqli_real_escape_string($connection, $_POST['secondNote']);
 
 
 //Start of table
-echo "<table>";
+echo "<table class=\"productcheckin\">";
 
 //Show me what product is selected in the database for the row
 $chosen_product = mysqli_query($connection, "SELECT logged_info.selected_product,logged_info.tid,products.id,products.name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' ORDER BY tid DESC");
@@ -43,7 +40,7 @@ $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 $last3 = mysqli_query($connection, "SELECT logged_info.date_returned,customers.name,logged_info.cid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
 
-$chosen_product_for_3 = mysqli_query($connection, "SELECT logged_info.selected_product,products.name FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
+$chosen_product_for_3 = mysqli_query($connection, "SELECT logged_info.selected_product,products.name,products.id FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
 
 echo "<div align='center'>Last 3 items checked in</div>";
 while ($row = mysqli_fetch_array($last3)) { ?>

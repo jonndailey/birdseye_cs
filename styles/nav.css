@@ -10,13 +10,13 @@
 }
 
 #collectedLinks > a {
-	font-size: 11px;
+	font-size: 12px;
 	color:black;
 
 }
 
-#collectedLinks > a:hover {
-	text-decoration: underline;
+.checklinks {
+	font-size:12px;
+	text-decoration: overline;
+	color:red;
 }
-
-

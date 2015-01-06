@@ -64,6 +64,7 @@ table:nth-child() {
 a:link {
 	color:#000;
 	font-size: 12px;
+	text-decoration: none;
 }
 
 a:visited{
@@ -79,7 +80,7 @@ a:active {
 	margin: 20px auto; display:none; }
 
 textarea {
-	width:885px;
+	width:790px;
 	height:45px;
 	font-size: 12px;
 	border:1px solid #ddd;

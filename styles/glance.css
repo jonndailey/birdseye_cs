@@ -1,6 +1,7 @@
 body {
 
 	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
 	margin:0;
 	padding:0;
 
@@ -44,7 +45,7 @@ tr:nth-child(even) {
 #product_results {
 	margin-top: 35px;
 	margin-left:120;
-};
+}
 
 /*End entries for the results page*/
 

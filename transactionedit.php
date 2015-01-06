@@ -2,7 +2,6 @@
 	<?php include('header.php');?>
 
 <?php
-$dataset = "<img src=\"images/logo/coffee.png\">";
 
 include('db.php');
 

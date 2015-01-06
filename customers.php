@@ -1,6 +1,5 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="styles/customer.css">
 </head>
 	<?php include('header.php');?>
 
@@ -50,7 +49,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Outgoing</th><th>Incoming</th><th>Warranty</th><th>Product</th><th>Qty</th>
 
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
-	<tr>
+	<tr class="customerTopLine">
 		<?php echo "<td><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
 		<td><?php echo $row['ticket_number'];?></td>
 		<td><?php echo $row['date_sent'];?></td>
@@ -78,7 +77,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($notes2)) { ?>
-		<?php echo "<tr class=\"sep\">" ?>
+		<?php echo "<tr class=\"customerBottomLine\">" ?>
 		<td><?php echo $row['note2'];?></td>
 		<?php echo "</tr><table><br /><br />" ?>
 	<?php }; ?>	
