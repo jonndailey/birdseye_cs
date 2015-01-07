@@ -2,6 +2,7 @@
 
 include('db.php');
 
+$routingquery = $_REQUEST['cid'];
 $identification = $_REQUEST['tid'];
 $myticket = $_REQUEST['ticket'];
 $inTrack = $_REQUEST['incoming'];
@@ -13,6 +14,8 @@ $mywarranty = $_REQUEST['mywarranty'];
 $mydestination = $_REQUEST['mydestination'];
 $quantity = $_REQUEST['myquantity'];
 $mypackage = $_REQUEST['mypackage'];
+
+
 
 //for removing a checked in item.
 
@@ -48,5 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 }else mysqli_error($connection);
 
-echo "<META http-equiv='refresh' content='.01;http://localhost/transactionedit.php?tid=" . $identification . "'>";
+
+echo "<META http-equiv='refresh' content='.1;http://localhost/customers.php?cid=" . $routingquery . "'>";
 ?>

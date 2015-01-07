@@ -27,6 +27,12 @@ $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE cid = $custo
 //Pull the second note from the DB
 $notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE cid = $customerID ORDER BY logged_info.tid DESC");
 
+//Package weight
+$chosen_size = mysqli_query($connection, "SELECT p_size.id,p_size.package,logged_info.weight FROM p_size INNER JOIN logged_info ON p_size.id=logged_info.weight WHERE cid = $customerID ORDER BY logged_info.tid DESC");
+
+//For the display of the flag
+$chosen_location = mysqli_query($connection, "SELECT area.secondary_name,area.mypath,logged_info.location FROM area INNER JOIN logged_info ON area.id=logged_info.location WHERE cid = $customerID ORDER BY logged_info.tid DESC");
+
 //Displaying the customers name and email.
 while ($row = mysqli_fetch_array($customer_name)) {
 	echo "<div id='infoContainer'>";
@@ -38,7 +44,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 ?>
 
 <table id="customers">
-		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Outgoing</th><th>Incoming</th><th>Warranty</th><th>Product</th><th>Qty</th>
+		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Outgoing</th><th>Incoming</th><th>Warranty</th><th>Product</th><th>Qty</th><th>Weight</th><th>Country</th>
 
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
 	<tr class="customerTopLine">
@@ -60,17 +66,26 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	<?php if ($row = mysqli_fetch_array($chosen_quantity)) { ?>
 		<td><?php echo $row['quantity'];?></td>
 
+
 	<?php }; ?>	
-	
+	<?php if ($row = mysqli_fetch_array($chosen_size)) { ?>
+		<td><?php echo $row['package'] . "oz";?></td>
+			<?php }; ?>	
+
+	<?php if ($row = mysqli_fetch_array($chosen_location)) { ?>
+		<td><?php echo $row['secondary_name'];?></td>
+			<?php }; ?>		
 	<?php if ($row = mysqli_fetch_array($notes)) { ?>
 		<?php echo "<table class='lastnote'><tr>" ?>
 		<td><?php echo $row['note'];?></td>
-		<?php echo "</tr><table>" ?>
+		<?php echo "</tr><br /><table>" ?>
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($notes2)) { ?>
 		<?php echo "<tr class=\"customerBottomLine\">" ?>
+
 		<td><?php echo $row['note2'];?></td>
+
 		<?php echo "</tr><table><br /><br />" ?>
 	<?php }; ?>	
 

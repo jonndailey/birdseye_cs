@@ -66,13 +66,12 @@ a:visited{
 }
 
 .customerspage #customerName {
-	width:150px;
+	width:1000px;
 	font-size: 25px;
 	margin: 50px auto;
 	color: maroon;
 	padding:5px;
-	text-align:center;
-	border:1px solid #000;
+	text-align:left;
 }
 
 .transactioneditpage th {
@@ -91,13 +90,22 @@ a:visited{
 	border-radius:5px;
 }
 
-.transactioneditpage input {
-	width: 365px;
+.transactioneditpage input:not([type=submit]):not([type=file]) {
+   height:20px;
+   width:350px;
+   font-size:12px;
+   font-family: 'Open Sans', sans-serif;
+   border:2px solid #eee;
 }
+
+.transactionform{
+	font-size:10px;
+}
+
 
 .transactioneditpage select {
 	height:20px;
-	width:130px;
+	width:100%;
 	float:right;
 }
 
@@ -270,6 +278,10 @@ tr:nth-child(even) {
 	-webkit-border-radius:1px;
 	background-color: #eee;
 }
+
+#logo {
+	text-align: left;
+}
 /*Global submit button */
 input[type=submit]{
 	height:25px;
@@ -341,4 +353,9 @@ th {
 a:link{
 	color:black;
 	text-decoration: none;
+}
+
+#collectedLinks {
+	text-align:center;
+	margin-bottom:55px;
 }

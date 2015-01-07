@@ -15,6 +15,11 @@ $mydestination = mysqli_real_escape_string($connection, $_POST['mydestination'])
 $mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']); 
 $mytid = mysqli_real_escape_string($connection, $_POST['tid']); 
 
+//These 2 queries allow the page to be re-routed back the customers page.
+$routingquery = mysqli_query($connection, "SELECT customers.cid FROM customers INNER JOIN logged_info ON logged_info.cid=customers.cid WHERE tid = $identification");
+$routingqueryarray = mysqli_fetch_array($routingquery);
+
+
 if (strlen($outTrack) >= 18) {
 	$outTrack = substr($outTrack, 11);
 }
@@ -23,6 +28,8 @@ if (strlen($inTrack) >= 18) {
 	$inTrack = substr($inTrack, 11);
 
 }
+
+
 
 //Select the items from the DB that match the transaction
 $edit = mysqli_query($connection, "SELECT * FROM logged_info WHERE tid = $identification ORDER BY tid DESC");
@@ -72,15 +79,15 @@ $checkdate = mysqli_query($connection, "SELECT date_returned FROM logged_info WH
 $checkdatearray = mysqli_fetch_array($checkdate);
 
 if ($checkdatearray[0] > 1) {
-	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br />";
+	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br /><br />";
 }else echo "This has not been checked in.<br /><br />";
 
 ?>
 
 <form action="editinsert.php?">
-	Ticket number:<br /><input type="text" name="ticket" placeholder="Ticket Number" value="<?php echo $row['ticket_number'];?>"></input><br /><br />
-	Outgoing Tracking: <br /><input type="text" name="incoming" placeholder="Incoming Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
-	Incoming Tracking:<br /><input type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
+	Ticket number:<br /><input class="transactionform" type="text" name="ticket" placeholder="Ticket Number" value="<?php echo $row['ticket_number'];?>"></input><br /><br />
+	Outgoing Tracking: <br /><input class="transactionform"  type="text" name="incoming" placeholder="Incoming Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
+	Incoming Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
 
 <?php
 
@@ -97,6 +104,9 @@ while ($customernote2 = mysqli_fetch_array($notes2)) { ?>
 
 <input type="text" name="note2" value="<?php echo $customernote2['note2']; ?>"></input>
 <?php }; ?>
+
+	<input type="hidden" name="cid"  value="<?php echo $routingqueryarray[0] ?>"></input>
+
 <br /><br />
 <?php
 
@@ -190,14 +200,17 @@ while($row = mysqli_fetch_array($package)){
 }
 	echo "</select>";
 
-echo "<input name=\"tid\" type=\"hidden\" value=". $identification . "></input>";
+
+echo "<input type=\"hidden\" name=\"tid\"  value=". $identification ."></input>";
+
+
 ?>
 <br /><br />
-
-<input type="submit" value="Submit Changes">
+<input type="submit" value="Submit Changes"></input>
 
 </form>
 </div>
-<?php }; ?>
+
+ <?php }; ?>
 </body>
 </html>

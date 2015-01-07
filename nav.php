@@ -1,6 +1,6 @@
-<div id="nav" align="center">
-<div id="collectedLinks" align="center">
-<a href="/checkout.php" onmouseout="document.tan1.src='images/logo/coffeedcb3a3_small.png'" onmouseover="document.tan1.src='images/logo/coffee59000_small.png'"><img name="tan1" src="images/logo/coffeedcb3a3_small.png"></a>
+<div id="nav">
+<div id="collectedLinks">
+<br /><img name="tan1" src="images/logo/papercup_starbuckscolorsdarkerwithshadow_first.png">
 <div class="checklinks"><a href="/checkout.php">Checkout</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/checkin.php">Checkin</a></div>
 <?php
 
