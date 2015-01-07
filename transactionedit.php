@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="styles/transaction.css">
-	<?php include('header.php');?>
+<?php include('header.php');?>
+<body class="checkoutpage">
+<?php include('nav.php');?>
 
 <?php
-
-include('db.php');
 
 $identification = $_REQUEST['tid'];
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
@@ -79,9 +75,6 @@ if ($checkdatearray[0] > 1) {
 	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br />";
 }else echo "This has not been checked in.<br /><br />";
 
-
-
-
 ?>
 
 <form action="editinsert.php?">
@@ -106,20 +99,12 @@ while ($customernote2 = mysqli_fetch_array($notes2)) { ?>
 <?php }; ?>
 <br /><br />
 <?php
-//echo "<h3>Change more info below:</h3>";
-//echo "Just so you remember, you sent this ";
 
-
-//echo "<br /> customer: ";
 
 //For the quantity of products
 $chosen_quantity = mysqli_query($connection, "SELECT amount.quantity,logged_info.quantity FROM amount INNER JOIN logged_info ON amount.id=logged_info.quantity WHERE tid = $identification ORDER BY logged_info.tid DESC");
 
 //The name of the product
-//The amount sent
-/*while ($row = mysqli_fetch_array($chosen_quantity)) {
-	echo "<div style='display:inline-block;color:steelblue'><li>" . $row['quantity'] . "</li></div>";
-}*/
 echo "Change ";
 
 while ($row = mysqli_fetch_array($remind_product)) {
@@ -205,7 +190,6 @@ while($row = mysqli_fetch_array($package)){
 }
 	echo "</select>";
 
-
 echo "<input name=\"tid\" type=\"hidden\" value=". $identification . "></input>";
 ?>
 <br /><br />
@@ -215,3 +199,5 @@ echo "<input name=\"tid\" type=\"hidden\" value=". $identification . "></input>"
 </form>
 </div>
 <?php }; ?>
+</body>
+</html>

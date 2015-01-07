@@ -69,13 +69,9 @@ if ($sql1Result[0] > 1) {
   		echo ('The logged into data has been added ');
 	}else echo '** ' . mysqli_error($connection);
 
-}
-
-
-
+	}
 
 }
-
 
 ?>
 
@@ -109,14 +105,11 @@ while($productamount = mysqli_fetch_array($quantity)){
 	echo "|";
 ?>
 
-
-
 <?php
 
 $pl = mysqli_query($connection, "SELECT id,name FROM products");
 
 //Begin dropdown list for all of the products in the database.
-
 echo "Product: ";
 echo "<select name=\"myproducts\">";
 
@@ -196,12 +189,10 @@ echo "</select>";
 
 <?php
 
-//Adding the MYSQl query into the $result variable to grab the last 20 results entered into the Database
-
+//Grab the last 20 checked out items
 $result = mysqli_query($connection, "SELECT logged_info.tid, customers.cid, ticket_number, customers.name, date_sent, outgoing_barcode, incoming_barcode, selected_product FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid  ORDER BY logged_info.tid DESC LIMIT 20");
 
 //Adding the MySql query to to join the products and logged_info table so I can display the product the customer received
-
 $chosen_product = mysqli_query($connection, "SELECT products.id, products.name,products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
 
 echo "<div id='lastItems'>Last 20 items checked out.</div>";

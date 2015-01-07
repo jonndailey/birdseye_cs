@@ -1,24 +1,14 @@
 <?php include('header.php');?>
 <body class="resultspage">
 <?php include('nav.php');?>
-
 	
 <?php
-
 
 $product = $_GET['id'];
 
 if ($product == 14) {
 	echo "<META http-equiv='refresh' content='.01;http://localhost/qa.php'>";
 }else "Nope";
-
-
-
-
-include('db.php');
-
-//echo "<a href=\"checkout.php\">Checkout Page</a><br />";
-//echo "<a href=\"checkin.php\">Checkin Page</a><br />";
 
 
 /*
@@ -28,9 +18,6 @@ Information banner
 
 ***************
 */
-
-//Grabbing the date from 7 days ago, always dynamic 
-//$seven_days_ago = date('m-d-Y', strtotime("-7 day"));
 
 //Grabbing and counting the amount of products sent in the table that match this product 
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC"); 
@@ -97,23 +84,20 @@ include('switch.php');
 ?>
 <br /><br />
 <div id="navcontainer">
-		<table align="center" class="navstation">	
-			<tr>
-				<td align="center" class="titleName"><?php echo $product ?></td>
-				<td align="center" class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
-				<!--<td align="center" class="title"><span class="number"><?php/* echo $last_7_days_displayed[0]*/ ?></span><br/>In the past seven days</td>-->
-				<td align="center" class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
-				<td align="center" class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
-			</tr>
-		</table>
-	</div>
-
+	<table align="center" class="navstation">	
+		<tr>
+			<td align="center" class="titleName"><?php echo $product ?></td>
+			<td align="center" class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
+			<td align="center" class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
+			<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
+			<td align="center" class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
+			<td align="center" class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
+			<td align="center" class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
+		</tr>
+	</table>
+</div>
 
 <?php
-
 
 echo "<br>";
 
@@ -129,9 +113,9 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td>" . $row['date_returned'] ;
 	
 
-	if ($row['date_returned'] == '') {
-		echo "<a href=\"checkin.php\">Not checked in</a></td>";
-	};
+if ($row['date_returned'] == '') {
+	echo "<a href=\"checkin.php\">Not checked in</a></td>";
+};
 
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ."</a></td>";
@@ -148,7 +132,6 @@ if ($row = mysqli_fetch_array($chosen_quantity)) {
 	echo "<div class='detailedinfo'>";
 	echo "Qty: " . $row['quantity'] . " &#183; ";
 	
-
 	}
 
 
@@ -180,13 +163,10 @@ if ($row = mysqli_fetch_array($notes2)){
 	echo "</td></table>";
 	}else echo "";
 	echo "</tr><br /><br />";
-
 }
+
 echo "</tr>";
 echo "</table>";
-
-
 ?>
-
 </body>
 </html>

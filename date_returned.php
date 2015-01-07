@@ -7,7 +7,6 @@ include('db.php');
 echo "<p>Good to go</p>";
 $identification = $_REQUEST['tid'];
 
-
 if (isset($_GET['tid'])) {
 mysqli_query($connection, "UPDATE logged_info SET date_returned = '' WHERE tid = $identification");
 };

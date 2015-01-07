@@ -2,15 +2,12 @@
 <body class="customerspage">
 <?php include('nav.php');?>
 
-
 <?php
 
 $customerID = $_REQUEST['cid'];
 
-
 //Pulling the product the customer was sent. 
 $chosen_product = mysqli_query($connection, "SELECT id,name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id WHERE cid = $customerID ORDER BY logged_info.tid DESC");
-
 
 //Pulling the customer information.
 $customer_data = mysqli_query($connection, "SELECT logged_info.warranty,logged_info.incoming_barcode, logged_info.outgoing_barcode, customers.name, logged_info.ticket_number,logged_info.date_sent,logged_info.selected_product,logged_info.date_returned,logged_info.tid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE logged_info.cid = $customerID ORDER BY logged_info.tid DESC");
@@ -18,10 +15,10 @@ $customer_data = mysqli_query($connection, "SELECT logged_info.warranty,logged_i
 //Pulling the customers name to display at the top of the page.
 $customer_name = mysqli_query($connection, "SELECT cid,name,email FROM customers WHERE cid = $customerID");
 
-
 //Pull warranty information
 $warranty = mysqli_query($connection, "SELECT id,status FROM warranty INNER JOIN logged_info ON warranty.id=logged_info.warranty WHERE cid = $customerID ORDER BY logged_info.tid DESC");
 
+//Pull the quantity
 $chosen_quantity = mysqli_query($connection, "SELECT amount.quantity,logged_info.quantity FROM amount INNER JOIN logged_info ON amount.id=logged_info.quantity WHERE cid = $customerID ORDER BY logged_info.tid DESC");
 
 //Pull the first note from the DB
@@ -38,9 +35,8 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	echo "</div>";
 };
 
-
-
 ?>
+
 <table id="customers">
 		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Outgoing</th><th>Incoming</th><th>Warranty</th><th>Product</th><th>Qty</th>
 
@@ -81,8 +77,5 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	</tr>
 <?php }; ?>
 </table>
-
-
-
 </table>
 </html>

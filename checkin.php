@@ -4,18 +4,8 @@
 
 <?php
 
-//Including the DB connection
-
-
-
-//My Dev navigation. Not final.
-echo "<br /><br />";
-echo "<a href=\"checkout.php\">Checkout Page</a><br />";
-echo "<a href=\"checkin.php\">Checkin Page</a><br />";
-
 //Checkin note for the transaction.
 $theNewNote =  mysqli_real_escape_string($connection, $_POST['secondNote']);
-
 
 //Start of table
 echo "<table class=\"productcheckin\">";
@@ -57,7 +47,6 @@ echo "<br /><br /><br /><br /><br /><div align='center'>There are "  . $number_o
 ?>
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>
-
 		<table>
 		  <tr>
 			<td><?php echo $row['date_sent']; ?></td>

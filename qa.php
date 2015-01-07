@@ -6,14 +6,11 @@
 <body>
 <?php
 
-
 $product = 14;
 
 $dataset = "*";
 
 include('db.php');
-
-
 
 //Grabbing the amount of products sent in the table. 
 $number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product); 
@@ -24,15 +21,11 @@ $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 $last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product =" .  $product . ""); 
 $last_7_days_displayed = mysqli_fetch_array($last_7_days);
 
-
-
-
+//Grabbing the product from the products table
 $result = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
 
 //Same query as result to display notes
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product = $product ORDER BY id DESC");
-
-
 
 include('switch.php');
 
@@ -52,8 +45,6 @@ $chosen_quantity = mysqli_query($connection, "SELECT logged_info.customer_name,a
 //Warranty status
 $chosen_warranty = mysqli_query($connection, "SELECT logged_info.customer_name,warranty.id,logged_info.warranty FROM warranty INNER JOIN logged_info ON warranty.status=logged_info.warranty ORDER BY logged_info.id DESC");
 
-
-
 echo "<table>" . "<tr><th>Ticket Number</th>" . "<th>Name</th>" . "<th>Date sent</th>" . "<th>Outgoing Tracking</th>" . "<th>Incoming Tracking</th>";
 //Display the info grabbed from the tables displayed in HTML
 
@@ -68,7 +59,6 @@ while($row = mysqli_fetch_array($result)) {
 }
 
 echo "</table>";
-
 
 ?>
 
