@@ -1,5 +1,5 @@
 <?php include('header.php');?>
-<body class="checkoutpage">
+<body class="transactioneditpage">
 <?php include('nav.php');?>
 
 <?php

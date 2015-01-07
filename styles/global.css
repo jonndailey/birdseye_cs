@@ -75,6 +75,34 @@ a:visited{
 	border:1px solid #000;
 }
 
+.transactioneditpage th {
+	color:#34495e;
+	text-align: left;
+	background-color: white;
+
+}
+
+.transactioneditpage .groupedData {
+	background-color: #F5F5DC;
+	width:365px;
+	margin:70px auto;
+	border:5px solid #ECF0F1;
+	padding:15px;
+	border-radius:5px;
+}
+
+.transactioneditpage input {
+	width: 365px;
+}
+
+.transactioneditpage select {
+	height:20px;
+	width:130px;
+	float:right;
+}
+
+
+
 /*styling for the last 20 items on the checkout table*/
 
 
