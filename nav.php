@@ -1,6 +1,6 @@
 <div id="nav">
 <div id="collectedLinks">
-<br /><img name="tan1" src="images/logo/papercup_starbuckscolorsdarkerwithshadow_first.png">
+<br /><img id="tan1" src="images/logo/papercup_starbuckscolorsdarkerwithshadow_first.png" alt="Coffee Logo">
 <div class="checklinks"><a href="/checkout.php">Checkout</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/checkin.php">Checkin</a></div>
 <?php
 

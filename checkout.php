@@ -86,8 +86,8 @@ echo "<form action=\"checkout.php\" method=\"POST\">";
 <input type="text" name="ticket" placeholder="Ticket #">
 <input type="text" name="name" placeholder="First/Last Name">
 <input type="text" name="myemail" placeholder="Email Address"><br />
-<textarea id="styled" rows="2" cols="20" type="text" name="outTrack" placeholder="Outgoing tracking"></textarea>
-<textarea id="styled" rows="2" cols="20" type="textarea" name="inTrack" placeholder="Incoming tracking"></textarea><br />
+<textarea class="styled" rows="2" cols="20"  name="outTrack" placeholder="Outgoing tracking"></textarea>
+<textarea class="styled" rows="2" cols="20" name="inTrack" placeholder="Incoming tracking"></textarea><br />
 <textarea rows="4" cols="108" placeholder="Optional note" name="note"></textarea>
 
 <?php
@@ -98,7 +98,7 @@ $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
 echo "<select name=\"myquantity\">";
 
 while($productamount = mysqli_fetch_array($quantity)){
-	echo "<option value=\"". $productamount["id"] . "\">". $productamount["quantity"] . "</option>";
+	echo "<option label=\"product_amount\" value=\"". $productamount["id"] . "\">". $productamount["quantity"] . "</option>";
 
 }
 	echo "</select>";
@@ -117,7 +117,7 @@ echo "<select name=\"myproducts\">";
 	
 while($list = mysqli_fetch_array($pl)){
 	//Write the line of HTML for each item
-	echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
+	echo "<option label=\"product_list\" value=\"". $list["id"] ."\">". $list["name"] . "</option>";
 }
 
 //End the dropdown for the products
@@ -144,7 +144,7 @@ echo "Destination: ";
 echo "<select name=\"mydestination\">";
 
 while ($origin = mysqli_fetch_array($loc)) {
-	echo "<option value=\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
+	echo "<option label=\"location\" value=\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
 }
 
 echo "</select>";
@@ -156,7 +156,7 @@ echo "&nbsp;Weight: ";
 echo "<select name=\"myweight\">";
 
 while ($weighted = mysqli_fetch_array($size)) {
-	echo "<option value=\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
+	echo "<option label=\"size\" value=\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
 
 }
 echo "</select>";
@@ -172,7 +172,7 @@ echo "&nbsp;Warranty: ";
 echo "<select name=\"mywarranty\">";
 
 while ($warrantyStatus = mysqli_fetch_array($warranty)) {
-	echo "<option value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
+	echo "<option label=\"warranty\" value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
 
 }
 echo "</select>";
@@ -180,11 +180,10 @@ echo "</select>";
 ?>
 
 
-<div id="button">
+<div id="button"></div>
 	<input type="submit">
 </form>
 
-</div>
 </div>
 
 <?php
@@ -201,7 +200,7 @@ echo "<table id=\"viewtable\">" . "<tr><th>Ticket Number</th>" . "<th>Customer N
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['tid'] . "\"><img src=\"images/buttons/close.png\">&nbsp;</a>" . $row['ticket_number'] . "</td>";
+	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['tid'] . "\"><img src=\"images/buttons/close.png\" alt=\"close_button\">&nbsp;</a>" . $row['ticket_number'] . "</td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
@@ -220,7 +219,6 @@ echo "</tr>";
 	};
 
 echo "</table>";
-echo "</div>";
 ?>
 
 </body>

@@ -84,15 +84,15 @@ include('switch.php');
 ?>
 <br /><br />
 <div id="navcontainer">
-	<table align="center" class="navstation">	
+	<table class="navstation">	
 		<tr>
-			<td align="center" class="titleName"><?php echo $product ?></td>
-			<td align="center" class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
-			<td align="center" class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
-			<td align="center" class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
-			<td align="center" class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
-			<td align="center" class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
-			<td align="center" class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
+			<td class="titleName"><?php echo $product ?></td>
+			<td class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
+			<td class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
+			<td class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
+			<td class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
+			<td class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
+			<td class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
 		</tr>
 	</table>
 </div>
@@ -123,7 +123,7 @@ if ($row['date_returned'] == '') {
 echo "<tr  class='resultdata'>";
 if ($row = mysqli_fetch_array($chosen_location)) {
 	echo "<td class='outerinfo'>";
-	echo "<img src=\"images/flags/" . $row['mypath'] . "\">";
+	echo "<img alt=\"flag\" src=\"images/flags/" . $row['mypath'] . "\">";
 
 	}
 
@@ -155,10 +155,10 @@ if ($row = mysqli_fetch_array($notes)){
 	echo $row['note'];
 	echo "</td>";
 	}else echo "No note checked in:";
-	echo "</tr><br />";
+	echo "</tr>";
 
 if ($row = mysqli_fetch_array($notes2)){
-	echo "<td class='mynote'>";
+	echo "<br /><td class='mynote'>";
 	echo $row['note2'];
 	echo "</td></table>";
 	}else echo "";
@@ -166,7 +166,6 @@ if ($row = mysqli_fetch_array($notes2)){
 }
 
 echo "</tr>";
-echo "</table>";
 ?>
 </body>
 </html>

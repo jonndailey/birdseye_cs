@@ -9,6 +9,10 @@ a {
 	color:#fff;
 }
 
+.resultspage .title {
+	text-align: center;
+}
+
 a:visited{
 	color:#000;
 }
@@ -304,7 +308,7 @@ input:not([type=submit]):not([type=file]) {
 }
 
 /*textarea style for checkout page */
-textarea#styled {
+textarea.styled {
 	height:35px;
     width:363px;
 	font-size:15px;
