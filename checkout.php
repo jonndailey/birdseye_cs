@@ -97,8 +97,8 @@ $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
 
 echo "<select name=\"myquantity\">";
 
-while($productamount = mysqli_fetch_array($quantity)){
-	echo "<option label=\"product_amount\" value=\"". $productamount["id"] . "\">". $productamount["quantity"] . "</option>";
+while($row = mysqli_fetch_array($quantity)){
+	echo "<option value=\"". $row["id"] . "\">". $row["quantity"] . "</option>";
 
 }
 	echo "</select>";
@@ -117,7 +117,7 @@ echo "<select name=\"myproducts\">";
 	
 while($list = mysqli_fetch_array($pl)){
 	//Write the line of HTML for each item
-	echo "<option label=\"product_list\" value=\"". $list["id"] ."\">". $list["name"] . "</option>";
+	echo "<option value=\"". $list["id"] ."\">". $list["name"] . "</option>";
 }
 
 //End the dropdown for the products
@@ -144,7 +144,7 @@ echo "Destination: ";
 echo "<select name=\"mydestination\">";
 
 while ($origin = mysqli_fetch_array($loc)) {
-	echo "<option label=\"location\" value=\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
+	echo "<option value=\"" . $origin["id"] . "\">" . $origin["location"] . "</option>";
 }
 
 echo "</select>";
@@ -156,7 +156,7 @@ echo "&nbsp;Weight: ";
 echo "<select name=\"myweight\">";
 
 while ($weighted = mysqli_fetch_array($size)) {
-	echo "<option label=\"size\" value=\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
+	echo "<option value=\"" . $weighted["id"] . "\">" . $weighted["package"] . "</option>";
 
 }
 echo "</select>";
@@ -172,7 +172,7 @@ echo "&nbsp;Warranty: ";
 echo "<select name=\"mywarranty\">";
 
 while ($warrantyStatus = mysqli_fetch_array($warranty)) {
-	echo "<option label=\"warranty\" value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
+	echo "<option value=\"" . $warrantyStatus["id"] . "\">" . $warrantyStatus["status"] . "</option>";
 
 }
 echo "</select>";
