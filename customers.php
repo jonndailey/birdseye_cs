@@ -37,9 +37,11 @@ $chosen_location = mysqli_query($connection, "SELECT area.secondary_name,area.my
 while ($row = mysqli_fetch_array($customer_name)) {
 	echo "<div id='infoContainer'>";
 	echo "<div id='customerName'>". $row['name'] . "<br />";
-	echo $row['email'] . "</div>";
+	echo $row['email'] . "<span class=\"name_edit\">&nbsp;<a href=\"name_edit.php?cid=" . $row['cid'] . "\">Edit</a></span></div>";
 	echo "</div>";
 };
+
+
 
 ?>
 

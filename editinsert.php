@@ -2,6 +2,8 @@
 
 include('db.php');
 
+$customername = $_REQUEST['customer_name'];
+$customeremail = $_REQUEST['customer_email'];
 $routingquery = $_REQUEST['cid'];
 $identification = $_REQUEST['tid'];
 $myticket = $_REQUEST['ticket'];
@@ -14,6 +16,7 @@ $mywarranty = $_REQUEST['mywarranty'];
 $mydestination = $_REQUEST['mydestination'];
 $quantity = $_REQUEST['myquantity'];
 $mypackage = $_REQUEST['mypackage'];
+
 
 
 
@@ -49,7 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	mysqli_query($connection, "UPDATE logged_info SET note = '$firstNote' WHERE tid = $identification");
 	mysqli_query($connection, "UPDATE logged_info SET note2 = '$secondNote' WHERE tid = $identification");
 
+	//update customer name
+	if ($customername == '') {
+	}else mysqli_query($connection, "UPDATE customers SET name = '$customername' WHERE cid = $routingquery");
+
+	if ($customeremail == '') {
+	}else mysqli_query($connection, "UPDATE customers SET email = '$customeremail' WHERE cid = $routingquery");
+	
+
 }else mysqli_error($connection);
+
 
 
 echo "<META http-equiv='refresh' content='.1;http://localhost/customers.php?cid=" . $routingquery . "'>";

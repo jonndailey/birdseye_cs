@@ -53,9 +53,10 @@ if ($sql1Result[0] > 1) {
 
 	//Verifying that the query went through
 	if (mysqli_query($connection,$customer_insert)) {
-  		echo ('The name record has been added <br />');
+  		//note if the connection is successful 
+  		echo ('');
 
-	}else echo '** ' . mysqli_error($connection);
+	}else echo '' . mysqli_error($connection);
 
 	//Grab the ID from the last customer table insert
 	$lastID = mysqli_insert_id($connection);
@@ -66,8 +67,8 @@ if ($sql1Result[0] > 1) {
 
 	//Verifying that the query went through
 	if (mysqli_query($connection,$logged_insert)) {
-  		echo ('The logged into data has been added ');
-	}else echo '** ' . mysqli_error($connection);
+  		echo ('');
+	}else echo '' . mysqli_error($connection);
 
 	}
 

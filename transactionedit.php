@@ -1,6 +1,7 @@
 <?php include('header.php');?>
 <body class="transactioneditpage">
-<?php include('nav.php');?>
+<?php include('nav.php'); $namemail = mysqli_query($connection, "SELECT customers.name,customers.email FROM customers WHERE cid = $routingquery");
+?>
 
 <?php
 
@@ -14,6 +15,7 @@ $myproduct = mysqli_real_escape_string($connection, $_POST['myproduct']);
 $mydestination = mysqli_real_escape_string($connection, $_POST['mydestination']); 
 $mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']); 
 $mytid = mysqli_real_escape_string($connection, $_POST['tid']); 
+
 
 //These 2 queries allow the page to be re-routed back the customers page.
 $routingquery = mysqli_query($connection, "SELECT customers.cid FROM customers INNER JOIN logged_info ON logged_info.cid=customers.cid WHERE tid = $identification");
@@ -91,10 +93,14 @@ if ($checkdatearray[0] > 1) {
 
 <?php
 
+if (condition) {
+	# code...
+}
+
 echo "Notes:<br />";
 while ($customernote1 = mysqli_fetch_array($notes)) { ?>
 
-<input type="text" name="note1" value="<?php echo $customernote1['note']; ?>"></input>
+<input type="text" name="note1" placeholder="Check out note" value="<?php echo $customernote1['note']; ?>"></input>
 
 <?php }; ?>
 <br /><br />
@@ -102,7 +108,7 @@ while ($customernote1 = mysqli_fetch_array($notes)) { ?>
 
 while ($customernote2 = mysqli_fetch_array($notes2)) { ?>
 
-<input type="text" name="note2" value="<?php echo $customernote2['note2']; ?>"></input>
+<input type="text" name="note2" placeholder="Check in note" value="<?php echo $customernote2['note2']; ?>"></input>
 <?php }; ?>
 
 	<input type="hidden" name="cid"  value="<?php echo $routingqueryarray[0] ?>"></input>

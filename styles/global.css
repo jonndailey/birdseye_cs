@@ -94,6 +94,20 @@ a:visited{
 	border-radius:5px;
 }
 
+.nameedit .groupedData {
+	background-color: #F5F5DC;
+	width:465px;
+	margin:70px auto;
+	border:5px solid #ECF0F1;
+	padding:15px;
+	border-radius:5px;
+}
+
+.nameedit input:not([type=submit]):not([type=file]) {
+	width: 400px;
+}
+
+
 .transactioneditpage input:not([type=submit]):not([type=file]) {
    height:20px;
    width:350px;
@@ -228,6 +242,11 @@ tr:nth-child(even) {
 	color:white;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
+}
+
+.customerspage .name_edit {
+	font-size: 10px;
+	color:red;
 }
 
 /*End entries for the results page*/

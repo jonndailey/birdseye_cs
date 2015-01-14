@@ -6,11 +6,6 @@
 
 $product = $_GET['id'];
 
-if ($product == 14) {
-	echo "<META http-equiv='refresh' content='.01;http://localhost/qa.php'>";
-}else "Nope";
-
-
 /*
 ***************
 
