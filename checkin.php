@@ -14,19 +14,20 @@ echo "<table class=\"productcheckin\">";
 $chosen_product = mysqli_query($connection, "SELECT logged_info.selected_product,logged_info.tid,products.id,products.name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' ORDER BY tid DESC");
 											
 //Show me everything in the database that does not have a return stamp
-$checkin = mysqli_query($connection,"SELECT logged_info.date_sent,logged_info.cid,products.name,customers.name,products.protected,logged_info.note,logged_info.note2 FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' AND products.protected = 'yes' ORDER BY tid DESC");
+$checkin = mysqli_query($connection,"SELECT logged_info.date_sent,logged_info.cid,products.name,customers.name,products.protected,logged_info.note2,logged_info.location FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC
+");
 
 //Show me the notes associated with returned row
 $checkinNotes = mysqli_query($connection,"SELECT logged_info.note,logged_info.note2,logged_info.tid FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid JOIN products ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' ORDER BY logged_info.tid DESC");
 
 //Count how many items are not checked in.
-$number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned='' AND products.protected = 'yes' "); 
+$number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned='' AND products.protected = 'yes' AND logged_info.location = 1 "); 
 
 $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
-$last3 = mysqli_query($connection, "SELECT logged_info.date_returned,customers.name,logged_info.cid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
+$last3 = mysqli_query($connection, "SELECT logged_info.date_returned,customers.name,logged_info.cid FROM logged_info INNER JOIN customers ON customers.cid=logged_info.cid WHERE date_returned != ''  AND logged_info.location = 1  ORDER BY date_returned DESC LIMIT 3");
 
-$chosen_product_for_3 = mysqli_query($connection, "SELECT logged_info.selected_product,products.name,products.id FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product WHERE date_returned != '' ORDER BY date_returned DESC LIMIT 3");
+$chosen_product_for_3 = mysqli_query($connection, "SELECT logged_info.selected_product,products.name,products.id FROM logged_info INNER JOIN products ON products.id=logged_info.selected_product WHERE date_returned != '' AND logged_info.location = 1 AND products.protected = 'yes' ORDER BY date_returned DESC LIMIT 3");
 
 echo "<div align='center'>Last 3 items checked in</div>";
 while ($row = mysqli_fetch_array($last3)) { ?>

@@ -156,12 +156,35 @@ a:visited{
 }
 
 .outgoingTracking {
-	font-size:8px;
+	font-size:6px;
+	font-weight: bold;
+}
+
+.incomingTracking {
+	font-size:6px;
+	font-weight: bold;
 }
 
 
-.incomingTracking {
-	font-size:8px;
+.outgoingTracking:hover{ 
+	background-color: #eee;
+	-webkit-transform: scale(2.0); 
+	border:1px solid #ddd;
+	text-align: center;
+	padding:0px;
+}
+
+
+.incomingTracking:hover{ 
+	background-color: #eee;
+	-webkit-transform: scale(2.0); 
+	border:1px solid #ddd;
+	text-align: center;
+	padding:0px;
+}
+
+.editbutton {
+	padding:1px;
 }
 
 .lastnote {

@@ -46,16 +46,17 @@ while ($row = mysqli_fetch_array($customer_name)) {
 ?>
 
 <table id="customers">
-		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Outgoing</th><th>Incoming</th><th>Warranty</th><th>Product</th><th>Qty</th><th>Weight</th><th>Country</th>
+		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Incoming</th><th>Outgoing</th><th>Warranty</th><th>Product</th><th>Qty</th><th>Weight</th><th>Country</th>
 
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
 	<tr class="customerTopLine">
-		<?php echo "<td><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
+		<?php echo "<td class=\"editbutton\"><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
 		<td><?php echo $row['ticket_number'];?></td>
 		<td><?php echo $row['date_sent'];?></td>
 		<td><?php echo $row['date_returned'];?></td>
-		<td class='outgoingTracking'><?php echo $row['outgoing_barcode'];?></td>
-		<td class='incomingTracking'><?php echo $row['incoming_barcode'];?></td>
+		<?php echo "<td class='incomingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a></td>" ?>
+		<?php echo "<td class='outgoingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a></td>" ?>
+		
 
 	<?php if ($row = mysqli_fetch_array($warranty)) { ?>
 		<td><?php echo $row['status'];?></td>

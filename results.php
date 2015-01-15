@@ -65,7 +65,7 @@ $notes2 = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_pr
 $chosen_warranty = mysqli_query($connection, "SELECT logged_info.warranty,warranty.status,logged_info.selected_product FROM logged_info INNER JOIN warranty ON logged_info.warranty=warranty.id WHERE logged_info.selected_product = $product ORDER BY logged_info.tid DESC");
 
 //For the display of the flag
-$chosen_location = mysqli_query($connection, "SELECT area.mypath,logged_info.location FROM area INNER JOIN logged_info ON area.id=logged_info.location WHERE selected_product = $product ORDER BY logged_info.tid DESC");
+$chosen_location = mysqli_query($connection, "SELECT area.mypath,logged_info.location,logged_info.tid,area.secondary_name FROM logged_info INNER JOIN area ON logged_info.location=area.id WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
 //For the quantity of products
 $chosen_quantity = mysqli_query($connection, "SELECT amount.quantity,logged_info.quantity FROM amount INNER JOIN logged_info ON amount.id=logged_info.quantity WHERE selected_product = $product ORDER BY logged_info.tid DESC");

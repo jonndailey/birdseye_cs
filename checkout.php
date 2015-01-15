@@ -19,11 +19,11 @@ $weight = mysqli_real_escape_string($connection, $_POST['weight']);
 $note = mysqli_real_escape_string($connection, $_POST['note']); 
 
 
-if (strlen($outTrack) >= 18) {
+if (strlen($outTrack) >= 24) {
 	$outTrack = substr($outTrack, 11);
 }
 
-if (strlen($inTrack) >= 18) {
+if (strlen($inTrack) >= 24) {
 	$inTrack = substr($inTrack, 11);
 
 }
