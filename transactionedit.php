@@ -67,8 +67,11 @@ $quantity = mysqli_query($connection, "SELECT id,quantity FROM amount ORDER BY i
 $package = mysqli_query($connection, "SELECT p_size.id,p_size.package FROM p_size ORDER BY id DESC");
 
 ?>
+
 <div class="groupedData">
+
 <?php 
+
 //Grab the customers location
 $chosen_location = mysqli_query($connection, "SELECT area.id,area.location,area.secondary_name FROM area INNER JOIN logged_info ON area.id=logged_info.location WHERE tid = $identification");
 
@@ -92,10 +95,6 @@ if ($checkdatearray[0] > 1) {
 	Incoming Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
 
 <?php
-
-if (condition) {
-	# code...
-}
 
 echo "Notes:<br />";
 while ($customernote1 = mysqli_fetch_array($notes)) { ?>
@@ -215,6 +214,8 @@ echo "<input type=\"hidden\" name=\"tid\"  value=". $identification ."></input>"
 <input type="submit" value="Submit Changes"></input>
 
 </form>
+<?php echo "<div class='closeme'><a href=\"delete_entry.php?id=" . $identification . "\"><img src=\"images/buttons/close.png\" alt=\"close_me\"></a></div>"; ?>
+
 </div>
 
  <?php }; ?>

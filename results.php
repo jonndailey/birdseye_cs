@@ -15,7 +15,7 @@ Information banner
 */
 
 //Grabbing and counting the amount of products sent in the table that match this product 
-$number_of_items = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC"); 
+$number_of_items = mysqli_query($connection, "SELECT SUM(quantity) FROM logged_info WHERE selected_product = $product ORDER BY logged_info.tid DESC"); 
 $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 

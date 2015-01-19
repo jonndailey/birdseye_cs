@@ -26,6 +26,7 @@ a:visited{
 	-webkit-border-radius:10px;
 }
 
+
 .checkoutpage #checkin {
 	margin: 0 auto;
 	font-size: 9px;
@@ -35,6 +36,7 @@ a:visited{
 }
 
 .checkoutpage td {
+	background-color: red;
 	border-bottom: 1px solid black;
 }
 
@@ -151,7 +153,7 @@ a:visited{
 	color:white;
 	background-color: steelblue;
 	padding:none;
-	width:200px;
+	width:100px;
 
 }
 
@@ -292,9 +294,10 @@ tr:nth-child(even) {
 
 .checkinpage .product {
 	width:200px;
+	border-bottom:1px solid black;
 }
 
-.checkinpage .checkinBox table{
+.checkinpage .checkinBox{
 	margin: 0 auto;
 	font-size: 11px;
 	height:50px;
@@ -344,6 +347,15 @@ input[type=submit]{
 input:not([type=submit]):not([type=file]) {
    height:40px;
    width:250px;
+   font-size:24px;
+   font-family: 'Open Sans', sans-serif;
+   border:3px solid #eee;
+}
+
+/* styling for buttons below checkin note */
+.checkinpage input:not([type=submit]):not([type=file]) {
+   height:10px;
+   width:20px;
    font-size:24px;
    font-family: 'Open Sans', sans-serif;
    border:3px solid #eee;
@@ -404,4 +416,104 @@ a:link{
 #collectedLinks {
 	text-align:center;
 	margin-bottom:55px;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+.checkinpage table {
+	width:500px;
+	border-spacing: 0;
+	margin: 0 auto;
+	font-size: 11px;
+	height:50px;
+	border-left:0;
+	border-right:0;
+	padding:0;
+	margin:0;
+	background-color: #eee;
+}
+
+.checkinpage td {
+	font-size: 11px;
+	height:30px;
+	border-left:0;
+	border-right:0;
+	padding:0;
+	margin:0;
+	background-color: #eee;
+}
+
+.checkinpage .container {
+	font-size: 11px;
+	padding:0;
+	height:100%;
+	width:500px;
+	margin: 0 auto;
+	margin-top:20px;
+	border:1px solid black;
+	-webkit-border-radius:2px;
+	background-color: #eee;
+
+}
+
+.checkinpage textarea {
+	width:470px;
+	height:100px;
+
+}
+
+.checkinpage .product{
+	background-color: steelblue;
+	height:10px;
+	width:200px;
+	text-align: center;
+}
+
+.checkinpage #main {
+	border-bottom:1px solid #ddd;
+}
+
+.checkinpage .note1 {
+	padding:10px;
+}
+
+.checkinpage .newtext {
+	text-align: center;
+}
+
+
+.checkinpage .current {
+	text-align: center;
+}
+
+.checkinpage .info {
+	background-color: black;
+	font-size: 11px;
+}
+
+
+.checkinpage input[type=submit]{
+	font-size:10px;
+}
+
+.movesubmit {
+	margin-left:200px;
+}
+
+.checkinpage form {
+	padding:3px;
+}
+
+.last3 {
+	margin: 0 auto;
+	width:500px;
+	text-align: center;
+}
+
+
+.closeme {
+	margin-left:350px;
 }

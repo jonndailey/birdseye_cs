@@ -201,7 +201,7 @@ echo "<table id=\"viewtable\">" . "<tr><th>Ticket Number</th>" . "<th>Customer N
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr class='rows'><td><a href=\"delete_entry.php?id=" . $row['tid'] . "\"><img src=\"images/buttons/close.png\" alt=\"close_button\">&nbsp;</a>" . $row['ticket_number'] . "</td>";
+	echo "<tr class='rows'><td>" . $row['ticket_number'] . "</td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
