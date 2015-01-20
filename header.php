@@ -11,4 +11,11 @@
 <link rel="stylesheet" type="text/css" href="styles/global.css">
 <link rel="stylesheet" type="text/css" href="styles/nav.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+
+<script type="text/javascript">
+	var name = document.getElementById(1650);
+
+</script>
+
 </head>

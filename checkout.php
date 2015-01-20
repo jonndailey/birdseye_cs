@@ -1,6 +1,7 @@
 <?php include('header.php');?>
 <body class="checkoutpage">
 <?php include('nav.php');?>
+
 <?php
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
@@ -201,11 +202,11 @@ echo "<table id=\"viewtable\">" . "<tr><th>Ticket Number</th>" . "<th>Customer N
 
 //Display the info grabbed from the tables displayed in HTML
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr class='rows'><td>" . $row['ticket_number'] . "</td>";
-	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
-	echo "<td>" . $row['date_sent'] . "</td>";
-	echo "<td class='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a> </td>";
-	echo "<td class='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a> </td>";
+	echo "<tr class='rows'><td id=" . $row['tid'] . "  name=\"jticket\" >&raquo; <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>";
+	echo "<td id=" . $row['tid'] . " name=\"jcustomer\"><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
+	echo "<td id=" . $row['tid'] . " name=\"jdate\">" . $row['date_sent'] . "</td>";
+	echo "<td id=" . $row['tid'] . " name='outgoing'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "' target=\"_blank\">" . $row['outgoing_barcode'] ." </a> </td>";
+	echo "<td id=" . $row['tid'] . " name='incoming'> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ." </a> </td>";
 	echo "<td class='product_sent'>";
 
 //Displays the type of product selected for the selected row

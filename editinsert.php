@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	mysqli_query($connection, "UPDATE logged_info SET incoming_barcode = $inTrack WHERE tid = $identification");
 	mysqli_query($connection, "UPDATE logged_info SET outgoing_barcode = $outTrack WHERE tid = $identification");
 		
-		if ($myproducts != 25) {
+		if ($myproducts != 50) {
 			mysqli_query($connection, "UPDATE logged_info SET selected_product = $myproducts WHERE tid = $identification");
 		}
 		
@@ -49,8 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 			mysqli_query($connection, "UPDATE logged_info SET weight = $mypackage WHERE tid = $identification");
 		}
 
+	mysqli_query($connection, "INSERT INTO logged_info (note) VALUES ('$firstNote') WHERE tid =  $identification;");
+	mysqli_query($connection, "INSERT INTO logged_info (note2) VALUES ('$secondNote') WHERE tid =  $identification;");
+
 	mysqli_query($connection, "UPDATE logged_info SET note = '$firstNote' WHERE tid = $identification");
 	mysqli_query($connection, "UPDATE logged_info SET note2 = '$secondNote' WHERE tid = $identification");
+
+
 
 	//update customer name
 	if ($customername == '') {
@@ -64,5 +69,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 
-echo "<META http-equiv='refresh' content='.1;http://localhost/customers.php?cid=" . $routingquery . "'>";
+echo "<META http-equiv='refresh' content='.1;customers.php?cid=" . $routingquery . "'>";
 ?>

@@ -54,8 +54,8 @@ while ($row = mysqli_fetch_array($customer_name)) {
 		<td><?php echo $row['ticket_number'];?></td>
 		<td><?php echo $row['date_sent'];?></td>
 		<td><?php echo $row['date_returned'];?></td>
-		<?php echo "<td class='incomingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "'>" . $row['incoming_barcode'] ." </a></td>" ?>
-		<?php echo "<td class='outgoingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "'>" . $row['outgoing_barcode'] ." </a></td>" ?>
+		<?php echo "<td class='incomingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ." </a></td>" ?>
+		<?php echo "<td class='outgoingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "' target=\"_blank\">" . $row['outgoing_barcode'] ." </a></td>" ?>
 		
 
 	<?php if ($row = mysqli_fetch_array($warranty)) { ?>
