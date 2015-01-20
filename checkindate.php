@@ -16,12 +16,16 @@ $identification = $_REQUEST['id'];
 $theNewNote = $_REQUEST['secondNote'];
 $reuse = $_REQUEST['reuse'];
 
-if ($identification && $theNewNote){
 
-	mysqli_query($connection, "UPDATE logged_info SET date_returned = CURDATE() WHERE tid =  $identification;");
-	mysqli_query($connection, "UPDATE logged_info SET note2 = '$theNewNote' WHERE tid =  $identification;");
-	mysqli_query($connection, "UPDATE logged_info SET reuse = '$reuse' WHERE tid =  $identification;");
-}
+mysqli_query($connection, "INSERT INTO logged_info (date_returned) VALUES ('$identification') = CURDATE() WHERE tid =  $identification;");
+mysqli_query($connection, "INSERT INTO logged_info (note2) VALUES ('$theNewNote') WHERE tid =  $identification;");
+mysqli_query($connection, "INSERT INTO logged_info (reuse) VALUES ('$reuse') WHERE tid =  $identification;");
+
+mysqli_query($connection, "UPDATE logged_info SET date_returned = CURDATE() WHERE tid =  $identification;");
+mysqli_query($connection, "UPDATE logged_info SET note2 = '$theNewNote' WHERE tid =  $identification;");
+mysqli_query($connection, "UPDATE logged_info SET reuse = '$reuse' WHERE tid =  $identification;");
+
+echo "All set!";
 
 
 ?>
