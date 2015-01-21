@@ -69,6 +69,9 @@ switch ($product) {
 	case 24:
 		$product = "Ambient Temperature Probe";
 		break;
+	case 25:
+		$product = "Kitchen Thermometer";
+		break;
 
 	default:
 		echo "Nothing selected";

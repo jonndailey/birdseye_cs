@@ -1,4 +1,4 @@
-<META http-equiv="refresh" content=".01;http://localhost/checkout.php">
+<META http-equiv="refresh" content=".01;checkout.php">
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
 <?php
 

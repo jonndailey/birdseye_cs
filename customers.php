@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
 	<tr class="customerTopLine">
 		<?php echo "<td class=\"editbutton\"><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
-		<td><?php echo $row['ticket_number'];?></td>
+		<?php echo "<td id=" . $row['tid'] . "  name=\"jticket\"> <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>"; ?>
 		<td><?php echo $row['date_sent'];?></td>
 		<td><?php echo $row['date_returned'];?></td>
 		<?php echo "<td class='incomingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ." </a></td>" ?>
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_array($customer_name)) {
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($chosen_product)) { ?>
-		<td><?php echo $row['name'];?></td>
+		<td><?php echo "<a href=\"results.php?id=" . $row['id']  ."\">". $row['name'] . "</a>";?> </td> 
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($chosen_quantity)) { ?>

@@ -18,20 +18,26 @@ $quantity = $_REQUEST['myquantity'];
 $mypackage = $_REQUEST['mypackage'];
 
 
+if (strlen($outTrack) >= 18) {
+	$outTrack = substr($outTrack, 11);
+}
+
+if (strlen($inTrack) >= 18) {
+	$inTrack = substr($inTrack, 11);
+
+}
+
 
 
 //for removing a checked in item.
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-	mysqli_query($connection, "UPDATE logged_info SET ticket_number = $myticket WHERE tid = $identification");
-	mysqli_query($connection, "UPDATE logged_info SET incoming_barcode = $inTrack WHERE tid = $identification");
-	mysqli_query($connection, "UPDATE logged_info SET outgoing_barcode = $outTrack WHERE tid = $identification");
-		
+
 		if ($myproducts != 50) {
 			mysqli_query($connection, "UPDATE logged_info SET selected_product = $myproducts WHERE tid = $identification");
 		}
 		
-		if ($mydestination != 4) {
+		if ($mydestination != 5) {
 			mysqli_query($connection, "UPDATE logged_info SET location = $mydestination WHERE tid = $identification");
 		}
 	
@@ -49,12 +55,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 			mysqli_query($connection, "UPDATE logged_info SET weight = $mypackage WHERE tid = $identification");
 		}
 
+	//Update or insert the changed information
+	mysqli_query($connection, "UPDATE logged_info SET ticket_number = '$myticket' WHERE tid = $identification");
+	mysqli_query($connection, "INSERT INTO logged_info (ticket_number) VALUES ('$myticket') WHERE tid =  $identification");
+
+	//Update or insert the changed information
+	mysqli_query($connection, "UPDATE logged_info SET incoming_barcode = '$inTrack' WHERE tid = $identification");
+	mysqli_query($connection, "INSERT INTO logged_info (incoming_barcode) VALUES ('$inTrack') WHERE tid =  $identification");
+
+	//Update or insert the changed information
+	mysqli_query($connection, "INSERT INTO logged_info (outgoing_barcode) VALUES ('$outTrack') WHERE tid =  $identification");
+	mysqli_query($connection, "UPDATE logged_info SET outgoing_barcode = '$outTrack' WHERE tid = $identification");
+		
+	//Update or insert the changed information
 	mysqli_query($connection, "INSERT INTO logged_info (note) VALUES ('$firstNote') WHERE tid =  $identification;");
 	mysqli_query($connection, "INSERT INTO logged_info (note2) VALUES ('$secondNote') WHERE tid =  $identification;");
 
+	//Update or insert the changed information
 	mysqli_query($connection, "UPDATE logged_info SET note = '$firstNote' WHERE tid = $identification");
 	mysqli_query($connection, "UPDATE logged_info SET note2 = '$secondNote' WHERE tid = $identification");
-
 
 
 	//update customer name

@@ -43,6 +43,9 @@ $how_many_europe_displayed = mysqli_fetch_array($how_many_europe);
 $how_many_canada = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 3 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_canada_displayed = mysqli_fetch_array($how_many_canada);
 
+//How many went to Australia
+$how_many_australia = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 4 AND selected_product= $product ORDER BY logged_info.tid DESC");
+$how_many_australia_displayed = mysqli_fetch_array($how_many_australia);
 /*
 ***************
 
@@ -88,6 +91,7 @@ include('switch.php');
 			<td class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
 			<td class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
 			<td class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
+			<td class="title"><span class="number"><?php echo $how_many_australia_displayed[0] ?></span><br/>Australia</td>
 		</tr>
 	</table>
 </div>
@@ -102,7 +106,7 @@ echo "<table id=\"resultsData\">" . "<tr><th>Ticket Number</th>" . "<th>Name</th
 while($row = mysqli_fetch_array($result)) {
 	echo "<table>";
 	echo "<tr>";
-	echo "<td>" . $row['ticket_number'] . "</td>";
+	echo "<td id=" . $row['tid'] . "  name=\"jticket\" >&raquo; <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
 	echo "<td>" . $row['date_returned'] ;

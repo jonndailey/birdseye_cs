@@ -22,15 +22,6 @@ $routingquery = mysqli_query($connection, "SELECT customers.cid FROM customers I
 $routingqueryarray = mysqli_fetch_array($routingquery);
 
 
-if (strlen($outTrack) >= 18) {
-	$outTrack = substr($outTrack, 11);
-}
-
-if (strlen($inTrack) >= 18) {
-	$inTrack = substr($inTrack, 11);
-
-}
-
 
 
 //Select the items from the DB that match the transaction
