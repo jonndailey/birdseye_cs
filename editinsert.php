@@ -2,31 +2,20 @@
 
 include('db.php');
 
-$customername = $_REQUEST['customer_name'];
-$customeremail = $_REQUEST['customer_email'];
-$routingquery = $_REQUEST['cid'];
-$identification = $_REQUEST['tid'];
-$myticket = $_REQUEST['ticket'];
-$inTrack = $_REQUEST['incoming'];
-$outTrack = $_REQUEST['outgoing'];
-$firstNote = $_REQUEST['note1'];
-$secondNote = $_REQUEST['note2'];
-$myproducts = $_REQUEST['myproduct'];
-$mywarranty = $_REQUEST['mywarranty'];
-$mydestination = $_REQUEST['mydestination'];
-$quantity = $_REQUEST['myquantity'];
-$mypackage = $_REQUEST['mypackage'];
-
-
-if (strlen($outTrack) >= 18) {
-	$outTrack = substr($outTrack, 11);
-}
-
-if (strlen($inTrack) >= 18) {
-	$inTrack = substr($inTrack, 11);
-
-}
-
+$customername = mysqli_real_escape_string($connection, $_REQUEST['customer_name']);
+$customeremail = mysqli_real_escape_string($connection, $_REQUEST['customer_email']);
+$routingquery = mysqli_real_escape_string($connection, $_REQUEST['cid']);
+$identification = mysqli_real_escape_string($connection, $_REQUEST['tid']);
+$myticket = mysqli_real_escape_string($connection, $_REQUEST['ticket']);
+$inTrack = mysqli_real_escape_string($connection, $_REQUEST['incoming']);
+$outTrack = mysqli_real_escape_string($connection, $_REQUEST['outgoing']);
+$firstNote = mysqli_real_escape_string($connection, $_REQUEST['note1']);
+$secondNote = mysqli_real_escape_string($connection, $_REQUEST['note2']);
+$myproducts = mysqli_real_escape_string($connection, $_REQUEST['myproduct']);
+$mywarranty = mysqli_real_escape_string($connection, $_REQUEST['mywarranty']);
+$mydestination = mysqli_real_escape_string($connection, $_REQUEST['mydestination']);
+$quantity = mysqli_real_escape_string($connection, $_REQUEST['myquantity']);
+$mypackage = mysqli_real_escape_string($connection, $_REQUEST['mypackage']);
 
 
 //for removing a checked in item.

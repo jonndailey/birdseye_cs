@@ -25,11 +25,17 @@ $last_7_days_displayed = mysqli_fetch_array($last_7_days);
 
 //How many items sent that were in warranty
 $how_many_in_warranty = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE warranty = 1 AND selected_product=  $product ORDER BY logged_info.tid DESC");
-$how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty);
+$how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty) ;
+
 
 //How many items sent that were out of warranty
 $how_many_out_warranty = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
 $how_many_out_warranty_displayed = mysqli_fetch_array($how_many_out_warranty);
+
+//Accurately show in and out of warranty numbers in the nav stattion
+$outofwarranty = ($number_of_items_displayed[0]) - ($how_many_in_warranty_displayed[0]);
+$inwarranty = ($number_of_items_displayed[0]) - ($outofwarranty);
+
 
 //How many items are sent domestically
 $how_many_domestic = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 1 AND selected_product= $product ORDER BY logged_info.tid DESC");
@@ -86,8 +92,8 @@ include('switch.php');
 		<tr>
 			<td class="titleName"><?php echo $product ?></td>
 			<td class="title"><span class="number"><?php echo $number_of_items_displayed[0] ?></span><br/>Sent</td>
-			<td class="title"><span class="number"><?php echo $how_many_in_warranty_displayed[0] ?></span><br/>In warranty</td>
-			<td class="title"><span class="number"><?php echo $how_many_out_warranty_displayed[0] ?></span><br/>Out of Warranty</td>
+			<td class="title"><span class="number"><?php echo $inwarranty ?></span><br/>In warranty</td>
+			<td class="title"><span class="number"><?php echo $outofwarranty ?></span><br/>Out of Warranty</td>
 			<td class="title"><span class="number"><?php echo $how_many_domestic_displayed[0] ?></span><br/>United States</td>
 			<td class="title"><span class="number"><?php echo $how_many_europe_displayed[0] ?></span><br/>Europe</td>
 			<td class="title"><span class="number"><?php echo $how_many_canada_displayed[0] ?></span><br/>Canada</td>
