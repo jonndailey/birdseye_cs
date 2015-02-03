@@ -4,19 +4,7 @@
 
 <?php
 
-$time = microtime(TRUE);
-$mem = memory_get_usage();
 
-$chosen_product = mysqli_query($connection, "SELECT products.id, products.name,products.color_code FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id ORDER BY logged_info.tid DESC");
-
-
-print_r(array(
-
-  'memory' => (memory_get_usage() - $mem) / (1024 * 1024),
-
-  'seconds' => microtime(TRUE) - $time
-
-));
 
 
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
@@ -96,7 +84,7 @@ if ($sql1Result[0] > 1) {
 
 echo "<div id=\"checkin\">";
 
-echo "<form action=\"checkout.php\" method=\"POST\">";
+echo "<form action=\"checkout.php\" method=\"POST\" name=\"myInputs[]\">";
 
 ?>
 
@@ -196,9 +184,6 @@ echo "</select>";
 
 ?>
 
-
-<div id="button"></div>
-	<input type="submit">
 </form>
 
 </div>

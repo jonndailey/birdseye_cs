@@ -10,7 +10,7 @@ $lastquery = mysqli_query($connection,"SELECT logged_info.tid,logged_info.date_s
 //Checkin note for the transaction.
 $theNewNote =  mysqli_real_escape_string($connection, $_POST['secondNote']);
 //Show me what product is selected in the database for the row
-$chosen_product = mysqli_query($connection, "SELECT logged_info.note,logged_info.selected_product,logged_info.tid,products.id,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' ORDER BY tid DESC");
+$chosen_product = mysqli_query($connection, "SELECT logged_info.note,logged_info.selected_product,logged_info.tid,products.id,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC");
 											
 //Show me everything in the database that does not have a return stamp
 $checkin = mysqli_query($connection,"SELECT logged_info.date_sent,logged_info.cid,products.name,customers.name,products.protected,logged_info.note,logged_info.location FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC");
