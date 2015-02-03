@@ -184,6 +184,10 @@ echo "</select>";
 
 ?>
 
+
+<div id="button"></div>
+	<input type="submit">
+	
 </form>
 
 </div>

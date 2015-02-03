@@ -82,8 +82,8 @@ if ($checkdatearray[0] > 1) {
 
 <form action="editinsert.php?">
 	Ticket number:<br /><input class="transactionform" type="text" name="ticket" placeholder="Ticket Number" value="<?php echo $row['ticket_number'];?>"></input><br /><br />
-	Outgoing Tracking: <br /><input class="transactionform"  type="text" name="incoming" placeholder="Incoming Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
-	Incoming Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
+	Outgoing Tracking: <br /><input class="transactionform"  type="text" name="incoming" placeholder="Outgoing Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
+	Incoming Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Incoming Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
 
 <?php
 
