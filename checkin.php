@@ -67,11 +67,15 @@ echo "<br /><br /><div class='last3'>There are "  . $number_of_items_displayed[0
 <form action="checkindate.php?" method="GET">
 
 <textarea placeholder="Checkin Note..." name="secondNote"></textarea>
+<input type="text" name="firmware" id="firmware" placeholder="Firmware Version"></input> |&nbsp;
+<input type="text" name="date_code" id="date_code" placeholder="Date Code"></input> |&nbsp;
 	Re-usable?
+
 		<input type="radio" name="reuse" value="1" />Yes
 		<input type="radio" name="reuse" value="2" />No
+
 		<input type="hidden" name="id" value="<?php echo $row['tid'] ?>">
-		<span class="movesubmit"><input type="submit"></span>
+		<span class="movesubmit"><input type="submit" id="checkinsubmit"></span>
 </form>
 <?php }; ?>
 </div>

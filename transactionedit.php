@@ -75,15 +75,15 @@ $checkdate = mysqli_query($connection, "SELECT date_returned FROM logged_info WH
 $checkdatearray = mysqli_fetch_array($checkdate);
 
 if ($checkdatearray[0] > 1) {
-	echo "<a href='http://localhost/date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br /><br />";
+	echo "<a href='date_returned.php?tid=" . $identification . "'>Click me if I was mistakenly checked in.</a><br /><br />";
 }else echo "This has not been checked in.<br /><br />";
 
 ?>
 
 <form action="editinsert.php?">
 	Ticket number:<br /><input class="transactionform" type="text" name="ticket" placeholder="Ticket Number" value="<?php echo $row['ticket_number'];?>"></input><br /><br />
-	Outgoing Tracking: <br /><input class="transactionform"  type="text" name="incoming" placeholder="Outgoing Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
-	Incoming Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Incoming Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
+	Incoming Tracking: <br /><input class="transactionform"  type="text" name="incoming" placeholder="Incoming Barcode" value="<?php echo $row['incoming_barcode'];?>"></input><br /><br />
+	Outgoing Tracking:<br /><input class="transactionform"  type="text" name="outgoing" placeholder="Outgoing Barcode" value="<?php echo $row['outgoing_barcode'];?>"></input><br /><br />
 
 <?php
 

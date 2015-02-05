@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 			mysqli_query($connection, "UPDATE logged_info SET selected_product = $myproducts WHERE tid = $identification");
 		}
 		
-		if ($mydestination != 5) {
+		if ($mydestination != 50) {
 			mysqli_query($connection, "UPDATE logged_info SET location = $mydestination WHERE tid = $identification");
 		}
 	

@@ -500,11 +500,26 @@ body {
 }
 
 .movesubmit {
-	margin-left:200px;
+	float:right;
+	margin-top: 15px;
+}
+
+
+#date_code {
+	border:1px solid #000;
+	width:50px;
+	font-size: 10px;
+}
+
+#firmware {
+	border:1px solid #000;
+	width:82px;
+	font-size: 10px;
 }
 
 .checkinpage form {
 	padding:3px;
+	height: 200px;
 }
 
 .last3 {
