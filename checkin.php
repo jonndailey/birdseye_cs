@@ -64,7 +64,7 @@ echo "<br /><br /><div class='last3'>There are "  . $number_of_items_displayed[0
 	</tr>
 </table>
 
-<form action="checkindate.php?" method="GET">
+<form action="checkindate.php?" method="GET" name="checkindata" onsubmit="return validateForm();">
 
 <textarea placeholder="Checkin Note..." name="secondNote"></textarea>
 <input type="text" name="firmware" id="firmware" placeholder="Firmware Version"></input> |&nbsp;

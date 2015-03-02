@@ -61,7 +61,7 @@ switch ($product) {
 		$product = "Kitchen Thermometer Mini Base";
 		break;
 	case 22:
-		$product = "iShower Mount";
+		$product = "iShower<sup>2</sup> Mount";
 		break;
 	case 23:
 		$product = "KT mini";
@@ -72,6 +72,18 @@ switch ($product) {
 	case 25:
 		$product = "Kitchen Thermometer";
 		break;
+	case 26:
+		$product = "iShower<sup>2</sup> Kick Stand";
+		break;
+	case 27:
+		$product = "iShower<sup>2</sup> Body";
+		break;
+	case 28:
+		$product = "Candy Probe";
+		break;
+	case 29:
+		$product = "iShower<sup>2</sup> Wall Mount";
+		break;	
 
 	default:
 		echo "Nothing selected";

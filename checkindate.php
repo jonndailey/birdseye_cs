@@ -1,4 +1,4 @@
-<META http-equiv="refresh" content=".1;http://localhost/checkin.php">
+<META http-equiv="refresh" content=".1;checkin.php">
 <link rel="stylesheet" type="text/css" href="styles/glance.css">
 
 <style type="text/css">
@@ -13,11 +13,10 @@ include('db.php');
 $dataset = "<img src=\"images/logo/coffee.png\">";
 
 $identification = $_REQUEST['id'];
-$theNewNote = $_REQUEST['secondNote'];
-$reuse = $_REQUEST['reuse'];
-$datecode = $_REQUEST['date_code'];
-$firmware = $_REQUEST['firmware'];
-
+$theNewNote = mysqli_real_escape_string($connection, $_REQUEST['secondNote']);
+$reuse = mysqli_real_escape_string($connection, $_REQUEST['reuse']);
+$datecode = mysqli_real_escape_string($connection, $_REQUEST['date_code']);
+$firmware = mysqli_real_escape_string($connection, $_REQUEST['firmware']);
 
 mysqli_query($connection, "INSERT INTO logged_info (date_returned) VALUES ('$identification') = CURDATE() WHERE tid =  $identification;");
 mysqli_query($connection, "INSERT INTO logged_info (note2) VALUES ('$theNewNote') WHERE tid =  $identification;");

@@ -540,3 +540,73 @@ body {
 	font-size:8px;
 	text-align: center;
 }
+
+#notification {
+	visibility: hidden;
+	border-bottom: 1px solid #000;
+	padding-top:5px;
+	color:#000;
+	width:100%;
+	height:65px;
+	background-color:#d35400;
+	text-align: center;
+	position: fixed;
+	
+
+	
+}
+
+.notification_message {
+	color: #000;
+
+}
+
+.overviewpage #overview {
+	table-layout: fixed;
+	width:1000px;
+	margin: 0 auto;
+	border-spacing: 0;
+}
+
+.overviewpage td {
+	border-bottom: 1px solid black;
+}
+
+.overviewpage #domestic_percentages {
+	color:red;
+	float:left;
+	border-spacing: 0;
+	border: 1px solid black;
+
+}
+.overviewpage #international_percentages {
+	width:350px;
+	margin: 0 auto;
+	float:right;
+	border-spacing: 0;
+	border: 1px solid black;
+
+
+}
+
+.overviewpage #callmemaybe{
+	float:left;
+}
+
+.overviewpage #sent {
+	width:90px;
+}
+
+.overviewpage #reuse {
+	margin: 0 auto;
+	border-spacing: 1;
+	width:250px;
+	border: 1px solid #ddd;
+	
+
+
+}
+
+#thesix {
+	float:left;
+}
