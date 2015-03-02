@@ -307,7 +307,20 @@ $you_and_the_six = mysqli_query($connection, "SELECT date_sent,customers.name AS
 			<td><?php echo $igrill_mini_qa_useable_result_output . "%" ?></td>
 		</tr>
 </table>
+
+	<table id ="callmemaybe">
+	<caption>Sent, but not returned. Follow up.</caption>
+	<tr>
+		<?php while($row = mysqli_fetch_array($call_me_maybe)) { ?>
+		<td id="sent"><?php echo $row['date_sent'] ?></td>
+		<td><?php echo $row['cus_name'] ?></td>
+		<td><?php echo $row['name'] ?></td>
+	</tr>
+<?php }; ?>
+</table>
 </div>
+
+
 
 
 </div>
