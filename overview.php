@@ -197,13 +197,29 @@ $igrill_mini_qa_useable_result_output = round($igrill_mini_qa_useable_result * 1
 
 $you_and_the_six = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
 
+$prod = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
+$prod_array = mysqli_fetch_array($prod);
+
+//echo "<pre>";
+//print_r($prod_array['customers_name']);
+//echo "</pre>";
+
+
+while($row=mysqli_fetch_array($prod)) {
+	echo  $row['name'] . "&nbsp <br />";
+	
+}
+
+
+
+
+//$prod_count = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
+//$prod_count_array = mysqli_fetch_array($prod_count);
+
+
 
 
 ?>
-
-
-
-
 
 
 <div id="overview">
@@ -318,9 +334,26 @@ $you_and_the_six = mysqli_query($connection, "SELECT date_sent,customers.name AS
 	</tr>
 <?php }; ?>
 </table>
-</div>
+
+<table id="thesix">
+	<caption>Items sent this week</caption>
+	<th>Product</th><th>Quantity</th>
+	
+<?php
+
+while ($rows = mysqli_fetch_array($prod)) {
+	if ($rows[0] > 1) {
+	echo "<tr><td>" . $rows['name'] . "</td>";
+	}
 
 
+}
+
+?>
+	
+	</table>
+
+	</div>
 
 
 </div>

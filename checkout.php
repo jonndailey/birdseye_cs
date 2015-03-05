@@ -184,6 +184,21 @@ echo "</select>";
 
 ?>
 
+<?php
+
+$issues = mysqli_query($connection, "SELECT id,issue FROM problems");
+echo "&nbsp;Issues: ";
+
+echo "<select name=\"myissues\">";
+
+while ($myissue = mysqli_fetch_array($issues)) {
+	echo "<option value=\"" . $myissue["id"] . "\">" . $myissue["issue"] . "</option>";
+
+}
+echo "</select>";
+
+?>
+
 
 <div id="button"></div>
 	<input type="submit">
