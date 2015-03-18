@@ -93,6 +93,7 @@ $ipl_count = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info  RIGHT 
 $ipl_count_igrillmini_qa= mysqli_fetch_array($ipl_count);
 $ipl_count_igrillmini_qa_returned = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info  RIGHT JOIN products ON products.id=logged_info.selected_product WHERE products.protected = 'yes' AND selected_product = 14  AND logged_info.location != 1"); 
 $ipl_count_grillmini_qa_returned_array = mysqli_fetch_array($ipl_count_igrillmini_qa_returned);
+
 $ipl_grillmini_qa_return_rate = $ipl_count_grillmini_qa_returned_array[0] / $ipl_count_igrillmini_qa[0];
 $iresult_igmqa = round($ipl_grillmini_qa_return_rate * 100);
 
@@ -102,6 +103,7 @@ $ipl_count = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info  RIGHT 
 $ipl_count_kt= mysqli_fetch_array($ipl_count);
 $ipl_count_kt_returned = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info  RIGHT JOIN products ON products.id=logged_info.selected_product WHERE products.protected = 'yes' AND selected_product = 25  AND logged_info.location != 1"); 
 $ipl_count_kt_returned_array = mysqli_fetch_array($ipl_count_kt_returned);
+
 $ipl_kt_return_rate = $ipl_count_kt_returned_array[0] / $ipl_count_kt[0];
 $iresult_kt = round($ipl_kt_return_rate * 100);
 
@@ -126,7 +128,7 @@ $iresult_ktmini = round($ipl_ktmini_return_rate * 100);
 
 //All items returned more than 14 days ago.
 
-$call_me_maybe = mysqli_query($connection, "SELECT date_sent,customers.name AS cus_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -14 DAY) AND (now() - INTERVAL 14 DAY) AND date_returned = '' AND products.protected = 'yes' AND logged_info.location != 1 ORDER BY date_sent DESC");
+$call_me_maybe = mysqli_query($connection, "SELECT date_sent,follow_up,ticket_number,customers.name AS cus_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -14 DAY) AND (now() - INTERVAL 14 DAY) AND date_returned = '' AND products.protected = 'yes' AND logged_info.location != 1 ORDER BY date_sent DESC");
 
 
 // Percentage of product that comes back and is reusable.
@@ -195,26 +197,36 @@ $igrill_mini_qa_useable_result_output = round($igrill_mini_qa_useable_result * 1
 
 //Which items were sent in the last 6 days
 
-$you_and_the_six = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
+$pro_meat_probe_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 6");
+$pro_meat_probe_sent_this_week_array = mysqli_fetch_array($pro_meat_probe_sent_this_week);
 
-$prod = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
+$standard_meat_probe_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 2");
+$standard_probe_sent_this_week_array = mysqli_fetch_array($standard_meat_probe_sent_this_week);
+
+$pro_ambient_probe_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 24 ");
+$pro_ambient_probe_sent_this_week_array = mysqli_fetch_array($pro_ambient_probe_sent_this_week);
+
+$igrill_mini_qa_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 14 ");
+$igrill_mini_qa_sent_this_week_array = mysqli_fetch_array($igrill_mini_qa_sent_this_week);
+
+$igrill_mini_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 3 ");
+$igrill_mini_sent_this_week_array = mysqli_fetch_array($igrill_mini_sent_this_week);
+
+$igrill_2_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 7 ");
+$igrill_2_sent_this_week_array = mysqli_fetch_array($igrill_2_sent_this_week);
+
+$kitchen_thermometer_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 7 ");
+$kitchen_thermometer_sent_this_week_array = mysqli_fetch_array($kitchen_thermometer_sent_this_week);
+
+$kitchen_thermometer_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 25 ");
+$kitchen_thermometer_sent_this_week_array = mysqli_fetch_array($kitchen_thermometer_sent_this_week);
+
+$kitchen_thermometer_mini_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 23 ");
+$kitchen_thermometer_mini_sent_this_week_array = mysqli_fetch_array($kitchen_thermometer_mini_sent_this_week);
+
+
+$prod = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ");
 $prod_array = mysqli_fetch_array($prod);
-
-//echo "<pre>";
-//print_r($prod_array['customers_name']);
-//echo "</pre>";
-
-
-while($row=mysqli_fetch_array($prod)) {
-	echo  $row['name'] . "&nbsp <br />";
-	
-}
-
-
-
-
-//$prod_count = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ORDER BY products.name");
-//$prod_count_array = mysqli_fetch_array($prod_count);
 
 
 
@@ -324,39 +336,86 @@ while($row=mysqli_fetch_array($prod)) {
 		</tr>
 </table>
 
-	<table id ="callmemaybe">
-	<caption>Sent, but not returned. Follow up.</caption>
-	<tr>
-		<?php while($row = mysqli_fetch_array($call_me_maybe)) { ?>
-		<td id="sent"><?php echo $row['date_sent'] ?></td>
-		<td><?php echo $row['cus_name'] ?></td>
-		<td><?php echo $row['name'] ?></td>
-	</tr>
-<?php }; ?>
-</table>
 
 <table id="thesix">
-	<caption>Items sent this week</caption>
+	<caption>Top items sent this week</caption>
 	<th>Product</th><th>Quantity</th>
-	
-<?php
+	<tr>
+		<td>Pro Meat Probe</td>
+		<td><?php echo $pro_meat_probe_sent_this_week_array[0] ?></td>
+	</tr>
 
-while ($rows = mysqli_fetch_array($prod)) {
-	if ($rows[0] > 1) {
-	echo "<tr><td>" . $rows['name'] . "</td>";
-	}
+	<tr>
+		<td>Standard Meat Probe</td>
+		<td><?php echo $standard_probe_sent_this_week_array[0]  ?></td>
+	</tr>
 
+	<tr>
+		<td>Pro Ambient Temp Probe</td>
+		<td><?php echo $pro_ambient_probe_sent_this_week_array[0] ?></td>
+	</tr>
 
-}
+	<tr>
+		<td>iGrill mini - QA</td>
+		<td><?php echo $igrill_mini_qa_sent_this_week_array[0] ?></td>
+	</tr>
 
-?>
-	
+	<tr>
+		<td>iGrill mini</td>
+		<td><?php echo $igrill_mini_sent_this_week_array[0] ?></td>
+	</tr>
+
+	<tr>
+		<td>iGrill <sup>2</sup></td>
+		<td><?php echo $igrill_2_sent_this_week_array[0] ?></td>
+	</tr>
+
+	<tr>
+		<td>Kitchen Thermometer</td>
+		<td><?php echo $kitchen_thermometer_sent_this_week_array[0] ?></td>
+	</tr>
+
+	<tr>
+		<td>Kitchen Thermometer<sup>mini</sup></td>
+		<td><?php echo $kitchen_thermometer_mini_sent_this_week_array[0]  ?></td>
+	</tr>
+		
 	</table>
+<table id="followed_up">
+	<caption>Followed up</caption>
+	<th>Ticket</th><th>Name</th><th>Days since</th><th>Lost cause</th>
+		<tr>
+			<td>12345</td>
+			<td>Jonny Dailey</td>
+			<td>12</td>
+			<td>Button</td>
+		</tr>
+</table>
 
+<div id="not_returned">
+	<caption>Sent, but not returned. Follow up.</caption>
+<span id="above_followup"><br />
+	<form>
+	<th>Ticket </th>|<th>Date sent </th>|<th>Name </th>|<th>Product </th>|<th>Follow up? </th>
+	</form>
+</span>
+	<tr>
+		<?php while($row = mysqli_fetch_array($call_me_maybe)) { ?>
+<form>
+	<input type="text" value=" <?php echo $row['ticket_number']; ?>" />
+	<input id="sent" type="text" value=" <?php echo $row['date_sent']; ?>" />
+	<input id="sent" type="text" value=" <?php echo $row['cus_name']; ?>" />
+	<input id="productsss" type="text" value=" <?php echo $row['name']; ?>" />
+	<input type="submit" value="&check;" id="submitBtn"/>
+</form>
+		<?php }; ?>
 	</div>
+</div>
+
 
 
 </div>
+
 
 
 	

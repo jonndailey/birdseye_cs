@@ -566,6 +566,11 @@ body {
 	width:1000px;
 	margin: 0 auto;
 	border-spacing: 0;
+	font-size: 10px;
+}
+
+.overviewpage #overview td{
+	font-size: 10px;
 }
 
 .overviewpage td {
@@ -573,10 +578,15 @@ body {
 }
 
 .overviewpage #domestic_percentages {
-	color:red;
 	float:left;
 	border-spacing: 0;
 	border: 1px solid black;
+	font-size: 10px;
+
+}
+
+.overviewpage #domestic_percentages td{
+	font-size: 10px;
 
 }
 .overviewpage #international_percentages {
@@ -585,17 +595,26 @@ body {
 	float:right;
 	border-spacing: 0;
 	border: 1px solid black;
-
-
 }
 
+.overviewpage #international_percentages table{
+	font-size: 10px;
+}
+
+
 .overviewpage #callmemaybe{
-	float:left;
-	margin-top: 50px;
+	margin-top: 60px;
+	font-size: 10px;
+	width:460px;
+	border:1px solid black;
 }
 
 .overviewpage #sent {
 	width:90px;
+}
+
+.overviewpage #sent td {
+	font-size: 10px;
 }
 
 .overviewpage #reuse {
@@ -604,10 +623,66 @@ body {
 	width:250px;
 	border: 1px solid #ddd;
 
+}
 
+.overviewpage #reuse td {
+	font-size: 10px;
+}
 
+#thesix td{
+	font-size: 10px;
 }
 
 #thesix {
+	font-size: 10px;
 	float:right;
+	margin-top: 100px;
+	width:350px;
+	border:1px solid black;
+}
+
+#followed_up {
+	border:1px solid black;
+	margin-top: 100px;
+	font-size: 10px;
+}
+
+
+#followed_up td {
+	font-size: 10px;
+	width:110px;
+}
+
+.overviewpage #callmemaybe td {
+	font-size: 10px;
+}
+
+
+
+.overviewpage #not_returned input:not([type=submit]):not([type=file])
+{
+	width:105px;
+	font-size: 10px;
+	border-right:0.1em solid #ddd;
+	border-left:0.1em solid #ddd;
+	border-bottom:0.1em solid #ddd;
+	background-color: #eee;
+	padding:0px;
+	margin-left: -1%;
+}
+
+.overviewpage #not_returned input[type=submit]{
+	background-color:steelblue;
+	width:50px;
+	height:45px;
+}
+
+#above_followup form{
+	width: 460px;
+	font-size: 13px;
+	border:1px solid black;
+	text-align: left;
+	letter-spacing: 2px;
+	display: inline-block;
+	text-align: justify;
 }

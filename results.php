@@ -19,30 +19,27 @@ $number_of_items = mysqli_query($connection, "SELECT SUM(quantity) FROM logged_i
 $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 
-//How many items have been sent in the last 7 days
-$last_7_days = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE selected_product = $product AND date_sent >= (DATE_SUB(CURDATE(), INTERVAL -7 DAY))  ORDER BY logged_info.tid DESC" ); 
-$last_7_days_displayed = mysqli_fetch_array($last_7_days);
-
 //How many items sent that were in warranty
-$how_many_in_warranty = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE warranty = 1 AND selected_product=  $product ORDER BY logged_info.tid DESC");
+$how_many_in_warranty = mysqli_query($connection, "SELECT SUM(warranty) FROM logged_info WHERE warranty = 1 AND selected_product =  $product ORDER BY logged_info.tid DESC");
 $how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty) ;
 
 
 //How many items sent that were out of warranty
-$how_many_out_warranty = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
+$how_many_out_warranty = mysqli_query($connection, "SELECT SUM(warranty) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
 $how_many_out_warranty_displayed = mysqli_fetch_array($how_many_out_warranty);
 
 //Accurately show in and out of warranty numbers in the nav stattion
-$outofwarranty = ($number_of_items_displayed[0]) - ($how_many_in_warranty_displayed[0]);
-$inwarranty = ($number_of_items_displayed[0]) - ($outofwarranty);
+$inwarranty = $how_many_in_warranty_displayed[0];
+$outofwarranty = $how_many_out_warranty_displayed[0];
 
+echo $outofwarranty;
 
 //How many items are sent domestically
-$how_many_domestic = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 1 AND selected_product= $product ORDER BY logged_info.tid DESC");
+$how_many_domestic = mysqli_query($connection, "SELECT SUM(*) FROM logged_info WHERE location = 1 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_domestic_displayed = mysqli_fetch_array($how_many_domestic);
 
 //How many items are sent to Europe
-$how_many_europe = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 2 AND selected_product= $product ORDER BY logged_info.tid DESC");
+$how_many_europe = mysqli_query($connection, "SELECT SUM(*) FROM logged_info WHERE location = 2 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_europe_displayed = mysqli_fetch_array($how_many_europe);
 
 //How many items are sent to Canada
