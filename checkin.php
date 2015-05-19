@@ -43,7 +43,7 @@ echo "</table></div>";
 ?>
 
 <?php
-echo "<br /><br /><div class='last3'>There are "  . $number_of_items_displayed[0] . " items to be checked in.</div>";
+echo "<div class='last3'>There are "  . $number_of_items_displayed[0] . " items to be checked in.</div>";
 ?>
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>
@@ -64,18 +64,30 @@ echo "<br /><br /><div class='last3'>There are "  . $number_of_items_displayed[0
 	</tr>
 </table>
 
-<form action="checkindate.php?" method="GET" name="checkindata" onsubmit="return validateForm();">
+<form action="checkindate.php?" method="GET" name="checkindata" class="checkindata" >
 
 <textarea placeholder="Checkin Note..." name="secondNote"></textarea>
-<input type="text" name="firmware" id="firmware" placeholder="Firmware Version"></input> |&nbsp;
-<input type="text" name="date_code" id="date_code" placeholder="Date Code"></input> |&nbsp;
+<input type="text" class="firmware" placeholder="Firmware Version" name="date_code"/> |&nbsp;
+<input type="text" class="date_code" placeholder="Date Code" name="firmware"/>|&nbsp;
 	Re-usable?
 
 		<input type="radio" name="reuse" value="1" />Yes
 		<input type="radio" name="reuse" value="2" />No
+		&nbsp;&nbsp;
+		<?php
+			echo "<br /><br />";
+			echo "Issue:&nbsp;&nbsp;";
+			$issues = mysqli_query($connection, "SELECT id,issue FROM issues");
+			echo "\n<select name=\"issues\">\n";
+
+			while($issue = mysqli_fetch_array($issues)){
+				echo "\t<option value=\"". $issue["issue"] . "\" >". $issue["issue"] . "</option>\n";
+	}
+			echo "</select>\n";
+?>
 
 		<input type="hidden" name="id" value="<?php echo $row['tid'] ?>">
-		<span class="movesubmit"><input type="submit" id="checkinsubmit"></span>
+		<span class="movesubmit"><input type="submit" class="checkinsubmit"></span>
 </form>
 <?php }; ?>
 </div>

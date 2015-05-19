@@ -46,12 +46,12 @@ while ($row = mysqli_fetch_array($customer_name)) {
 ?>
 
 <table id="customers">
-		<th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Incoming</th><th>Outgoing</th><th>Warranty</th><th>Product</th><th>Qty</th><th>Weight</th><th>Country</th>
+		<tr><th>Edit</th><th>Ticket</th><th>Sent</th><th>Returned</th><th>Incoming</th><th>Outgoing</th><th>Warranty</th><th>Product</th><th>Qty</th><th>Weight</th><th>Country</th></tr>
 
 <?php while ($row = mysqli_fetch_array($customer_data)) { ?>
 	<tr class="customerTopLine">
-		<?php echo "<td class=\"editbutton\"><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img src=\"images/buttons/edit.png\"></a></td>";?>
-		<?php echo "<td id=" . $row['tid'] . "  name=\"jticket\"> <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>"; ?>
+		<?php echo "<td class=\"editbutton\"><a href=\"transactionedit.php?tid=" . $row['tid'] . "\"><img alt=\"edit\" src=\"images/buttons/edit.png\"></a></td>";?>
+		<?php echo "<td id=\"" . $row['tid'] . "\"> <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>"; ?>
 		<td><?php echo $row['date_sent'];?></td>
 		<td><?php echo $row['date_returned'];?></td>
 		<?php echo "<td class='incomingTracking'><a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ." </a></td>" ?>
@@ -79,9 +79,9 @@ while ($row = mysqli_fetch_array($customer_name)) {
 		<td><?php echo $row['secondary_name'];?></td>
 			<?php }; ?>		
 	<?php if ($row = mysqli_fetch_array($notes)) { ?>
-		<?php echo "<table class='lastnote'><tr>" ?>
+		<?php echo "<tr>" ?>
 		<td><?php echo $row['note'];?></td>
-		<?php echo "</tr><br /><table>" ?>
+		<?php echo "</tr></table><table>" ?>
 	<?php }; ?>	
 
 	<?php if ($row = mysqli_fetch_array($notes2)) { ?>
@@ -89,11 +89,11 @@ while ($row = mysqli_fetch_array($customer_name)) {
 
 		<td><?php echo $row['note2'];?></td>
 
-		<?php echo "</tr><table><br /><br />" ?>
+		<?php echo "</tr>" ?>
 	<?php }; ?>	
 
-	</tr>
+	
 <?php }; ?>
-</table>
+
 </table>
 </html>

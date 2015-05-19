@@ -3,90 +3,115 @@
 
 switch ($product) {
 
+	case 1:
+		$product = "Pro Meat Probe - [iGrill2]";
+		break;
 	case 2:
-		$product = "Standard Meat Probe";
+		$product = "Meat Probe - [iGrill mini]";
 		break;
 	case 3:
-		$product = "iGrill Mini";
+		$product = "Meat Probe -[Kitchen Thermometer]";
 		break;
+	
 	case 4:
-		$product = "Standard Meat Probe";
+		$product = "Pro Meat Probe -[Kitchen Thermometer]";
+		break;
+	
+	case 5:
+		$product = "Meat Probe - [KT mini]";
 		break;
 	case 6:
-		$product = "Pro Meat Probe";
+		$product = "Pro Meat Probe [solo]";
 		break;
 	case 7:
-		$product = "iGrill<sup>2</sup>";
+		$product = "Standard Probe [solo]";
 		break;
 	case 8:
-		$product = "iGrill<sup>2</sup> Base";
+		$product = "Ambient Temp Probe";
 		break;
 	case 9:
-		$product = "iGrill<sup>2</sup> Battery Cover";
+		$product = "iGrill<sup>2</sup>";
 		break;
 	case 10:
-		$product = "Double A Batteries";
+		$product = "iGrill <sup>mini</sup>";
 		break;
 	case 11:
-		$product = "iGrill mini battery cover";
+		$product = "iGrill mini <sup>QA</sup>";
 		break;
 	case 12:
-		$product = "Coin cell battery";
-		break;
-	case 13:
-		$product = "Probe Wrap";
-		break;
-	case 14:
-		$product = "iGrill mini QA";
-		break;
-	case 15:
-		$product = "iShower Door Lock";
-		break;
-	case 16:
-		$product = "Magnetic Disc";
-		break;
-	case 17:
-		$product = "Probe indicator";
-		break;
-	case 18:
-		$product = "Grate clip";
-		break;
-	case 19:
-		$product = "iGrill mini base";
-		break;
-	case 20:
-		$product = "Kitchen Thermometer Base";
-		break;
-	case 21:
-		$product = "Kitchen Thermometer Mini Base";
-		break;
-	case 22:
-		$product = "iShower<sup>2</sup> Mount";
-		break;
-	case 23:
-		$product = "KT mini";
-		break;		
-	case 24:
-		$product = "Ambient Temperature Probe";
-		break;
-	case 25:
 		$product = "Kitchen Thermometer";
 		break;
-	case 26:
+	case 13:
+		$product = "KT <sub>Mini</sub>";
+		break;
+	case 14:
+		$product = "Probe Indicator (Red)";
+		break;
+	case 15:
+		$product = "Probe Indicator (Blue)";
+		break;
+	case 16:
+		$product = "Probe Indicator (Green)";
+		break;
+	case 17:
+		$product = "Probe Indicator (Yellow)";
+		break;
+	case 18:
+		$product = "iGrill2 <sup>Base</sup>";
+		break;
+	case 19:
+		$product = "KT Mini <sup>Base</sup>";
+		break;
+	case 20:
+		$product = "KT <sup>Base</sup>";
+		break;
+	case 21:
+		$product = "iGrill Mini <sup>Base</sup>";
+		break;
+	case 22:
+		$product = "Coin Cell Battery";
+		break;		
+	case 23:
+		$product = "iG<sup>2</sup> Battery Cover";
+		break;
+	case 24:
+		$product = "iGmini - Battery Cov";
+		break;
+	case 25:
 		$product = "iShower<sup>2</sup> Kick Stand";
 		break;
+	case 26:
+		$product = "iShower Door Lock";
+		break;
 	case 27:
-		$product = "iShower<sup>2</sup> Body";
+		$product = "Magnetic Disc";
 		break;
 	case 28:
-		$product = "Candy Probe";
-		break;
-	case 29:
-		$product = "iShower<sup>2</sup> Wall Mount";
+		$product = "Grate Clip";
 		break;	
+	case 29:
+		$product = "iShower Mount";
+		break;
+	case 30: 
+		$product = "iShower2 kickstand";
+		break;
+	case 31:
+		$product = "iShower2 wall mount";
+		break;
+	case 32:
+		$product = "KT Battery Cover";
+		break;
+	case 33: $product = "iShower<sup>2</sup> body";
+		break;
+	case 34: $product = "Candy Probe";
+		break;
+	case 35: $product = "Probe Wrap (Black)";
+		break;
+	case 36: $product = "Probe Wrap (white)";
 
 	default:
 		echo "Nothing selected";
 		break;
 }
 ?>
+

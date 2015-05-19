@@ -1,21 +1,21 @@
 <?php include('db.php'); ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Coffee</title>
-
-<!--<script language="Javascript" type="text/javascript">
+<script>
 
 function validateForm() {
-    var x = document.forms["checkindata"]["date_code"].value;
+    var x = document.forms["checkoutform"]["name"].value;
     if (x == null || x == "") {
-     document.getElementById("notification").style.visibility = "visible";
-     return false;    
-    } else {/*Do nothing if it passes*/}
+        document.getElementById("notification").style.visibility = "visible";
+        return false; 	 
+    }
 }
 
-</script>-->
+var mytest = document.getElementsByClassName('name');
+
+</script>
 
 <meta name="description" content="Coffee - Tracking System">
 <meta name="keywords" content="tracking,inventory,logging">
@@ -26,4 +26,7 @@ function validateForm() {
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 
+
+
 </head>
+

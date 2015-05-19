@@ -20,26 +20,25 @@ $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 
 //How many items sent that were in warranty
-$how_many_in_warranty = mysqli_query($connection, "SELECT SUM(warranty) FROM logged_info WHERE warranty = 1 AND selected_product =  $product ORDER BY logged_info.tid DESC");
+$how_many_in_warranty = mysqli_query($connection, "SELECT COUNT(warranty) FROM logged_info WHERE warranty = 1 AND selected_product =  $product ORDER BY logged_info.tid DESC");
 $how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty) ;
 
 
 //How many items sent that were out of warranty
-$how_many_out_warranty = mysqli_query($connection, "SELECT SUM(warranty) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
+$how_many_out_warranty = mysqli_query($connection, "SELECT COUNT(warranty) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
 $how_many_out_warranty_displayed = mysqli_fetch_array($how_many_out_warranty);
 
 //Accurately show in and out of warranty numbers in the nav stattion
 $inwarranty = $how_many_in_warranty_displayed[0];
-$outofwarranty = $how_many_out_warranty_displayed[0];
+$outofwarranty = $how_many_out_warranty_displayed[0] ;
 
-echo $outofwarranty;
 
 //How many items are sent domestically
-$how_many_domestic = mysqli_query($connection, "SELECT SUM(*) FROM logged_info WHERE location = 1 AND selected_product= $product ORDER BY logged_info.tid DESC");
+$how_many_domestic = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 1 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_domestic_displayed = mysqli_fetch_array($how_many_domestic);
 
 //How many items are sent to Europe
-$how_many_europe = mysqli_query($connection, "SELECT SUM(*) FROM logged_info WHERE location = 2 AND selected_product= $product ORDER BY logged_info.tid DESC");
+$how_many_europe = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 2 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_europe_displayed = mysqli_fetch_array($how_many_europe);
 
 //How many items are sent to Canada
@@ -58,6 +57,10 @@ $how_many_new_zealand_displayed = mysqli_fetch_array($how_many_new_zealand);
 //How many went to Australia
 $how_many_south_africa = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 6 AND selected_product= $product ORDER BY logged_info.tid DESC");
 $how_many_south_africa_displayed = mysqli_fetch_array($how_many_south_africa);
+
+//How many went to Taiwan
+$how_many_taiwan = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 7 AND selected_product = $product ORDER BY logged_info.tid DESC");
+$how_many_taiwan_displayed = mysqli_fetch_array($how_many_taiwan);
 
 
 /*
@@ -92,6 +95,8 @@ $chosen_quantity = mysqli_query($connection, "SELECT amount.quantity,logged_info
 //Package weight
 $chosen_size = mysqli_query($connection, "SELECT p_size.package,logged_info.weight FROM p_size INNER JOIN logged_info ON p_size.id=logged_info.weight WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
+//Product type
+
 
 include('switch.php');
 
@@ -108,6 +113,7 @@ include('switch.php');
 			<td class="title"><span class="number"><?php echo $how_many_australia_displayed[0] ?></span><br/>Australia</td>
 			<td class="title"><span class="number"><?php echo $how_many_new_zealand_displayed[0] ?></span><br/>New Zealand</td>
 			<td class="title"><span class="number"><?php echo $how_many_south_africa_displayed[0] ?></span><br/>South Africa</td>
+			<td class="title"><span class="number"><?php echo $how_many_taiwan_displayed[0] ?></span><br/>Taiwan</td>
 			<td class="title"><span class="number"><?php echo $inwarranty ?></span><br/>In warranty</td>
 			<td class="title"><span class="number"><?php echo $outofwarranty ?></span><br/>Out warranty</td>
 		</tr>
@@ -124,15 +130,15 @@ echo "<table id=\"resultsData\">" . "<tr><th>Ticket Number</th>" . "<th>Name</th
 while($row = mysqli_fetch_array($result)) {
 	echo "<table>";
 	echo "<tr>";
-	echo "<td id=" . $row['tid'] . "  name=\"jticket\" >&raquo; <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>";
+	echo "<td id='" . $row['tid'] . "' >&raquo; <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
-	echo "<td>" . $row['date_returned'] ;
+	echo "<td>" . $row['date_returned'] . "</td>";
 	
 
-if ($row['date_returned'] == '') {
-	echo "<a href=\"checkin.php\">Not checked in</a></td>";
-};
+/*if ($row['date_returned'] == '') {
+	echo "<td><a href=\"checkin.php\">Not checked in</a></td>";
+};*/
 
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "' target=\"_blank\">" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ."</a></td>";
@@ -179,9 +185,10 @@ if ($row = mysqli_fetch_array($notes2)){
 	echo $row['note2'];
 	echo "</td></table>";
 	}else echo "";
-	echo "</tr><br /><br />";
+	echo "</tr><br />";
 }
-
+echo "</table>";
+echo "</table>";
 echo "</tr>";
 ?>
 </body>

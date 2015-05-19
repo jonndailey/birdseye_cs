@@ -89,7 +89,7 @@ a:visited{
 
 .transactioneditpage .groupedData {
 	background-color: #F5F5DC;
-	width:365px;
+	width:375px;
 	margin:70px auto;
 	border:5px solid #ECF0F1;
 	padding:15px;
@@ -223,12 +223,23 @@ tr:nth-child(even) {
 }
 
 
-.customerTopLine {
-	background-color: #ddd;
+.customerspage table#customers {
+	background-color: #eee;
+	margin-bottom: 10px;
 }
 
-.customerBottomLine {
+/*start here */
+
+.customerspage > table > tbody > tr > td {
+	margin-top: 40px;
+}
+
+
+
+.customers {
 	background-color: #eee;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 
 .product {
@@ -297,6 +308,14 @@ tr:nth-child(even) {
 	border-bottom:1px solid black;
 }
 
+.checkinpage > .container > .checkindata > .date_code {
+	width:50px;
+}
+
+.checkinpage > .container > .checkindata > .firmware {
+	width:82px;
+}
+
 .checkinpage .checkinBox{
 	margin: 0 auto;
 	font-size: 11px;
@@ -356,9 +375,17 @@ input:not([type=submit]):not([type=file]) {
 .checkinpage input:not([type=submit]):not([type=file]) {
    height:10px;
    width:20px;
-   font-size:24px;
+   font-size:10px;
    font-family: 'Open Sans', sans-serif;
    border:3px solid #eee;
+}
+
+.checkinpage input:not([type=submit]):not([type=file]) {
+   height:10px;
+   width:20px;
+   font-size:10px;
+   font-family: 'Open Sans', sans-serif;
+   border:1px solid #ddd;
 }
 
 /*textarea style for checkout page */
@@ -501,20 +528,22 @@ body {
 
 .movesubmit {
 	float:right;
-	margin-top: 15px;
+	margin-top: -20px;
 }
 
 
-#date_code {
+.checkinpage .date_code {
 	border:1px solid #000;
 	width:50px;
 	font-size: 10px;
+
 }
 
-#firmware {
+.checkinpage input > .firmware{
 	border:1px solid #000;
 	width:82px;
-	font-size: 10px;
+	font-size: 1px;
+	border: 2px solid red;
 }
 
 .checkinpage form {
@@ -523,7 +552,7 @@ body {
 }
 
 .last3 {
-	margin: 0 auto;
+	margin: 20px auto;
 	width:500px;
 	text-align: center;
 }
@@ -661,20 +690,76 @@ body {
 
 .overviewpage #not_returned input:not([type=submit]):not([type=file])
 {
-	width:105px;
+	width:125px;
 	font-size: 10px;
 	border-right:0.1em solid #ddd;
 	border-left:0.1em solid #ddd;
 	border-bottom:0.1em solid #ddd;
 	background-color: #eee;
 	padding:0px;
-	margin-left: -1%;
+	margin-left: -0%;
 }
+
+/*This is what you were working on yesterday. Righ below this comment - 3/18/15 */
+
+.overviewpage #nested_returned input:not([type=submit]):not([type=file]) 
+{	
+	margin-top: 30px;
+	width:125px;
+	height:15px;
+	font-size: 10px;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+	border-right:1px solid black;
+	margin-left: -.0%;
+	color:black;
+	text-align: center;
+}
+
+.overviewpage #nested_returned  #sent_title_checked
+{	
+	color:red;
+	width:47px;
+	text-align: center;
+}
+
 
 .overviewpage #not_returned input[type=submit]{
 	background-color:steelblue;
 	width:50px;
 	height:45px;
+	text-align: center;
+}
+
+.overviewpage #above_followup  {
+	width: 460px; 
+	font-size: 19px;
+	border:1px solid black;
+	text-align: left;
+	color: red;
+	text-decoration: underline;
+}
+
+.overviewpage #overview_products_area {
+}
+
+.checkoutpage   .nav_links {
+	text-decoration: underline;
+}
+
+.resultspage .nav_links {
+	text-decoration: underline;
+
+}
+
+.checkinpage .nav_links {
+	text-decoration: underline;
+
+}
+
+.transactioneditpage .nav_links {
+	text-decoration: underline;
+
 }
 
 #above_followup form{
@@ -686,3 +771,49 @@ body {
 	display: inline-block;
 	text-align: justify;
 }
+
+#search {
+	background-image: url('../images/buttons/mag_glass.png');
+	background-repeat:no-repeat;
+   	background-position:left;
+   	
+	height:20px;
+	width:400px;
+	font-size: 10px;
+	padding:5px;
+}
+
+#search_form {
+	
+	padding:5px;
+	text-align: center;
+}
+
+#search_form > form {
+
+	padding:5px;
+	text-align: center;
+	height:40px;
+	border-radius: 5px;
+}
+
+.result_count{
+	margin:0 auto;
+	text-align: center;
+}
+
+#header_image {
+	margin: 0 auto;
+	text-align: center;
+	padding:5px;
+}
+
+#found_results {
+	margin-bottom:40px;
+	font-size: 20px;
+}
+
+#checkinsubmit {
+	margin-top: -40px;
+}
+

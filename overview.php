@@ -128,7 +128,7 @@ $iresult_ktmini = round($ipl_ktmini_return_rate * 100);
 
 //All items returned more than 14 days ago.
 
-$call_me_maybe = mysqli_query($connection, "SELECT date_sent,follow_up,ticket_number,customers.name AS cus_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -14 DAY) AND (now() - INTERVAL 14 DAY) AND date_returned = '' AND products.protected = 'yes' AND logged_info.location != 1 ORDER BY date_sent DESC");
+$call_me_maybe = mysqli_query($connection, "SELECT follow_up,tid,date_sent,follow_up,ticket_number,customers.name AS cus_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id INNER JOIN customers ON logged_info.cid=customers.cid WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -14 DAY) AND (now() - INTERVAL 14 DAY) AND date_returned = '' AND products.protected = 'yes' AND logged_info.location != 1 AND logged_info.follow_up = '' ORDER BY date_sent DESC");
 
 
 // Percentage of product that comes back and is reusable.
@@ -224,6 +224,17 @@ $kitchen_thermometer_sent_this_week_array = mysqli_fetch_array($kitchen_thermome
 $kitchen_thermometer_mini_sent_this_week = mysqli_query($connection, "SELECT sum(quantity) FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) AND products.id = 23 ");
 $kitchen_thermometer_mini_sent_this_week_array = mysqli_fetch_array($kitchen_thermometer_mini_sent_this_week);
 
+
+$followed_up = mysqli_query($connection, "SELECT tid,ticket_number,name,date_sent FROM logged_info JOIN customers ON logged_info.cid=customers.cid WHERE follow_up = 1");
+$followed_up_array = mysqli_fetch_array($followed_up);
+
+
+
+$hello = date("Y-m-d");
+echo "<br />";
+echo $followed_up_array[2];
+echo "<br />";
+echo  $followed_up_array[2] - $hello[0] ;
 
 $prod = mysqli_query($connection, "SELECT date_sent,customers.name AS customers_name,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id  WHERE date_sent <= ADDDATE(CURDATE(), INTERVAL -0 DAY) AND date_sent >= ADDDATE(CURDATE(), INTERVAL -6 DAY) ");
 $prod_array = mysqli_fetch_array($prod);
@@ -381,31 +392,50 @@ $prod_array = mysqli_fetch_array($prod);
 	</tr>
 		
 	</table>
-<table id="followed_up">
 	<caption>Followed up</caption>
-	<th>Ticket</th><th>Name</th><th>Days since</th><th>Lost cause</th>
-		<tr>
-			<td>12345</td>
-			<td>Jonny Dailey</td>
-			<td>12</td>
-			<td>Button</td>
-		</tr>
-</table>
+	<div id="not_returned">
+<div id="nested_returned">	
+<form>
+	<input type="text" value="Ticket Number" />
+	<input id="sent_title" type="text" value="Date Sent" />
+	<input id="sent_title" type="text" value="Name" />
+	<input id="overview_products_area" type="text" value="Product" />
+	<input type="text" value="Lost" id="sent_title_checked"/>
+</form>
+</div>
+<?php while($row = mysqli_fetch_array($followed_up)){ ?>
+<form >
+	<input type="text" value=" <?php echo $row['ticket_number']; ?>" />
+	<input id="sent" type="text" value=" <?php echo $row['name']; ?>" />
+	<input id="sent" type="text" value=" <?php echo $row['date_sent']; ?>" />
+	<input id="overview_products_area" type="text" value="" />
+	<input type="submit" value="&cross;" id="submitBtn"/>
+</form>
+<?php }; ?>
 
-<div id="not_returned">
+
+
+
 	<caption>Sent, but not returned. Follow up.</caption>
-<span id="above_followup"><br />
-	<form>
-	<th>Ticket </th>|<th>Date sent </th>|<th>Name </th>|<th>Product </th>|<th>Follow up? </th>
-	</form>
-</span>
+<div id="nested_returned">	
+<form>
+	<input type="text" value="Ticket Number" />
+	<input id="sent_title" type="text" value="Date Sent" />
+	<input id="sent_title" type="text" value="Name" />
+	<input id="overview_products_area" type="text" value="Product" />
+	<input type="text" value="Checked" id="sent_title_checked"/>
+</form>
+</div>
+
 	<tr>
 		<?php while($row = mysqli_fetch_array($call_me_maybe)) { ?>
-<form>
+<form method="GET" action="followup.php">
 	<input type="text" value=" <?php echo $row['ticket_number']; ?>" />
 	<input id="sent" type="text" value=" <?php echo $row['date_sent']; ?>" />
 	<input id="sent" type="text" value=" <?php echo $row['cus_name']; ?>" />
-	<input id="productsss" type="text" value=" <?php echo $row['name']; ?>" />
+	<input id="overview_products_area" type="text" value=" <?php echo $row['name']; ?>" />
+	<input id="sent" type="hidden" value="<?php echo $row['tid']; ?>" name="transaction"/>
+	<input id="sent" type="hidden" value="1" name="answer"/>
 	<input type="submit" value="&check;" id="submitBtn"/>
 </form>
 		<?php }; ?>
