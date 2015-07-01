@@ -1,9 +1,9 @@
 
 <div id="search_form">
-	<img src="images/logo/paper_small.png" id="header_image"/>
+	<img src="images/easter/faces.png" id="header_image"/>
 
 <form method="GET" action="search.php" >
-	<input type="text" id="search" name="search" target="_blank" placeholder="Type and press 'Enter'...">
+	<input type="text" id="search" name="search" target="_blank" autocomplete="off" placeholder="Type and press 'Enter'...">
 	<input type="hidden" value="Search!" id="search_button" />
 </form>
 </div>

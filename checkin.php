@@ -13,7 +13,7 @@ $theNewNote =  mysqli_real_escape_string($connection, $_POST['secondNote']);
 $chosen_product = mysqli_query($connection, "SELECT logged_info.note,logged_info.selected_product,logged_info.tid,products.id,products.name FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC");
 											
 //Show me everything in the database that does not have a return stamp
-$checkin = mysqli_query($connection,"SELECT logged_info.date_sent,logged_info.cid,products.name,customers.name,products.protected,logged_info.note,logged_info.location FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC");
+$checkin = mysqli_query($connection,"SELECT logged_info.tid,logged_info.date_sent,logged_info.cid,products.name,customers.name,products.protected,logged_info.note,logged_info.location FROM logged_info INNER JOIN products ON logged_info.selected_product=products.id JOIN customers ON customers.cid=logged_info.cid WHERE date_returned = '' AND products.protected = 'yes' AND logged_info.location = 1 ORDER BY tid DESC");
 
 //Show me the notes associated with returned row
 $checkinNotes = mysqli_query($connection,"SELECT logged_info.tid,logged_info.note,logged_info.note2 FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid JOIN products ON logged_info.selected_product=products.id WHERE date_returned = '' AND products.protected = 'yes' ORDER BY logged_info.tid DESC");
@@ -47,7 +47,7 @@ echo "<div class='last3'>There are "  . $number_of_items_displayed[0] . " items 
 ?>
 
 <?php while ($row = mysqli_fetch_array($checkin)) { ?>
-<div class="container">
+<div class="container" id="<?php echo $row['tid'] ?>">
 <div>
 <table>
 	<tr>

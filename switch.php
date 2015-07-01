@@ -109,6 +109,9 @@ switch ($product) {
 		break;
 	case 36: $product = "Probe Wrap (white)";
 
+	case 37: $product = "Probe Indicator (Pack)";
+		break;
+
 	default:
 		echo "Nothing selected";
 		break;

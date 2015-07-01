@@ -5,6 +5,9 @@
 	<title>Coffee</title>
 <script>
 
+<link rel="shortcut icon" href="images/logo/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/logo/favicon.ico" type="image/x-icon">
+
 function validateForm() {
     var x = document.forms["checkoutform"]["name"].value;
     if (x == null || x == "") {

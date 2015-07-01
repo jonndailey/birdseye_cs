@@ -20,12 +20,12 @@ $number_of_items_displayed = mysqli_fetch_array($number_of_items);
 
 
 //How many items sent that were in warranty
-$how_many_in_warranty = mysqli_query($connection, "SELECT COUNT(warranty) FROM logged_info WHERE warranty = 1 AND selected_product =  $product ORDER BY logged_info.tid DESC");
+$how_many_in_warranty = mysqli_query($connection, "SELECT sum(warranty) FROM logged_info WHERE warranty = 1 AND selected_product =  $product ORDER BY logged_info.tid DESC");
 $how_many_in_warranty_displayed = mysqli_fetch_array($how_many_in_warranty) ;
 
 
 //How many items sent that were out of warranty
-$how_many_out_warranty = mysqli_query($connection, "SELECT COUNT(warranty) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
+$how_many_out_warranty = mysqli_query($connection, "SELECT sum(warranty) FROM logged_info WHERE warranty = 2 AND selected_product=  $product ORDER BY logged_info.tid DESC");
 $how_many_out_warranty_displayed = mysqli_fetch_array($how_many_out_warranty);
 
 //Accurately show in and out of warranty numbers in the nav stattion
@@ -62,6 +62,10 @@ $how_many_south_africa_displayed = mysqli_fetch_array($how_many_south_africa);
 $how_many_taiwan = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 7 AND selected_product = $product ORDER BY logged_info.tid DESC");
 $how_many_taiwan_displayed = mysqli_fetch_array($how_many_taiwan);
 
+//How many went to Chile
+$how_many_chile = mysqli_query($connection, "SELECT COUNT(*) FROM logged_info WHERE location = 8 AND selected_product = $product ORDER BY logged_info.tid DESC");
+$how_many_chile_displayed = mysqli_fetch_array($how_many_chile);
+
 
 /*
 
@@ -75,7 +79,7 @@ End of information banner
 
 
 //Grabbing every item in the database that has the correct ID
-$result = mysqli_query($connection, "SELECT customers.cid,ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product = $product ORDER BY logged_info.tid DESC");
+$result = mysqli_query($connection, "SELECT tid,customers.cid,ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid WHERE selected_product = $product ORDER BY logged_info.tid DESC");
 
 //Pull the first note from the DB
 $notes = mysqli_query($connection, "SELECT * FROM logged_info WHERE selected_product =  $product ORDER BY logged_info.tid DESC");
@@ -114,6 +118,7 @@ include('switch.php');
 			<td class="title"><span class="number"><?php echo $how_many_new_zealand_displayed[0] ?></span><br/>New Zealand</td>
 			<td class="title"><span class="number"><?php echo $how_many_south_africa_displayed[0] ?></span><br/>South Africa</td>
 			<td class="title"><span class="number"><?php echo $how_many_taiwan_displayed[0] ?></span><br/>Taiwan</td>
+			<td class="title"><span class="number"><?php echo $how_many_chile_displayed[0] ?></span><br/>Chile</td>
 			<td class="title"><span class="number"><?php echo $inwarranty ?></span><br/>In warranty</td>
 			<td class="title"><span class="number"><?php echo $outofwarranty ?></span><br/>Out warranty</td>
 		</tr>
@@ -133,12 +138,12 @@ while($row = mysqli_fetch_array($result)) {
 	echo "<td id='" . $row['tid'] . "' >&raquo; <a href='https://idevices.zendesk.com/agent/tickets/" . $row['ticket_number'] . "' target=\"_blank\" >" . $row['ticket_number'] ."</a> </td>";
 	echo "<td><a href=\"customers.php?cid=" . $row['cid'] . "\">" . $row['name'] . "</a></td>";
 	echo "<td>" . $row['date_sent'] . "</td>";
-	echo "<td>" . $row['date_returned'] . "</td>";
+	echo "<td>" . $row['date_returned'];
 	
 
-/*if ($row['date_returned'] == '') {
-	echo "<td><a href=\"checkin.php\">Not checked in</a></td>";
-};*/
+if ($row['date_returned'] == '') {
+	echo "<a href=\"checkin.php#" . $row['tid'] . " \"> Not checked in</a></td>";
+};
 
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "' target=\"_blank\">" . $row['outgoing_barcode'] ."</a></td>";
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['incoming_barcode'] . "' target=\"_blank\">" . $row['incoming_barcode'] ."</a></td>";

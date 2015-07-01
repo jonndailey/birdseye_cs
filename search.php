@@ -19,7 +19,7 @@ if (isset($_GET['search'])) {
 	$query = mysqli_real_escape_string($connection,$_GET['search']);
 
 	$raw_results = mysqli_query($connection,
-		"SELECT tid,customers.cid,ticket_number,customers.name,date_sent,date_returned,outgoing_barcode,incoming_barcode,note,note2,quantity,logged_info.weight,status,area.mypath 
+		"SELECT tid,customers.cid,ticket_number,customers.name,customers.email,date_sent,date_returned,outgoing_barcode,incoming_barcode,note,note2,quantity,logged_info.weight,status,area.mypath 
 		 FROM logged_info INNER JOIN customers ON logged_info.cid=customers.cid 
 		 JOIN p_size ON logged_info.weight=p_size.id 
 		 JOIN warranty ON logged_info.warranty=warranty.id 
@@ -31,7 +31,8 @@ if (isset($_GET['search'])) {
 		 incoming_barcode LIKE '%{$query}%' OR 
 		 note LIKE '%{$query}%' OR 
 		 name COLLATE utf8_general_ci LIKE '%{$query}%' OR
-		 ticket_number LIKE '%{$query}%' OR mypath LIKE '%{$query}%'
+		 ticket_number LIKE '%{$query}%' OR mypath LIKE '%{$query}%' 
+		 OR email LIKE '%{$query}%'
 		");
 
 	$num_results = mysqli_num_rows($raw_results);
@@ -64,7 +65,7 @@ if (mysqli_num_rows($raw_results) > found0) {
 	
 
 if ($row['date_returned'] == '') {
-	echo "<a href=\"checkin.php\">Not checked in</a></td>";
+	echo "<a href=\"checkin.php#" . $row['tid'] . " \"> Not checked in</a></td>";
 };
 
 	echo "<td> <a href='https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=" . $row['outgoing_barcode'] . "' target=\"_blank\">" . $row['outgoing_barcode'] ."</a></td>";
@@ -94,7 +95,4 @@ if ($row['date_returned'] == '') {
 echo "</tr>";
 echo "</table>";
 }
-
-
 ?>
-

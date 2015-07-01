@@ -168,18 +168,18 @@ a:visited{
 }
 
 
-.outgoingTracking:hover{ 
+.outgoingTracking:hover{
 	background-color: #eee;
-	-webkit-transform: scale(2.0); 
+	-webkit-transform: scale(2.0);
 	border:1px solid #ddd;
 	text-align: center;
 	padding:0px;
 }
 
 
-.incomingTracking:hover{ 
+.incomingTracking:hover{
 	background-color: #eee;
-	-webkit-transform: scale(2.0); 
+	-webkit-transform: scale(2.0);
 	border:1px solid #ddd;
 	text-align: center;
 	padding:0px;
@@ -572,6 +572,7 @@ body {
 
 #notification {
 	visibility: hidden;
+	margin-top: -160px;
 	border-bottom: 1px solid #000;
 	padding-top:5px;
 	color:#000;
@@ -580,9 +581,9 @@ body {
 	background-color:#d35400;
 	text-align: center;
 	position: fixed;
-	
 
-	
+
+
 }
 
 .notification_message {
@@ -702,8 +703,8 @@ body {
 
 /*This is what you were working on yesterday. Righ below this comment - 3/18/15 */
 
-.overviewpage #nested_returned input:not([type=submit]):not([type=file]) 
-{	
+.overviewpage #nested_returned input:not([type=submit]):not([type=file])
+{
 	margin-top: 30px;
 	width:125px;
 	height:15px;
@@ -717,7 +718,7 @@ body {
 }
 
 .overviewpage #nested_returned  #sent_title_checked
-{	
+{
 	color:red;
 	width:47px;
 	text-align: center;
@@ -732,7 +733,7 @@ body {
 }
 
 .overviewpage #above_followup  {
-	width: 460px; 
+	width: 460px;
 	font-size: 19px;
 	border:1px solid black;
 	text-align: left;
@@ -776,7 +777,7 @@ body {
 	background-image: url('../images/buttons/mag_glass.png');
 	background-repeat:no-repeat;
    	background-position:left;
-   	
+
 	height:20px;
 	width:400px;
 	font-size: 10px;
@@ -784,7 +785,7 @@ body {
 }
 
 #search_form {
-	
+
 	padding:5px;
 	text-align: center;
 }
@@ -817,3 +818,39 @@ body {
 	margin-top: -40px;
 }
 
+.zuckerburg td{
+	padding: 0px;
+	text-align: center;
+	width:10px;
+	font-size: 10px;
+	border-right:15px solid #fff;
+	background-color: #F0F0F0;
+
+
+}
+
+.zuckerburg table{
+	width:800px;
+}
+
+.zuckerburg th {
+	text-align: center;
+	padding:3px;
+	border-right:15px solid #fff;
+	border-bottom:5px solid #fff;
+	background-color: steelblue;
+	color:white;
+}
+
+/*.checkinpage > .container > .checkindata > .firmware*/
+
+.homequant {
+	background-color: #6B94B5;
+	padding:3px;
+	width:13px;
+	text-align: center;
+	margin-left: 145px;
+	border-radius: 30%;
+	font-weight: bolder;
+	font-size: 8px;
+}
