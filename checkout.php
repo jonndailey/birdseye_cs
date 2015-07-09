@@ -59,7 +59,7 @@ if ($sql1Result[0] > 1) {
 
 <?php
 echo "<div id=\"checkin\">\n\n";
-echo "<form action=\"checkout.php\" method=\"POST\" name=\"checkoutform\"  onsubmit=\"return validateForm()\">";
+echo "<form action=\"checkout.php\" method=\"POST\" name=\"checkoutform\" onsubmit=\"return validateForm()\">";
 ?>
 
 	<input type="text" name="ticket" placeholder="Ticket #">
@@ -71,7 +71,7 @@ echo "<form action=\"checkout.php\" method=\"POST\" name=\"checkoutform\"  onsub
 
 <?php
 echo "Quantity:";
-$quantity = mysqli_query($connection, "SELECT id,quantity FROM amount");
+$quantity = mysqli_query($connection, "SELECT id,quantity,sort_secret FROM amount ORDER BY sort_secret DESC, id ASC");
 echo "\n<select name=\"myquantity\">\n";
 while($row = mysqli_fetch_array($quantity)){
 	echo "\t<option label=\"" . $row["label"] . "\" value=\"". $row["id"] . "\" >". $row["quantity"] . "</option>\n";
@@ -80,7 +80,7 @@ while($row = mysqli_fetch_array($quantity)){
 ?>
 
 <?php
-$pl = mysqli_query($connection, "SELECT id,name FROM products");
+$pl = mysqli_query($connection, "SELECT id,name,color_code FROM products ORDER BY color_code DESC, id DESC");
 //Begin dropdown list for all of the products in the database.
 echo "Product: ";
 echo "\n<select name=\"myproducts\">";

@@ -846,11 +846,10 @@ body {
 
 .homequant {
 	background-color: #6B94B5;
+	float:right;
 	padding:3px;
 	width:13px;
 	text-align: center;
-	margin-left: 145px;
-	border-radius: 30%;
 	font-weight: bolder;
 	font-size: 8px;
 }

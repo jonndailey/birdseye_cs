@@ -9,12 +9,12 @@ $identification = $_REQUEST['tid'];
 $ticket = mysqli_real_escape_string($connection, $_POST['ticket']);
 $inTrack = mysqli_real_escape_string($connection, $_POST['inTrack']);
 $outTrack = mysqli_real_escape_string($connection, $_POST['outTrack']);
-$note = mysqli_real_escape_string($connection, $_POST['note']); 
-$note2 = mysqli_real_escape_string($connection, $_POST['note2']); 
-$myproduct = mysqli_real_escape_string($connection, $_POST['myproduct']); 
-$mydestination = mysqli_real_escape_string($connection, $_POST['mydestination']); 
-$mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']); 
-$mytid = mysqli_real_escape_string($connection, $_POST['tid']); 
+$note = mysqli_real_escape_string($connection, $_POST['note']);
+$note2 = mysqli_real_escape_string($connection, $_POST['note2']);
+$myproduct = mysqli_real_escape_string($connection, $_POST['myproduct']);
+$mydestination = mysqli_real_escape_string($connection, $_POST['mydestination']);
+$mywarranty = mysqli_real_escape_string($connection, $_POST['mywarranty']);
+$mytid = mysqli_real_escape_string($connection, $_POST['tid']);
 
 
 //These 2 queries allow the page to be re-routed back the customers page.
@@ -27,11 +27,11 @@ $routingqueryarray = mysqli_fetch_array($routingquery);
 //Select the items from the DB that match the transaction
 $edit = mysqli_query($connection, "SELECT * FROM logged_info WHERE tid = $identification ORDER BY tid DESC");
 
-//Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product. 
-$chosen_product = mysqli_query($connection, "SELECT name,id,color_code from products ORDER BY color_code ASC");
+//Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product.
+$chosen_product = mysqli_query($connection, "SELECT name,id,color_code from products ORDER BY color_code DESC, id DESC");
 
 
-//Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product. 
+//Choose the product you meant to choose. First choose the product that I selected, with the ability to change to a new product.
 $remind_product = mysqli_query($connection, "SELECT id,name FROM products INNER JOIN logged_info ON logged_info.selected_product=products.id WHERE tid = $identification;");
 $remind_warranty = mysqli_query($connection, "SELECT id,status FROM warranty INNER JOIN logged_info ON logged_info.warranty=warranty.id WHERE tid = $identification;");
 $remind_quantity = mysqli_query($connection, "SELECT amount.id,amount.quantity FROM amount INNER JOIN logged_info ON logged_info.quantity=amount.quantity WHERE tid = $identification;");
@@ -61,7 +61,7 @@ $package = mysqli_query($connection, "SELECT p_size.id,p_size.package FROM p_siz
 
 <div class="groupedData">
 
-<?php 
+<?php
 
 //Grab the customers location
 $chosen_location = mysqli_query($connection, "SELECT area.id,area.location,area.secondary_name FROM area INNER JOIN logged_info ON area.id=logged_info.location WHERE tid = $identification");
@@ -69,7 +69,7 @@ $chosen_location = mysqli_query($connection, "SELECT area.id,area.location,area.
 while ($row = mysqli_fetch_array($edit)) { ?>
 
 
-<?php 
+<?php
 
 $checkdate = mysqli_query($connection, "SELECT date_returned FROM logged_info WHERE tid = $identification");
 $checkdatearray = mysqli_fetch_array($checkdate);
@@ -119,7 +119,7 @@ while ($row = mysqli_fetch_array($remind_product)) {
 
 ?>
 
-<?php 
+<?php
 echo "to ";
 echo "<select name=\"myproduct\">";
 
